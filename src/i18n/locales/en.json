@@ -4,5 +4,6 @@
     "exploreProjects": "Explore projects",
     "register": "Register",
     "login": "Log in"
-  }
+  },
+  "welcome":"Welcome to WeFund"
 }
