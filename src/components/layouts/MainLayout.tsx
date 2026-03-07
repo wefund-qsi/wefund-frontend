@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import Header from "./Header";
+import Footer from "./Footer";
 import type { ReactNode } from "react";
 
 interface MainLayoutProps {
@@ -13,6 +14,7 @@ function MainLayout({ children }: MainLayoutProps) {
       <Box component="main" sx={{ flex: 1, p: 3 }}>
         {children}
       </Box>
+      <Footer />
     </Box>
   );
 }
