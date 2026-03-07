@@ -17,12 +17,12 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="static" color="primary">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography
           variant="h5"
           component="div"
-          sx={{ fontWeight: 700, color: "primary.main" }}
+          sx={{ fontWeight: 700, color: "primary.contrastText" }}
         >
           WeFund
         </Typography>
@@ -46,8 +46,8 @@ function Header() {
           
           <Button color="inherit">{t("header.createProject")}</Button>
           <Button color="inherit">{t("header.exploreProjects")}</Button>
-          <Button variant="outlined">{t("header.register")}</Button>
-          <Button variant="contained">{t("header.login")}</Button>
+          <Button variant="outlined" sx={{ color: "primary.contrastText", borderColor: "primary.contrastText" }}>{t("header.register")}</Button>
+          <Button variant="contained" sx={{ bgcolor: "primary.dark", color: "primary.contrastText", "&:hover": { bgcolor: "#1a2410" } }}>{t("header.login")}</Button>
         </Box>
       </Toolbar>
     </AppBar>

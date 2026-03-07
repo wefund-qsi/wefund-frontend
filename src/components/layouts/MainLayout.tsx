@@ -8,7 +8,7 @@ interface MainLayoutProps {
 
 function MainLayout({ children }: MainLayoutProps) {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", bgcolor: "background.default" }}>
       <Header />
       <Box component="main" sx={{ flex: 1, p: 3 }}>
         {children}
