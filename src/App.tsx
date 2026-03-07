@@ -1,3 +1,4 @@
+import CssBaseline from '@mui/material/CssBaseline';
 import MainLayout from './components/layouts/MainLayout';
 import { useTranslation } from "react-i18next";
 
@@ -5,9 +6,12 @@ function App() {
   const { t } = useTranslation();
 
   return (
-    <MainLayout>
+    <>
+      <CssBaseline />
+      <MainLayout>
       <p>{t("welcome")}</p>
     </MainLayout>
+    </>
   )
 }
 
