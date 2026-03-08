@@ -31,6 +31,18 @@ npm run build
 npm run preview
 ```
 
+### Lancer les tests
+
+```bash
+npm run test
+```
+
+### Lancer les tests en mode watch
+
+```bash
+npm run test:watch
+```
+
 ### Linter (vérification du code)
 
 ```bash

@@ -1,10 +1,12 @@
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem } from "@mui/material";
 import LanguageIcon from "@mui/icons-material/Language";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useState, type MouseEvent } from "react";
 
 function Header() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleLanguageMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -22,7 +24,8 @@ function Header() {
         <Typography
           variant="h5"
           component="div"
-          sx={{ fontWeight: 700, color: "primary.contrastText" }}
+          onClick={() => void navigate("/")}
+          sx={{ fontWeight: 700, color: "primary.contrastText", cursor: "pointer" }}
         >
           WeFund
         </Typography>
@@ -44,7 +47,7 @@ function Header() {
             </MenuItem>
           </Menu>
           
-          <Button color="inherit">{t("header.createProject")}</Button>
+          <Button color="inherit" onClick={() => void navigate("/projects/create")}>{t("header.createProject")}</Button>
           <Button color="inherit">{t("header.exploreProjects")}</Button>
           <Button variant="outlined" sx={{ color: "primary.contrastText", borderColor: "primary.contrastText" }}>{t("header.register")}</Button>
           <Button variant="contained" sx={{ bgcolor: "primary.dark", color: "primary.contrastText", "&:hover": { bgcolor: "#1a2410" } }}>{t("header.login")}</Button>

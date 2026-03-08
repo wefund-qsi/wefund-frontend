@@ -11,7 +11,7 @@ function MainLayout({ children }: MainLayoutProps) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", bgcolor: "background.default" }}>
       <Header />
-      <Box component="main" sx={{ flex: 1, p: 3 }}>
+      <Box component="main" sx={{ flex: 1, px: { xs: 2, sm: 3 }, py: { xs: 2, sm: 3 } }}>
         {children}
       </Box>
       <Footer />
