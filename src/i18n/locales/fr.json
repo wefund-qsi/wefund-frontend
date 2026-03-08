@@ -5,5 +5,25 @@
     "register": "S'enregistrer",
     "login": "Se connecter"
   },
-  "welcome": "Bienvenue sur WeFund"
+  "welcome": "Bienvenue sur WeFund",
+  "projectForm": {
+    "title": "Créer un projet",
+    "subtitle": "Titre, description et photo",
+    "fields": {
+      "title": "Titre",
+      "description": "Description",
+      "photoUrl": "URL de la photo"
+    },
+    "submit": "Enregistrer le projet",
+    "success": "Projet créé avec succès !",
+    "backToHome": "Retour à l'accueil",
+    "mockInfo": "Les donnees sont mockees en memoire (pas de backend).",
+    "createdProjects": "Projets crees",
+    "noProjects": "Aucun projet cree pour le moment.",
+    "errors": {
+      "titleRequired": "Le titre est obligatoire",
+      "descriptionRequired": "La description est obligatoire",
+      "photoUrlRequired": "L'URL de la photo est obligatoire"
+    }
+  }
 }

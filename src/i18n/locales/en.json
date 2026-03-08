@@ -5,5 +5,25 @@
     "register": "Register",
     "login": "Log in"
   },
-  "welcome":"Welcome to WeFund"
+  "welcome": "Welcome to WeFund",
+  "projectForm": {
+    "title": "Create a project",
+    "subtitle": "Title, description and photo",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "photoUrl": "Photo URL"
+    },
+    "submit": "Save project",
+    "success": "Project created successfully!",
+    "backToHome": "Back to home",
+    "mockInfo": "Data is mocked in memory (no backend).",
+    "createdProjects": "Created projects",
+    "noProjects": "No project created yet.",
+    "errors": {
+      "titleRequired": "Title is required",
+      "descriptionRequired": "Description is required",
+      "photoUrlRequired": "Photo URL is required"
+    }
+  }
 }
