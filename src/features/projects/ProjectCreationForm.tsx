@@ -42,7 +42,7 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
     <Card sx={{ width: "100%", maxWidth: { xs: "100%", sm: 720 }, mx: "auto" }}>
       <CardHeader title={t("projectForm.title")} subheader={t("projectForm.subtitle")} />
       <CardContent>
-        <Box component="form" onSubmit={handleSubmit(onValid)} noValidate>
+        <Box component="form" onSubmit={(e) => void handleSubmit(onValid)(e)} noValidate>
           <Stack spacing={2}>
             {isSubmitted ? (
               <Alert severity="success">{t("projectForm.success")}</Alert>
