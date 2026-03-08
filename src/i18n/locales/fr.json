@@ -1,0 +1,9 @@
+{
+  "header": {
+    "createProject": "Créer votre projet",
+    "exploreProjects": "Explorer les projets",
+    "register": "S'enregistrer",
+    "login": "Se connecter"
+  },
+  "welcome": "Bienvenue sur WeFund"
+}
