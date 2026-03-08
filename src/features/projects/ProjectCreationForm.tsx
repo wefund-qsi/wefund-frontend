@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState } from "react";
 import {
   Alert,
   Box,
@@ -9,71 +9,40 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import type { Project } from "../../types/project";
-
-type ProjectFormValues = Pick<Project, "title" | "description" | "photoUrl">;
+import { projectSchema, type ProjectFormValues } from "../../types/project";
 
 interface ProjectCreationFormProps {
   onSubmit: (payload: ProjectFormValues) => void;
 }
 
-const initialFormValues: ProjectFormValues = {
-  title: "",
-  description: "",
-  photoUrl: "",
-};
-
 function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
   const { t } = useTranslation();
-  const [formValues, setFormValues] = useState<ProjectFormValues>(initialFormValues);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof ProjectFormValues, string>>>({});
 
-  const handleChange =
-    (field: keyof ProjectFormValues) =>
-    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setFormValues((previousValues) => ({
-        ...previousValues,
-        [field]: event.target.value,
-      }));
-    };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ProjectFormValues>({
+    resolver: zodResolver(projectSchema),
+    defaultValues: { title: "", description: "", photoUrl: "" },
+  });
 
-  const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof ProjectFormValues, string>> = {};
-
-    if (!formValues.title.trim()) {
-      newErrors.title = t("projectForm.errors.titleRequired");
-    }
-    if (!formValues.description.trim()) {
-      newErrors.description = t("projectForm.errors.descriptionRequired");
-    }
-    if (!formValues.photoUrl.trim()) {
-      newErrors.photoUrl = t("projectForm.errors.photoUrlRequired");
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    onSubmit(formValues);
+  const onValid = (data: ProjectFormValues) => {
+    onSubmit(data);
     setIsSubmitted(true);
-    setFormValues(initialFormValues);
-    setErrors({});
+    reset();
   };
 
   return (
     <Card sx={{ width: "100%", maxWidth: { xs: "100%", sm: 720 }, mx: "auto" }}>
       <CardHeader title={t("projectForm.title")} subheader={t("projectForm.subtitle")} />
       <CardContent>
-        <Box component="form" onSubmit={handleSubmit} noValidate>
+        <Box component="form" onSubmit={handleSubmit(onValid)} noValidate>
           <Stack spacing={2}>
             {isSubmitted ? (
               <Alert severity="success">{t("projectForm.success")}</Alert>
@@ -81,36 +50,33 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
 
             <TextField
               label={t("projectForm.fields.title")}
-              value={formValues.title}
-              onChange={handleChange("title")}
+              {...register("title")}
               fullWidth
               required
               error={Boolean(errors.title)}
-              helperText={errors.title}
+              helperText={errors.title ? t(errors.title.message!) : undefined}
             />
 
             <TextField
               label={t("projectForm.fields.description")}
-              value={formValues.description}
-              onChange={handleChange("description")}
+              {...register("description")}
               fullWidth
               required
               multiline
               minRows={4}
               error={Boolean(errors.description)}
-              helperText={errors.description}
+              helperText={errors.description ? t(errors.description.message!) : undefined}
             />
 
             <TextField
               label={t("projectForm.fields.photoUrl")}
-              value={formValues.photoUrl}
-              onChange={handleChange("photoUrl")}
+              {...register("photoUrl")}
               fullWidth
               required
               type="url"
               placeholder="https://example.com/photo.jpg"
               error={Boolean(errors.photoUrl)}
-              helperText={errors.photoUrl}
+              helperText={errors.photoUrl ? t(errors.photoUrl.message!) : undefined}
             />
 
             <Button variant="contained" type="submit" sx={{ alignSelf: { xs: "stretch", sm: "flex-start" } }}>

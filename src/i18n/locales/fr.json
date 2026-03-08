@@ -23,7 +23,8 @@
     "errors": {
       "titleRequired": "Le titre est obligatoire",
       "descriptionRequired": "La description est obligatoire",
-      "photoUrlRequired": "L'URL de la photo est obligatoire"
+      "photoUrlRequired": "L'URL de la photo est obligatoire",
+      "photoUrlInvalid": "L'URL de la photo n'est pas valide"
     }
   }
 }
