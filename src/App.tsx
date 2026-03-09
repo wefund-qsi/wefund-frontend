@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './ui/components/layouts/MainLayout';
 import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import LoginPage from './ui/pages/LoginPage';
+import RegisterPage from './ui/pages/RegisterPage';
 import { AuthProvider } from './shared/modules/users/adapters/primary/useAuthProvider';
 import theme from './theme';
 

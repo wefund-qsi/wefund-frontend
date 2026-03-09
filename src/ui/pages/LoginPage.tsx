@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import LoginForm from "../features/users/LoginForm";
+import LoginForm from "../../features/users/LoginForm";
 
 function LoginPage() {
   return (
