@@ -1,4 +1,44 @@
 {
+  "loginForm": {
+    "title": "Se connecter",
+    "subtitle": "Accédez à votre compte WeFund",
+    "fields": {
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe"
+    },
+    "submit": "Se connecter",
+    "noAccount": "Pas encore de compte ?",
+    "registerLink": "S'enregistrer",
+    "errors": {
+      "usernameRequired": "Le nom d'utilisateur est obligatoire",
+      "passwordRequired": "Le mot de passe est obligatoire",
+      "invalidCredentials": "Identifiants invalides. Veuillez réessayer."
+    }
+  },
+  "registerForm": {
+    "title": "Créer un compte",
+    "subtitle": "Rejoignez la communauté WeFund",
+    "fields": {
+      "prenom": "Prénom",
+      "nom": "Nom",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe"
+    },
+    "submit": "S'enregistrer",
+    "alreadyAccount": "Déjà un compte ?",
+    "loginLink": "Se connecter",
+    "success": "Compte créé avec succès ! Vous pouvez maintenant vous connecter.",
+    "errors": {
+      "prenomRequired": "Le prénom est obligatoire",
+      "nomRequired": "Le nom est obligatoire",
+      "usernameRequired": "Le nom d'utilisateur est obligatoire",
+      "usernameMinLength": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+      "usernameInvalidChars": "Le nom d'utilisateur ne peut contenir que des lettres, chiffres et underscores",
+      "passwordRequired": "Le mot de passe est obligatoire",
+      "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+      "usernameTaken": "Ce nom d'utilisateur est déjà pris"
+    }
+  },
   "header": {
     "createProject": "Créer votre projet",
     "exploreProjects": "Explorer les projets",

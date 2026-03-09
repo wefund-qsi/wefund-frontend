@@ -1,4 +1,44 @@
 {
+  "loginForm": {
+    "title": "Log in",
+    "subtitle": "Access your WeFund account",
+    "fields": {
+      "username": "Username",
+      "password": "Password"
+    },
+    "submit": "Log in",
+    "noAccount": "Don't have an account yet?",
+    "registerLink": "Register",
+    "errors": {
+      "usernameRequired": "Username is required",
+      "passwordRequired": "Password is required",
+      "invalidCredentials": "Invalid credentials. Please try again."
+    }
+  },
+  "registerForm": {
+    "title": "Create an account",
+    "subtitle": "Join the WeFund community",
+    "fields": {
+      "prenom": "First name",
+      "nom": "Last name",
+      "username": "Username",
+      "password": "Password"
+    },
+    "submit": "Register",
+    "alreadyAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "success": "Account created successfully! You can now log in.",
+    "errors": {
+      "prenomRequired": "First name is required",
+      "nomRequired": "Last name is required",
+      "usernameRequired": "Username is required",
+      "usernameMinLength": "Username must be at least 3 characters",
+      "usernameInvalidChars": "Username can only contain letters, numbers and underscores",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "usernameTaken": "This username is already taken"
+    }
+  },
   "header": {
     "createProject": "Create your project",
     "exploreProjects": "Explore projects",
