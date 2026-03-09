@@ -43,7 +43,15 @@ describe("RegisterUseCase", () => {
   });
 
   it("injecte automatiquement le rôle VISITEUR sans que l'appelant le fournisse", async () => {
-    const port = makePort();
+    const signupFn = vi.fn().mockResolvedValue(
+      Ok({
+        statusCode: 201,
+        message: "User, auth and role created successfully",
+        data: { id: "uuid-123", nom: "Duval", prenom: "Alice", username: "alice", role: "VISITEUR" },
+        timestamp: "2026-01-01T00:00:00.000Z",
+      })
+    );
+    const port = makePort({ signup: signupFn });
     const useCase = createRegisterUseCase(port);
 
     await useCase.execute({
@@ -53,13 +61,21 @@ describe("RegisterUseCase", () => {
       password: "secret",
     });
 
-    expect(port.signup).toHaveBeenCalledWith(
+    expect(signupFn).toHaveBeenCalledWith(
       expect.objectContaining({ role: "VISITEUR" })
     );
   });
 
   it("transmet tous les champs au port", async () => {
-    const port = makePort();
+    const signupFn = vi.fn().mockResolvedValue(
+      Ok({
+        statusCode: 201,
+        message: "User, auth and role created successfully",
+        data: { id: "uuid-123", nom: "Duval", prenom: "Alice", username: "alice", role: "VISITEUR" },
+        timestamp: "2026-01-01T00:00:00.000Z",
+      })
+    );
+    const port = makePort({ signup: signupFn });
     const useCase = createRegisterUseCase(port);
 
     await useCase.execute({
@@ -69,7 +85,7 @@ describe("RegisterUseCase", () => {
       password: "secret",
     });
 
-    expect(port.signup).toHaveBeenCalledWith({
+    expect(signupFn).toHaveBeenCalledWith({
       prenom: "Alice",
       nom: "Duval",
       username: "alice",
@@ -122,12 +138,20 @@ describe("RegisterUseCase", () => {
   });
 
   it("ne fait qu'un seul appel au port par exécution", async () => {
-    const port = makePort();
+    const signupFn = vi.fn().mockResolvedValue(
+      Ok({
+        statusCode: 201,
+        message: "User, auth and role created successfully",
+        data: { id: "uuid-123", nom: "B", prenom: "A", username: "ab1", role: "VISITEUR" },
+        timestamp: "2026-01-01T00:00:00.000Z",
+      })
+    );
+    const port = makePort({ signup: signupFn });
     const useCase = createRegisterUseCase(port);
 
     await useCase.execute({ prenom: "A", nom: "B", username: "ab1", password: "123456" });
     await useCase.execute({ prenom: "C", nom: "D", username: "cd1", password: "123456" });
 
-    expect(port.signup).toHaveBeenCalledTimes(2);
+    expect(signupFn).toHaveBeenCalledTimes(2);
   });
 });

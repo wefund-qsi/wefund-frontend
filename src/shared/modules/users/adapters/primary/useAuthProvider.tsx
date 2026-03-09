@@ -1,39 +1,23 @@
 import {
-  createContext,
-  useContext,
   useState,
   useCallback,
   useMemo,
   type ReactNode,
 } from "react";
-import type { User } from "../../entities/User";
-import type { ApiErrorResult, LoginRequest } from "../../ports/AuthPort";
+import type { LoginRequest } from "../../ports/AuthPort";
+import type { ApiErrorResult } from "../../ports/AuthPort";
 import type { Result } from "../../../../../types/utils";
 import { createLoginUseCase } from "../../use-cases/LoginUseCase";
 import { createRegisterUseCase } from "../../use-cases/RegisterUseCase";
 import { createMockAuthAdapter } from "../secondary/MockAuthAdapter";
 import { createUser } from "../../entities/User";
+import type { User } from "../../entities/User";
+import { AuthContext } from "./AuthContext";
+import type { RegisterInput, AuthContextValue } from "./AuthContext";
+
 
 const SESSION_TOKEN_KEY = "wefund_access_token";
 const SESSION_USER_KEY = "wefund_user";
-
-export interface RegisterInput {
-  prenom: string;
-  nom: string;
-  username: string;
-  password: string;
-}
-
-export interface AuthContextValue {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  login(request: LoginRequest): Promise<Result<{ access_token: string }, ApiErrorResult>>;
-  register(input: RegisterInput): Promise<Result<void, ApiErrorResult>>;
-  logout(): void;
-}
-
-const AuthContext = createContext<AuthContextValue | null>(null);
 
 const authPort = createMockAuthAdapter();
 const loginUseCase = createLoginUseCase(authPort);
@@ -114,12 +98,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth(): AuthContextValue {
-  const context = useContext(AuthContext);
-  if (context === null) {
-    throw new Error("useAuth doit être utilisé dans un AuthProvider");
-  }
-  return context;
 }

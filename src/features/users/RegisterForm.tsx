@@ -20,12 +20,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { registerSchema } from "../../types/auth";
-import { useAuth } from "../../shared/modules/users/adapters/primary/useAuthProvider";
+import { useAuth } from "../../shared/modules/users/adapters/primary/useAuth";
 
 function RegisterForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { register: authRegister } = useAuth();
+  const auth = useAuth();
   const [apiError, setApiError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,7 +40,7 @@ function RegisterForm() {
 
   const onValid = async (data: { prenom: string; nom: string; username: string; password: string }) => {
     setApiError(null);
-    const result = await authRegister(data);
+    const result = await auth.register(data);
 
     if (result.ok) {
       void navigate("/login");

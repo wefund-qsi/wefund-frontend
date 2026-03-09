@@ -31,13 +31,21 @@ describe("LoginUseCase", () => {
   });
 
   it("transmet les identifiants au port", async () => {
-    const port = makePort();
+    const loginFn = vi.fn().mockResolvedValue(
+      Ok({
+        statusCode: 200,
+        message: "Login successful",
+        data: { access_token: "mock-jwt-token" },
+        timestamp: "2026-01-01T00:00:00.000Z",
+      })
+    );
+    const port = makePort({ login: loginFn });
     const useCase = createLoginUseCase(port);
 
     await useCase.execute({ username: "alice", password: "secret" });
 
-    expect(port.login).toHaveBeenCalledOnce();
-    expect(port.login).toHaveBeenCalledWith({ username: "alice", password: "secret" });
+    expect(loginFn).toHaveBeenCalledOnce();
+    expect(loginFn).toHaveBeenCalledWith({ username: "alice", password: "secret" });
   });
 
   it("retourne un Result error quand le port échoue (401)", async () => {
@@ -74,12 +82,20 @@ describe("LoginUseCase", () => {
   });
 
   it("ne fait qu'un seul appel au port par exécution", async () => {
-    const port = makePort();
+    const loginFn = vi.fn().mockResolvedValue(
+      Ok({
+        statusCode: 200,
+        message: "Login successful",
+        data: { access_token: "mock-jwt-token" },
+        timestamp: "2026-01-01T00:00:00.000Z",
+      })
+    );
+    const port = makePort({ login: loginFn });
     const useCase = createLoginUseCase(port);
 
     await useCase.execute({ username: "alice", password: "secret" });
     await useCase.execute({ username: "bob", password: "pass" });
 
-    expect(port.login).toHaveBeenCalledTimes(2);
+    expect(loginFn).toHaveBeenCalledTimes(2);
   });
 });

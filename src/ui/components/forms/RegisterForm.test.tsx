@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import React from "react";
 import RegisterForm from "../../features/users/RegisterForm";
 import { AuthProvider } from "../../shared/modules/users/adapters/primary/useAuthProvider";
-import "../../i18n";
+import "../../infrastructure/i18n";
 
 const renderWithProviders = ({ initialRoute = "/register" } = {}) => {
   return render(

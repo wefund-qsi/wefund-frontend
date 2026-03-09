@@ -20,12 +20,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { loginSchema, type LoginFormValues } from "../../types/auth";
-import { useAuth } from "../../shared/modules/users/adapters/primary/useAuthProvider";
+import { useAuth } from "../../shared/modules/users/adapters/primary/useAuth";
 
 function LoginForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const auth = useAuth();
   const [apiError, setApiError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,7 +40,7 @@ function LoginForm() {
 
   const onValid = async (data: LoginFormValues) => {
     setApiError(null);
-    const result = await login(data);
+    const result = await auth.login(data);
 
     if (result.ok) {
       void navigate("/");
