@@ -12,7 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import { projectSchema, type ProjectFormValues } from "../../types/project";
+import { projectSchema, type ProjectFormValues } from "../../../types/project";
 
 interface ProjectCreationFormProps {
   onSubmit: (payload: ProjectFormValues) => void;
