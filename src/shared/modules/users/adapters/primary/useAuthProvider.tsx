@@ -10,20 +10,23 @@ import type { Result } from "../../../../../types/utils";
 import { createLoginUseCase } from "../../use-cases/LoginUseCase";
 import { createRegisterUseCase } from "../../use-cases/RegisterUseCase";
 import { createMockAuthAdapter } from "../secondary/MockAuthAdapter";
-import { createUser } from "../../entities/User";
+import { createUser, DEFAULT_ROLE } from "../../entities/User";
 import type { User } from "../../entities/User";
 import { AuthContext } from "./AuthContext";
 import type { RegisterInput, AuthContextValue } from "./AuthContext";
 
-
 const SESSION_TOKEN_KEY = "wefund_access_token";
 const SESSION_USER_KEY = "wefund_user";
 
-const authPort = createMockAuthAdapter();
-const loginUseCase = createLoginUseCase(authPort);
-const registerUseCase = createRegisterUseCase(authPort);
-
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const { loginUseCase, registerUseCase } = useMemo(() => {
+    const authPort = createMockAuthAdapter();
+    return {
+      loginUseCase: createLoginUseCase(authPort),
+      registerUseCase: createRegisterUseCase(authPort),
+    };
+  }, []);
+
   const [token, setToken] = useState<string | null>(
     () => sessionStorage.getItem(SESSION_TOKEN_KEY)
   );
@@ -52,7 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           prenom: "",
           nom: "",
           username: request.username,
-          role: "VISITEUR",
+          role: DEFAULT_ROLE,
         });
         sessionStorage.setItem(SESSION_USER_KEY, JSON.stringify(partialUser));
         setUser(partialUser);
@@ -62,7 +65,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       return result;
     },
-    []
+    [loginUseCase]
   );
 
   const register = useCallback(
@@ -75,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       return result;
     },
-    []
+    [registerUseCase]
   );
 
   const logout = useCallback(() => {

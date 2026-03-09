@@ -1,4 +1,4 @@
-import { createUser, DEFAULT_ROLE } from "../../shared/modules/users/entities/User";
+import { createUser, DEFAULT_ROLE, isUserRole } from "../../shared/modules/users/entities/User";
 import { UserId } from "../../types/user";
 
 describe("User entity", () => {
@@ -40,6 +40,23 @@ describe("User entity", () => {
     roles.forEach((role) => {
       const user = createUser({ id: "x", prenom: "a", nom: "b", username: "c", role });
       expect(user.role).toBe(role);
+    });
+  });
+
+  describe("isUserRole", () => {
+    it("retourne true pour les rôles valides", () => {
+      expect(isUserRole("VISITEUR")).toBe(true);
+      expect(isUserRole("CONTRIBUTEUR")).toBe(true);
+      expect(isUserRole("PORTEUR DE PROJET")).toBe(true);
+      expect(isUserRole("ADMINISTRATEUR")).toBe(true);
+    });
+
+    it("retourne false pour les valeurs invalides", () => {
+      expect(isUserRole("SUPER_ADMIN")).toBe(false);
+      expect(isUserRole("")).toBe(false);
+      expect(isUserRole(null)).toBe(false);
+      expect(isUserRole(42)).toBe(false);
+      expect(isUserRole(undefined)).toBe(false);
     });
   });
 });

@@ -12,7 +12,8 @@
     "errors": {
       "usernameRequired": "Le nom d'utilisateur est obligatoire",
       "passwordRequired": "Le mot de passe est obligatoire",
-      "invalidCredentials": "Identifiants invalides. Veuillez réessayer."
+      "invalidCredentials": "Identifiants invalides. Veuillez réessayer.",
+      "genericError": "Une erreur est survenue. Veuillez réessayer plus tard."
     }
   },
   "registerForm": {

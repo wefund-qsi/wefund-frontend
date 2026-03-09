@@ -23,7 +23,7 @@ export interface SignupSuccessData {
   readonly nom: string;
   readonly prenom: string;
   readonly username: string;
-  readonly role: string;
+  readonly role: UserRole;
 }
 
 export interface ApiSuccessResult<T> {

@@ -45,7 +45,14 @@ function LoginForm() {
     if (result.ok) {
       void navigate("/");
     } else {
-      setApiError(t("loginForm.errors.invalidCredentials"));
+      const { statusCode, message } = result.error;
+      if (statusCode === 401) {
+        setApiError(t("loginForm.errors.invalidCredentials"));
+      } else if (message) {
+        setApiError(message);
+      } else {
+        setApiError(t("loginForm.errors.genericError"));
+      }
     }
   };
 
