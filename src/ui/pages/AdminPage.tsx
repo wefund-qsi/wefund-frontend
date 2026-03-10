@@ -37,8 +37,7 @@ const mockCampaigns: Campaign[] = [
     endDate: "2024-12-31",
     ownerId: UserId("u2"),
     createdAt: "2024-01-01",
-    status: "pending_validation",
-    startedAt: "2024-01-15",
+    status: "pending_validation"
   },
   {
     id: CampaignId("3"),
