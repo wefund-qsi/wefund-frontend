@@ -9,13 +9,13 @@ export const ProjectId = (value: string): ProjectId => value as ProjectId;
 
 // --- Type métier ---
 
-export interface Project {
+export type Project = {
   id: ProjectId;
   title: string;
   description: string;
   photoUrl: string;
   ownerId: UserId;
-  createdAt: string;
+  createdAt: Date;
 }
 
 // --- Schéma Zod ---

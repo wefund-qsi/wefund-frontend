@@ -1,4 +1,4 @@
-import { ProjectId, type Project } from "../entities/project";
+import { ProjectId, type CreateProjectData, type Project } from "../entities/project";
 import type { IProjectRepository } from "../ports/project-repository.interface";
 
 export class InMemoryProjectRepository implements IProjectRepository {
