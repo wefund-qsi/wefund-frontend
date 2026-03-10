@@ -8,7 +8,6 @@ import {
   Typography,
   Button,
   Stack,
-  Grid,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import type { Campaign } from "../../domain/campagns/entites/campaign";
@@ -38,7 +37,7 @@ const mockCampaigns: Campaign[] = [
     endDate: "2024-12-31",
     ownerId: UserId("u2"),
     createdAt: "2024-01-01",
-    status: "active",
+    status: "pending_validation",
     startedAt: "2024-01-15",
   },
   {
@@ -123,6 +122,7 @@ function AdminPage() {
     (c) => c.status === statuses[tabValue]
   );
 
+
   return (
     <Box sx={{ width: "100%" }}>
       <Typography variant="h4" gutterBottom>
@@ -135,50 +135,41 @@ function AdminPage() {
         <Tab label={t("admin.tabs.failed")} />
         <Tab label={t("admin.tabs.rejected")} />
       </Tabs>
-      <Box sx={{ mt: 2 }}>
-        <Grid container spacing={2}>
-          {filteredCampaigns.map((campaign) => (
-            <Grid item xs={12} sm={6} md={4} key={campaign.id}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{campaign.title}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {campaign.description}
-                  </Typography>
-                  <Typography variant="body2">
-                    {t("admin.goal")}: ${campaign.goal}
-                  </Typography>
-                  <Typography variant="body2">
-                    {t("admin.endDate")}: {campaign.endDate}
-                  </Typography>
-                  {campaign.status === "pending_validation" && (
-                    <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleAccept(campaign.id)}
-                      >
-                        {t("admin.accept")}
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={() => handleReject(campaign.id)}
-                      >
-                        {t("admin.reject")}
-                      </Button>
-                    </Stack>
-                  )}
-                </CardContent>
-              </Card>
-            </Grid>
+      <Box sx={{ mt: 2, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 2 }}>
+        {filteredCampaigns.map((campaign) => (
+            <Card key={campaign.id}>
+              <CardContent>
+                <Typography variant="h6">{campaign.title}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {campaign.description}
+                </Typography>
+                <Typography variant="body2">
+                  {t("admin.goal")}: ${campaign.goal}
+                </Typography>
+                <Typography variant="body2">
+                  {t("admin.endDate")}: {campaign.endDate}
+                </Typography>
+                {campaign.status === "pending_validation" && (
+                  <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleAccept(campaign.id)}
+                    >
+                      {t("admin.accept")}
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      onClick={() => handleReject(campaign.id)}
+                    >
+                      {t("admin.reject")}
+                    </Button>
+                  </Stack>
+                )}
+              </CardContent>
+            </Card>
           ))}
-        </Grid>
-        {filteredCampaigns.length === 0 && (
-          <Typography variant="body1" sx={{ mt: 2 }}>
-            {t("admin.noCampaigns")}
-          </Typography>
-        )}
       </Box>
     </Box>
   );
