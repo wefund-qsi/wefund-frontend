@@ -1,4 +1,4 @@
-import type { CreateProjectData, Project, ProjectId } from "../entities/project";
+import type { Project, ProjectId } from "../entities/project";
 
 export interface IProjectRepository {
     findAll(): Promise<Project[]>;
