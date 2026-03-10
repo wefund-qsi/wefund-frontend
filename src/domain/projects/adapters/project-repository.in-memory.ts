@@ -12,10 +12,6 @@ export class InMemoryProjectRepository implements IProjectRepository {
         return this.projects;
     }
 
-    async findById(id: ProjectId): Promise<Project | null> {
-        return this.projects.find(project => project.id === id) || null;
-    }
-
     async create(project: Project): Promise<Project> {
         this.projects.push(project);
         return project;
