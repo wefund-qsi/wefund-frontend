@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ProjectCreationForm from "../../ui/components/forms/ProjectCreationForm";
-import "../../infrastructure/i18n";
+import ProjectCreationForm from "./ProjectCreationForm";
+import "../../../infrastructure/i18n";
 
 describe("ProjectCreationForm", () => {
   const setup = () => {

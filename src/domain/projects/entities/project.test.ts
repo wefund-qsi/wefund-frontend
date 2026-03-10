@@ -1,4 +1,11 @@
-import { projectSchema } from "../../types/project";
+import { projectSchema, ProjectId } from "./project";
+
+describe("ProjectId", () => {
+  it("crée un ProjectId à partir d'une string", () => {
+    const id = ProjectId("abc-123");
+    expect(id).toBe("abc-123");
+  });
+});
 
 describe("projectSchema", () => {
   it("accepte un projet valide", () => {
