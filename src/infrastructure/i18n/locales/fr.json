@@ -60,5 +60,10 @@
       "submit": "Se connecter",
       "success": "Connexion réussie !"
     }
+  },
+  "campaign": {
+    "createCampaign": "Créer une campagne",
+    "noCampaignYet": "Aucune campagne créée pour le moment pour ce projet",
+    "createNew": "Créer une campagne"
   }
 }

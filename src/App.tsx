@@ -14,6 +14,7 @@ import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
 import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
+import ProjectDetails from './ui/pages/ProjectDetails';
 import theme from './theme';
 
 const projectRepository = new InMemoryProjectRepository();
@@ -35,6 +36,7 @@ function App() {
             <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} />} />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
+            <Route path="/projects/:id" element={<ProjectDetails />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>
