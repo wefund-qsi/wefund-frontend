@@ -9,34 +9,34 @@ export class InMemoryProjectRepository implements IProjectRepository {
         this.projects = projects;
     }
 
-    async findAll(): Promise<Project[]> {
-        return this.projects;
+    findAll(): Promise<Project[]> {
+        return Promise.resolve(this.projects);
     }
 
-    async create(project: Project): Promise<Project> {
+    create(project: Project): Promise<Project> {
         this.projects.push(project);
-        return project;
+        return Promise.resolve(project);
     }
 
-    async update(project: Project): Promise<Project | null> {
+    update(project: Project): Promise<Project | null> {
         const index = this.projects.findIndex(p => p.id === project.id);
         if (index === -1) {
-            return null;
+            return Promise.resolve(null);
         }
         this.projects[index] = { ...this.projects[index], ...project };
-        return this.projects[index];
+        return Promise.resolve(this.projects[index]);
     }
 
-    async delete(id: ProjectId): Promise<Boolean> {
+    delete(id: ProjectId): Promise<boolean> {
         const index = this.projects.findIndex(project => project.id === id);
         if (index === -1) {
-            return false;
+            return Promise.resolve(false);
         }
         this.projects = this.projects.filter(project => project.id !== id);
-        return true;
+        return Promise.resolve(true);
     }
 
-    async findAllByUserId(id: UserId): Promise<Project[]> {
-        return this.projects.filter(project => project.ownerId === id);
+    findAllByUserId(id: UserId): Promise<Project[]> {
+        return Promise.resolve(this.projects.filter(project => project.ownerId === id));
     }
 }
