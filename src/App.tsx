@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './ui/components/layouts/MainLayout';
 import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
+import AdminPage from './ui/pages/AdminPage';
 import theme from './theme';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects/create" element={<CreateProjectPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>
