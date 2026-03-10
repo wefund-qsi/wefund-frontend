@@ -2,14 +2,25 @@
   "header": {
     "createProject": "Créer votre projet",
     "exploreProjects": "Explorer les projets",
-    "exploreCampaigns": "Explorer les campagnes",
-    "myProjects": "Mes projets",
-    "myContributions": "Mes contributions",
-    "signup": "S'enregistrer",
-    "login": "Se connecter",
-    "logout": "Se déconnecter"
+    "register": "S'enregistrer",
+    "login": "Se connecter"
   },
   "welcome": "Bienvenue sur WeFund",
+  "admin": {
+    "title": "Tableau de bord Admin",
+    "tabs": {
+      "pendingValidation": "En attente de validation",
+      "active": "Active",
+      "succeeded": "Réussie",
+      "failed": "Échouée",
+      "rejected": "Refusée"
+    },
+    "noCampaigns": "Aucune campagne dans ce statut.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "goal": "Objectif",
+    "endDate": "Date de fin"
+  },
   "homePage": {
     "projectsTitle": "Les projets",
     "noProjects": "Aucun projet pour le moment."

@@ -42,6 +42,7 @@ import MyProjectsPage from './ui/pages/MyProjectsPage';
 import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
 import ProjectDetails from './ui/pages/ProjectDetails';
+import AdminPage from './ui/pages/AdminPage';
 import theme from './theme';
 
 const seededProjects = [
@@ -234,6 +235,7 @@ function App() {
             />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
           </Routes>
         </MainLayout>

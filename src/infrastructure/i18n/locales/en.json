@@ -10,6 +10,21 @@
     "logout": "Log out"
   },
   "welcome": "Welcome to WeFund",
+  "admin": {
+    "title": "Admin Dashboard",
+    "tabs": {
+      "pendingValidation": "Pending Validation",
+      "active": "Active",
+      "succeeded": "Succeeded",
+      "failed": "Failed",
+      "rejected": "Rejected"
+    },
+    "noCampaigns": "No campaigns in this status.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "goal": "Goal",
+    "endDate": "End Date"
+  },
   "homePage": {
     "projectsTitle": "Projects",
     "noProjects": "No projects yet."
