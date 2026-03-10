@@ -1,3 +1,4 @@
+import type { UserId } from "../../users/entities/user";
 import { ProjectId, type Project } from "../entities/project";
 import type { IProjectRepository } from "../ports/project-repository.interface";
 
@@ -33,5 +34,9 @@ export class InMemoryProjectRepository implements IProjectRepository {
         }
         this.projects = this.projects.filter(project => project.id !== id);
         return true;
+    }
+
+    async findAllByUserId(id: UserId): Promise<Project[]> {
+        return this.projects.filter(project => project.ownerId === id);
     }
 }
