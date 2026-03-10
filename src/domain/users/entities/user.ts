@@ -1,4 +1,4 @@
-import type { Brand } from "./utils";
+import type { Brand } from "../../../shared/utils";
 
 // --- Branded Type UserId ---
 

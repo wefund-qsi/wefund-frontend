@@ -1,6 +1,6 @@
 import { z } from "zod";
-import type { Brand } from "./utils";
-import type { UserId } from "./user";
+import type { Brand } from "../../../shared/utils";
+import type { UserId } from "../../users/entities/user";
 
 // --- Branded Type ProjectId ---
 

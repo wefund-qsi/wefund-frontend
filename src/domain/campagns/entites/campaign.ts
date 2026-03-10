@@ -1,7 +1,7 @@
 import { z } from "zod";
-import type { Brand } from "./utils";
-import type { ProjectId } from "./project";
-import type { UserId } from "./user";
+import type { Brand } from "../../../shared/utils";
+import type { ProjectId } from "../../projects/entities/project";
+import type { UserId } from "../../users/entities/user";
 
 // --- Branded Type CampaignId ---
 
