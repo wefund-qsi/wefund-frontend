@@ -12,40 +12,43 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import type { Campaign } from "../../domain/campagns/entites/campaign";
+import { CampaignId } from "../../domain/campagns/entites/campaign";
+import { ProjectId } from "../../domain/projects/entities/project";
+import { UserId } from "../../domain/users/entities/user";
 
 // Mock data for campaigns
 const mockCampaigns: Campaign[] = [
   {
-    id: "1" as any,
-    projectId: "p1" as any,
+    id: CampaignId("1"),
+    projectId: ProjectId("p1"),
     title: "Campaign 1",
     description: "Description 1",
     goal: 1000,
     endDate: "2024-12-31",
-    ownerId: "u1" as any,
+    ownerId: UserId("u1"),
     createdAt: "2024-01-01",
     status: "pending_validation",
   },
   {
-    id: "2" as any,
-    projectId: "p2" as any,
+    id: CampaignId("2"),
+    projectId: ProjectId("p2"),
     title: "Campaign 2",
     description: "Description 2",
     goal: 2000,
     endDate: "2024-12-31",
-    ownerId: "u2" as any,
+    ownerId: UserId("u2"),
     createdAt: "2024-01-01",
-    status: "pending_validation",
+    status: "active",
     startedAt: "2024-01-15",
   },
   {
-    id: "3" as any,
-    projectId: "p3" as any,
+    id: CampaignId("3"),
+    projectId: ProjectId("p3"),
     title: "Campaign 3",
     description: "Description 3",
     goal: 1500,
     endDate: "2024-12-31",
-    ownerId: "u3" as any,
+    ownerId: UserId("u3"),
     createdAt: "2024-01-01",
     status: "succeeded",
     startedAt: "2024-01-15",
@@ -53,13 +56,13 @@ const mockCampaigns: Campaign[] = [
     collectedAmount: 1600,
   },
   {
-    id: "4" as any,
-    projectId: "p4" as any,
+    id: CampaignId("4"),
+    projectId: ProjectId("p4"),
     title: "Campaign 4",
     description: "Description 4",
     goal: 3000,
     endDate: "2024-12-31",
-    ownerId: "u4" as any,
+    ownerId: UserId("u4"),
     createdAt: "2024-01-01",
     status: "failed",
     startedAt: "2024-01-15",
@@ -67,13 +70,13 @@ const mockCampaigns: Campaign[] = [
     collectedAmount: 500,
   },
   {
-    id: "5" as any,
-    projectId: "p5" as any,
+    id: CampaignId("5"),
+    projectId: ProjectId("p5"),
     title: "Campaign 5",
     description: "Description 5",
     goal: 2500,
     endDate: "2024-12-31",
-    ownerId: "u5" as any,
+    ownerId: UserId("u5"),
     createdAt: "2024-01-01",
     status: "rejected",
   },
