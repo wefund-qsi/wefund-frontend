@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ProjectCreationForm from "../components/forms/ProjectCreationForm";
-import type { ProjectFormValues } from "../../types/project";
+import type { ProjectFormValues } from "../../domain/projects/entities/project";
 
 function CreateProjectPage() {
   const navigate = useNavigate();
