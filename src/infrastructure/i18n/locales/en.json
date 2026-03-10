@@ -26,5 +26,10 @@
       "photoUrlRequired": "Photo URL is required",
       "photoUrlInvalid": "Photo URL is not valid"
     }
+  },
+  "campaign": {
+    "createCampaign": "Create a Campaign",
+    "noCampaignYet": "No campaign created yet for this project",
+    "createNew": "Create a Campaign"
   }
 }
