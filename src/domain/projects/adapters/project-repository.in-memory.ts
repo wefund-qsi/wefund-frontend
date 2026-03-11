@@ -18,15 +18,6 @@ export class InMemoryProjectRepository implements IProjectRepository {
         return Promise.resolve(project);
     }
 
-    update(project: Project): Promise<Project | null> {
-        const index = this.projects.findIndex(p => p.id === project.id);
-        if (index === -1) {
-            return Promise.resolve(null);
-        }
-        this.projects[index] = { ...this.projects[index], ...project };
-        return Promise.resolve(this.projects[index]);
-    }
-
     delete(id: ProjectId): Promise<boolean> {
         const index = this.projects.findIndex(project => project.id === id);
         if (index === -1) {
