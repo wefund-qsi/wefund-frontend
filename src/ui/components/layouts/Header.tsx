@@ -48,7 +48,6 @@ function Header() {
           </Menu>
           
           <Button color="inherit" onClick={() => void navigate("/projects/create")}>{t("header.createProject")}</Button>
-          <Button color="inherit">{t("header.exploreProjects")}</Button>
           <Button variant="outlined" sx={{ color: "primary.contrastText", borderColor: "primary.contrastText" }}>{t("header.register")}</Button>
           <Button variant="contained" sx={{ bgcolor: "primary.dark", color: "primary.contrastText", "&:hover": { bgcolor: "#1a2410" } }}>{t("header.login")}</Button>
         </Box>
