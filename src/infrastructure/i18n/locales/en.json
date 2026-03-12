@@ -6,6 +6,10 @@
     "login": "Log in"
   },
   "welcome": "Welcome to WeFund",
+  "homePage": {
+    "projectsTitle": "Projects",
+    "noProjects": "No projects yet."
+  },
   "projectForm": {
     "title": "Create a project",
     "subtitle": "Title, description and photo",
