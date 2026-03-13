@@ -12,15 +12,18 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import type { Result } from "../../../shared/result";
+import type { Project } from "../../../domain/projects/entities/project";
 import { projectSchema, type ProjectFormValues } from "../../../domain/projects/entities/project";
 
 interface ProjectCreationFormProps {
-  onSubmit: (payload: ProjectFormValues) => void;
+  onSubmit: (payload: ProjectFormValues) => Promise<Result<Project, Error>>;
 }
 
 function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
   const { t } = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -32,8 +35,15 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
     defaultValues: { title: "", description: "", photoUrl: "" },
   });
 
-  const onValid = (data: ProjectFormValues) => {
-    onSubmit(data);
+  const onValid = async (data: ProjectFormValues) => {
+    setSubmitError(null);
+    const result = await onSubmit(data);
+
+    if (!result.isSuccess) {
+      setSubmitError(result.error?.message || t("projectForm.errors.submitFailed"));
+      return;
+    }
+
     setIsSubmitted(true);
     reset();
   };
@@ -44,6 +54,9 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
       <CardContent>
         <Box component="form" onSubmit={(e) => void handleSubmit(onValid)(e)} noValidate>
           <Stack spacing={2}>
+            {submitError ? (
+              <Alert severity="error">{submitError}</Alert>
+            ) : null}
             {isSubmitted ? (
               <Alert severity="success">{t("projectForm.success")}</Alert>
             ) : null}

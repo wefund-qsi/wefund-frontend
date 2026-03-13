@@ -15,19 +15,23 @@ function CreateProjectPage({ createProject }: CreateProjectPageProps) {
   const navigate = useNavigate();
 
   const handleSubmit = async (payload: ProjectFormValues) => {
-    await createProject.execute({
+    const result = await createProject.execute({
       ...payload,
       ownerId: PLACEHOLDER_USER_ID,
     });
 
-    setTimeout(() => {
-      void navigate("/");
-    }, 1500);
+    if (result.isSuccess) {
+      setTimeout(() => {
+        void navigate("/");
+      }, 1500);
+    }
+
+    return result;
   };
 
   return (
     <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
-      <ProjectCreationForm onSubmit={(payload) => void handleSubmit(payload)} />
+      <ProjectCreationForm onSubmit={(payload) => handleSubmit(payload)} />
     </Box>
   );
 }

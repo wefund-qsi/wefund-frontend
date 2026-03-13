@@ -23,9 +23,11 @@ describe("ViewAllProjects", () => {
     });
 
     it("retourne une liste vide si aucun projet n'existe", async () => {
-        const projects = await viewAllProjects.execute();
+        const result = await viewAllProjects.execute();
 
-        expect(projects).toEqual([]);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value).toEqual([]);
     });
 
     it("retourne tous les projets existants", async () => {
@@ -35,9 +37,11 @@ describe("ViewAllProjects", () => {
         ]);
         viewAllProjects = new ViewAllProjects(repository);
 
-        const projects = await viewAllProjects.execute();
+        const result = await viewAllProjects.execute();
 
-        expect(projects).toHaveLength(2);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value).toHaveLength(2);
     });
 
     it("retourne les projets avec les bonnes données", async () => {
@@ -45,8 +49,10 @@ describe("ViewAllProjects", () => {
         repository = new InMemoryProjectRepository([expected]);
         viewAllProjects = new ViewAllProjects(repository);
 
-        const projects = await viewAllProjects.execute();
+        const result = await viewAllProjects.execute();
 
-        expect(projects[0]).toEqual(expected);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value[0]).toEqual(expected);
     });
 });

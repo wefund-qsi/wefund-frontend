@@ -8,7 +8,11 @@
   "welcome": "Welcome to WeFund",
   "homePage": {
     "projectsTitle": "Projects",
-    "noProjects": "No projects yet."
+    "noProjects": "No projects yet.",
+    "errors": {
+      "loadFailed": "An error occurred while loading the projects.",
+      "unknownError": "An unknown error occurred."
+    }
   },
   "projectForm": {
     "title": "Create a project",
@@ -28,7 +32,8 @@
       "titleRequired": "Title is required",
       "descriptionRequired": "Description is required",
       "photoUrlRequired": "Photo URL is required",
-      "photoUrlInvalid": "Photo URL is not valid"
+      "photoUrlInvalid": "Photo URL is not valid",
+      "submitFailed": "An error occurred while creating the project."
     }
   },
   "authForm": {

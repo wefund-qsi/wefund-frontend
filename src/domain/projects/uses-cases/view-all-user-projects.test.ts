@@ -23,9 +23,11 @@ describe("ViawAllUserProject", () => {
     });
 
     it("retourne une liste vide si l'utilisateur n'a aucun projet", async () => {
-        const projects = await viewAllUserProjects.execute(UserId("user-1"));
+        const result = await viewAllUserProjects.execute(UserId("user-1"));
 
-        expect(projects).toEqual([]);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value).toEqual([]);
     });
 
     it("retourne uniquement les projets de l'utilisateur ciblé", async () => {
@@ -36,10 +38,12 @@ describe("ViawAllUserProject", () => {
         ]);
         viewAllUserProjects = new ViawAllUserProject(repository);
 
-        const projects = await viewAllUserProjects.execute(UserId("user-1"));
+        const result = await viewAllUserProjects.execute(UserId("user-1"));
 
-        expect(projects).toHaveLength(2);
-        expect(projects.every(p => p.ownerId === "user-1")).toBe(true);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value).toHaveLength(2);
+        expect(result.value.every(p => p.ownerId === "user-1")).toBe(true);
     });
 
     it("ne retourne pas les projets des autres utilisateurs", async () => {
@@ -48,9 +52,11 @@ describe("ViawAllUserProject", () => {
         ]);
         viewAllUserProjects = new ViawAllUserProject(repository);
 
-        const projects = await viewAllUserProjects.execute(UserId("user-1"));
+        const result = await viewAllUserProjects.execute(UserId("user-1"));
 
-        expect(projects).toHaveLength(0);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value).toHaveLength(0);
     });
 
     it("retourne les projets avec les bonnes données", async () => {
@@ -58,8 +64,10 @@ describe("ViawAllUserProject", () => {
         repository = new InMemoryProjectRepository([expected]);
         viewAllUserProjects = new ViawAllUserProject(repository);
 
-        const projects = await viewAllUserProjects.execute(UserId("user-1"));
+        const result = await viewAllUserProjects.execute(UserId("user-1"));
 
-        expect(projects[0]).toEqual(expected);
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+        expect(result.value[0]).toEqual(expected);
     });
 });

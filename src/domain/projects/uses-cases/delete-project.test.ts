@@ -24,22 +24,33 @@ describe("DeleteProject", () => {
     });
 
     it("supprime le projet existant", async () => {
-        await deleteProject.execute(ProjectId("project-1"));
+        const result = await deleteProject.execute(ProjectId("project-1"));
 
-        const projects = await repository.findAll();
-        expect(projects).toHaveLength(0);
+        expect(result.isSuccess).toBe(true);
+
+        const projectsResult = await repository.findAll();
+        expect(projectsResult.isSuccess).toBe(true);
+        if (projectsResult.isSuccess) {
+            expect(projectsResult.value).toHaveLength(0);
+        }
     });
 
-    it("lève une ProjectNotFoundException si le projet n'existe pas", async () => {
-        await expect(
-            deleteProject.execute(ProjectId("inexistant"))
-        ).rejects.toThrow(ProjectNotFoundException);
+    it("retourne une ProjectNotFoundException si le projet n'existe pas", async () => {
+        const result = await deleteProject.execute(ProjectId("inexistant"));
+
+        expect(result.isSuccess).toBe(false);
+        if (!result.isSuccess) {
+            expect(result.error).toBeInstanceOf(ProjectNotFoundException);
+        }
     });
 
-    it("lève une erreur avec l'id du projet manquant", async () => {
-        await expect(
-            deleteProject.execute(ProjectId("inexistant"))
-        ).rejects.toThrow("inexistant");
+    it("retourne une erreur avec l'id du projet manquant", async () => {
+        const result = await deleteProject.execute(ProjectId("inexistant"));
+
+        expect(result.isSuccess).toBe(false);
+        if (!result.isSuccess) {
+            expect(result.error.message).toContain("inexistant");
+        }
     });
 
     it("ne supprime que le projet ciblé", async () => {
@@ -49,10 +60,14 @@ describe("DeleteProject", () => {
         ]);
         deleteProject = new DeleteProject(repository);
 
-        await deleteProject.execute(ProjectId("project-1"));
+        const result = await deleteProject.execute(ProjectId("project-1"));
+        expect(result.isSuccess).toBe(true);
 
-        const projects = await repository.findAll();
-        expect(projects).toHaveLength(1);
-        expect(projects[0].id).toBe("project-2");
+        const projectsResult = await repository.findAll();
+        expect(projectsResult.isSuccess).toBe(true);
+        if (projectsResult.isSuccess) {
+            expect(projectsResult.value).toHaveLength(1);
+            expect(projectsResult.value[0].id).toBe("project-2");
+        }
     });
 });

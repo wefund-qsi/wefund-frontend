@@ -5,7 +5,7 @@ import "../../../infrastructure/i18n";
 
 describe("ProjectCreationForm", () => {
   const setup = () => {
-    const onSubmit = vi.fn();
+    const onSubmit = vi.fn().mockResolvedValue({ isSuccess: true, value: {} });
     const user = userEvent.setup();
     render(<ProjectCreationForm onSubmit={onSubmit} />);
     return { onSubmit, user };

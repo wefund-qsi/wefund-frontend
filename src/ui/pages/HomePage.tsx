@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Alert } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { Project } from "../../domain/projects/entities/project";
@@ -12,17 +12,35 @@ interface HomePageProps {
 function HomePage({ viewAllProjects }: HomePageProps) {
   const { t } = useTranslation();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    viewAllProjects.execute().then(setProjects).catch(console.error);
-  }, [viewAllProjects]);
+    viewAllProjects.execute().then((result) => {
+      if (result.isSuccess) {
+        setProjects(result.value);
+        setError(null);
+      } else {
+        setError(result.error?.message || t("homePage.errors.loadFailed"));
+        setProjects([]);
+      }
+    }).catch(() => {
+        setError(t("homePage.errors.unknownError"));
+    });
+  }, [viewAllProjects, t]);
 
   return (
     <>
       <Typography variant="h4" component="h1" fontWeight={700} mb={3}>
         {t("homePage.projectsTitle")}
       </Typography>
-      {projects.length === 0 ? (
+
+      {error ? (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {error}
+        </Alert>
+      ) : null}
+
+      {!error && projects.length === 0 ? (
         <Typography color="text.secondary">{t("homePage.noProjects")}</Typography>
       ) : (
         <Grid container spacing={3}>

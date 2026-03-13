@@ -8,7 +8,11 @@
   "welcome": "Bienvenue sur WeFund",
   "homePage": {
     "projectsTitle": "Les projets",
-    "noProjects": "Aucun projet pour le moment."
+    "noProjects": "Aucun projet pour le moment.",
+    "errors": {
+      "loadFailed": "Une erreur est survenue lors du chargement des projets.",
+      "unknownError": "Une erreur inconnue est survenue."
+    }
   },
   "projectForm": {
     "title": "Créer un projet",
@@ -28,7 +32,8 @@
       "titleRequired": "Le titre est obligatoire",
       "descriptionRequired": "La description est obligatoire",
       "photoUrlRequired": "L'URL de la photo est obligatoire",
-      "photoUrlInvalid": "L'URL de la photo n'est pas valide"
+      "photoUrlInvalid": "L'URL de la photo n'est pas valide",
+      "submitFailed": "Une erreur est survenue lors de la création du projet."
     }
   },
   "authForm": {

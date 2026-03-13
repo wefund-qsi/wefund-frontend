@@ -21,8 +21,8 @@ describe("CreateProject", () => {
     let createProject: CreateProject;
 
     beforeEach(() => {
-        repository = new InMemoryProjectRepository();
-        createProject = new CreateProject(repository, stubIdGenerator, stubDateGenerator);
+        repository = new InMemoryProjectRepository([], stubIdGenerator, stubDateGenerator);
+        createProject = new CreateProject(repository);
     });
 
     it("crée un projet avec les données fournies", async () => {
@@ -33,7 +33,12 @@ describe("CreateProject", () => {
             ownerId: UserId("user-1"),
         };
 
-        const project = await createProject.execute(data);
+        const result = await createProject.execute(data);
+
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+
+        const project = result.value;
 
         expect(project.title).toBe(data.title);
         expect(project.description).toBe(data.description);
@@ -49,9 +54,12 @@ describe("CreateProject", () => {
             ownerId: UserId("user-1"),
         };
 
-        const project = await createProject.execute(data);
+        const result = await createProject.execute(data);
+        
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
 
-        expect(project.id).toBe(FIXED_ID);
+        expect(result.value.id).toBe(FIXED_ID);
     });
 
     it("assigne la date générée au projet", async () => {
@@ -62,9 +70,12 @@ describe("CreateProject", () => {
             ownerId: UserId("user-1"),
         };
 
-        const project = await createProject.execute(data);
+        const result = await createProject.execute(data);
+        
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
 
-        expect(project.createdAt).toBe(FIXED_DATE);
+        expect(result.value.createdAt).toBe(FIXED_DATE);
     });
 
     it("persiste le projet dans le repository", async () => {
@@ -77,8 +88,11 @@ describe("CreateProject", () => {
 
         await createProject.execute(data);
 
-        const projects = await repository.findAll();
-        expect(projects).toHaveLength(1);
-        expect(projects[0].title).toBe(data.title);
+        const result = await repository.findAll();
+        expect(result.isSuccess).toBe(true);
+        if (!result.isSuccess) return;
+
+        expect(result.value).toHaveLength(1);
+        expect(result.value[0].title).toBe(data.title);
     });
 });
