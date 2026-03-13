@@ -8,11 +8,16 @@ import type { IDateGenerator } from "../../../core/ports/date-generator.interfac
 
 export class InMemoryAuthRepository implements IAuthRepository {
     private users: (SignupResultData & { password: string })[] = [];
+    private readonly idGenerator: IIdGenerator;
+    private readonly dateGenerator: IDateGenerator;
 
     constructor(
-        private readonly idGenerator: IIdGenerator,
-        private readonly dateGenerator: IDateGenerator,
-    ) {}
+        idGenerator: IIdGenerator,
+        dateGenerator: IDateGenerator,
+    ) {
+        this.idGenerator = idGenerator;
+        this.dateGenerator = dateGenerator;
+    }
 
     signup(request: SignupRequest): Promise<SignupResult> {
         const existingUser = this.users.find(u => u.username === request.username);
