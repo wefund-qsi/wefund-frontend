@@ -2,7 +2,7 @@
   "header": {
     "createProject": "Créer votre projet",
     "exploreProjects": "Explorer les projets",
-    "register": "S'enregistrer",
+    "signup": "S'enregistrer",
     "login": "Se connecter"
   },
   "welcome": "Bienvenue sur WeFund",
@@ -29,6 +29,36 @@
       "descriptionRequired": "La description est obligatoire",
       "photoUrlRequired": "L'URL de la photo est obligatoire",
       "photoUrlInvalid": "L'URL de la photo n'est pas valide"
+    }
+  },
+  "authForm": {
+    "fields": {
+      "prenom": "Prénom",
+      "nom": "Nom",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe"
+    },
+    "errors": {
+      "prenomRequired": "Le prénom est obligatoire",
+      "nomRequired": "Le nom est obligatoire",
+      "usernameRequired": "Le nom d'utilisateur est obligatoire",
+      "usernameMinLength": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+      "usernameMaxLength": "Le nom d'utilisateur ne doit pas dépasser 20 caractères",
+      "passwordRequired": "Le mot de passe est obligatoire",
+      "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+      "passwordMaxLength": "Le mot de passe ne doit pas dépasser 50 caractères"
+    },
+    "signup": {
+      "title": "Inscription",
+      "subtitle": "Créez votre compte WeFund",
+      "submit": "S'enregistrer",
+      "success": "Inscription réussie !"
+    },
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Connectez-vous à votre compte",
+      "submit": "Se connecter",
+      "success": "Connexion réussie !"
     }
   }
 }
