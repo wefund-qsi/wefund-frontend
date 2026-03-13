@@ -16,8 +16,8 @@ import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
 import theme from './theme';
 
-const projectRepository = new InMemoryProjectRepository();
-const createProject = new CreateProject(projectRepository, new RealIdGenerator(), new RealDateGenerator());
+const projectRepository = new InMemoryProjectRepository([], new RealIdGenerator(), new RealDateGenerator());
+const createProject = new CreateProject(projectRepository);
 const viewAllProjects = new ViewAllProjects(projectRepository);
 
 const authRepository = new InMemoryAuthRepository(new RealIdGenerator(), new RealDateGenerator());
