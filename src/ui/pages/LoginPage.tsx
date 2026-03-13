@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import type { LoginFormValues } from "../../domain/auth/entities/auth";
 import type { Login } from "../../domain/auth/uses-cases/login";
@@ -10,14 +11,26 @@ interface LoginPageProps {
 
 function LoginPage({ login }: LoginPageProps) {
   const navigate = useNavigate();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleSubmit = async (payload: LoginFormValues) => {
-    await login.execute(payload);
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current !== null) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
-    setTimeout(() => {
-      void navigate("/");
-    }, 1500);
-  };
+  const handleSubmit = useCallback(
+    async (payload: LoginFormValues) => {
+      await login.execute(payload);
+
+      timeoutRef.current = setTimeout(() => {
+        void navigate("/");
+      }, 1500);
+    },
+    [login, navigate],
+  );
 
   return (
     <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>

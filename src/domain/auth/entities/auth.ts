@@ -5,48 +5,36 @@ import type { UserId } from "../../users/entities/user";
 
 export type Role = "ADMINISTRATEUR" | "USER";
 
-export type SignupRequest = {
+export interface SignupBase {
   prenom: string;
   nom: string;
   username: string;
+}
+
+export interface SignupRequest extends SignupBase {
   password: string;
-  role: Role;
-};
+}
 
-export type SignupResultData = {
+export interface SignupResultData extends SignupBase {
   id: UserId;
-  nom: string;
-  prenom: string;
-  username: string;
-  role: string;
-};
+  role: Role;
+}
 
-export type SignupResult = {
+export type ApiResponse<T> = {
   statusCode: number;
   message: string;
-  data: SignupResultData;
+  data: T;
   timestamp: string;
 };
+
+export type SignupResult = ApiResponse<SignupResultData>;
 
 export type LoginRequest = {
   username: string;
   password: string;
 };
 
-export type LoginResult = {
-  statusCode: number;
-  message: string;
-  data: {
-    access_token: string;
-  };
-  timestamp: string;
-};
-
-export type AuthError = {
-  statusCode: number;
-  message: string;
-  error: string;
-};
+export type LoginResult = ApiResponse<{ access_token: string }>;
 
 // --- Schémas Zod ---
 

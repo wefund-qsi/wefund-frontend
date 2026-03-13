@@ -1,13 +1,19 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { InMemoryAuthRepository } from "../adapters/auth-repository.in-memory";
 import { Signup } from "./signup";
+import type { IIdGenerator } from "../../../core/ports/id-generator.interface";
+import type { IDateGenerator } from "../../../core/ports/date-generator.interface";
 
 describe("Signup", () => {
     let repository: InMemoryAuthRepository;
     let signup: Signup;
+    let idGenerator: IIdGenerator;
+    let dateGenerator: IDateGenerator;
 
     beforeEach(() => {
-        repository = new InMemoryAuthRepository();
+        idGenerator = { generate: () => "stub-id" };
+        dateGenerator = { now: () => new Date("2026-01-01T00:00:00.000Z") };
+        repository = new InMemoryAuthRepository(idGenerator, dateGenerator);
         signup = new Signup(repository);
     });
 

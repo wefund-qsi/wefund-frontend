@@ -20,7 +20,7 @@ const projectRepository = new InMemoryProjectRepository();
 const createProject = new CreateProject(projectRepository, new RealIdGenerator(), new RealDateGenerator());
 const viewAllProjects = new ViewAllProjects(projectRepository);
 
-const authRepository = new InMemoryAuthRepository();
+const authRepository = new InMemoryAuthRepository(new RealIdGenerator(), new RealDateGenerator());
 const signup = new Signup(authRepository);
 const login = new Login(authRepository);
 

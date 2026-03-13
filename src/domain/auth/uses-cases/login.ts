@@ -1,5 +1,6 @@
 import type { Executable } from "../../../shared/executable";
 import type { LoginRequest, LoginResult } from "../entities/auth";
+import { InvalidCredentialsException } from "../exceptions/invalid-credentials";
 import type { IAuthRepository } from "../ports/auth-repository.interface";
 
 export class Login implements Executable<LoginRequest, LoginResult> {
@@ -10,6 +11,10 @@ export class Login implements Executable<LoginRequest, LoginResult> {
     }
 
     async execute(data: LoginRequest): Promise<LoginResult> {
-        return await this.authRepository.login(data);
+        try {
+            return await this.authRepository.login(data);
+        } catch {
+            throw new InvalidCredentialsException();
+        }
     }
 }

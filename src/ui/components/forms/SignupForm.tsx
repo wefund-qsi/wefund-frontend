@@ -35,11 +35,13 @@ function SignupForm({ onSubmit }: SignupFormProps) {
 
   const onValid = async (data: SignupFormValues) => {
     try {
+      setIsSubmitted(false);
       setErrorMessage(null);
       await onSubmit(data);
       setIsSubmitted(true);
       reset();
     } catch (error: unknown) {
+      setIsSubmitted(false);
       if (error instanceof Error) {
         setErrorMessage(error.message);
       }

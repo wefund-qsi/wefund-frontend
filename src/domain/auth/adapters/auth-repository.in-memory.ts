@@ -3,10 +3,16 @@ import { UserId } from "../../users/entities/user";
 import { InvalidCredentialsException } from "../exceptions/invalid-credentials";
 import { UsernameAlreadyExistsException } from "../exceptions/username-already-exists";
 import type { IAuthRepository } from "../ports/auth-repository.interface";
+import type { IIdGenerator } from "../../../core/ports/id-generator.interface";
+import type { IDateGenerator } from "../../../core/ports/date-generator.interface";
 
 export class InMemoryAuthRepository implements IAuthRepository {
     private users: (SignupResultData & { password: string })[] = [];
-    private idCounter = 0;
+
+    constructor(
+        private readonly idGenerator: IIdGenerator,
+        private readonly dateGenerator: IDateGenerator,
+    ) {}
 
     signup(request: SignupRequest): Promise<SignupResult> {
         const existingUser = this.users.find(u => u.username === request.username);
@@ -14,15 +20,14 @@ export class InMemoryAuthRepository implements IAuthRepository {
             return Promise.reject(new UsernameAlreadyExistsException(request.username));
         }
 
-        this.idCounter++;
-        const id = UserId(`user-${this.idCounter}`);
+        const id = UserId(this.idGenerator.generate());
 
         const userData: SignupResultData & { password: string } = {
             id,
             nom: request.nom,
             prenom: request.prenom,
             username: request.username,
-            role: request.role,
+            role: "USER",
             password: request.password,
         };
 
@@ -38,7 +43,7 @@ export class InMemoryAuthRepository implements IAuthRepository {
                 username: userData.username,
                 role: userData.role,
             },
-            timestamp: new Date().toISOString(),
+            timestamp: this.dateGenerator.now().toISOString(),
         });
     }
 
@@ -51,13 +56,15 @@ export class InMemoryAuthRepository implements IAuthRepository {
             return Promise.reject(new InvalidCredentialsException());
         }
 
+        const payload = btoa(JSON.stringify({ sub: user.id, role: user.role }));
+
         return Promise.resolve({
             statusCode: 200,
             message: "Login successful",
             data: {
-                access_token: `fake-jwt-token-${user.id}`,
+                access_token: `fake-header.${payload}.fake-signature`,
             },
-            timestamp: new Date().toISOString(),
+            timestamp: this.dateGenerator.now().toISOString(),
         });
     }
 }
