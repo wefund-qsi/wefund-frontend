@@ -65,5 +65,10 @@
     "createCampaign": "Créer une campagne",
     "noCampaignYet": "Aucune campagne créée pour le moment pour ce projet",
     "createNew": "Créer une campagne"
+  },
+  "project": {
+    "notFound": "Projet introuvable",
+    "newsTitle": "Actualités",
+    "noNews": "Aucune actualité pour le moment."
   }
 }
