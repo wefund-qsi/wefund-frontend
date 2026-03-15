@@ -1,4 +1,5 @@
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import type { Project } from "../../domain/projects/entities/project";
 import noPicture from "../public/no_picture.jpg";
 
@@ -7,6 +8,8 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project }: ProjectCardProps) {
+  const navigate = useNavigate();
+
   return (
     <Card
       sx={{
@@ -21,7 +24,10 @@ function ProjectCard({ project }: ProjectCardProps) {
         },
       }}
     >
-      <CardActionArea sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", height: "100%" }}>
+      <CardActionArea 
+        onClick={() => { void navigate(`/projects/${project.id}`); }}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", height: "100%" }}
+      >
         <CardMedia
           component="img"
           height={180}

@@ -9,6 +9,7 @@ import { Signup } from './domain/auth/uses-cases/signup';
 import { InMemoryProjectRepository } from './domain/projects/adapters/project-repository.in-memory';
 import { CreateProject } from './domain/projects/uses-cases/create-project';
 import { ViewAllProjects } from './domain/projects/uses-cases/view-all-projects';
+import { ViewProject } from './domain/projects/uses-cases/view-project';
 import MainLayout from './ui/components/layouts/MainLayout';
 import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
@@ -20,6 +21,7 @@ import theme from './theme';
 const projectRepository = new InMemoryProjectRepository();
 const createProject = new CreateProject(projectRepository, new RealIdGenerator(), new RealDateGenerator());
 const viewAllProjects = new ViewAllProjects(projectRepository);
+const viewProject = new ViewProject(projectRepository);
 
 const authRepository = new InMemoryAuthRepository(new RealIdGenerator(), new RealDateGenerator());
 const signup = new Signup(authRepository);
@@ -36,7 +38,7 @@ function App() {
             <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} />} />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
-            <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/projects/:id" element={<ProjectDetails viewProject={viewProject} />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>

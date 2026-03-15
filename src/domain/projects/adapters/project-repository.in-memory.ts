@@ -13,6 +13,10 @@ export class InMemoryProjectRepository implements IProjectRepository {
         return Promise.resolve(this.projects);
     }
 
+    findById(id: ProjectId): Promise<Project | null> {
+        return Promise.resolve(this.projects.find(project => project.id === id) || null);
+    }
+
     create(project: Project): Promise<Project> {
         this.projects.push(project);
         return Promise.resolve(project);
