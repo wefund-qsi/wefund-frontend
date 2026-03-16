@@ -49,7 +49,6 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* Titre en gros avec bouton retour */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 4, gap: 2 }}>
         <IconButton onClick={() => { void navigate("/"); }} aria-label="back" sx={{ color: "primary.dark" }}>
           <ArrowBackIcon fontSize="large" />
@@ -67,11 +66,8 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
         </Typography>
       </Box>
 
-      {/* Section image et campagne côte à côte */}
       <Grid container spacing={4} sx={{ mb: 4, alignItems: "stretch" }}>
-        {/* Colonne gauche - Image (2/3) */}
         <Grid size={{ xs: 12, md: 8 }} sx={{ display: "flex" }}>
-          {/* Image du projet */}
           <Box
             component="img"
             src={project.photoUrl}
@@ -88,7 +84,6 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
           />
         </Grid>
 
-        {/* Colonne droite - Bouton créer campagne (1/3) */}
         <Grid
           size={{ xs: 12, md: 4 }}
           sx={{
@@ -152,7 +147,6 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
         </Grid>
       </Grid>
 
-      {/* Description en pleine largeur */}
       <Box sx={{ mb: 6 }}>
         <Typography
           variant="body1"
