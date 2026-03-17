@@ -42,7 +42,7 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
     setCampaigns((prev) =>
       prev.map((c) =>
         c.id === id && c.status === "pending_validation"
-          ? { ...c, status: "active", startedAt: new Date().toISOString() }
+          ? { ...c, status: "active", startedAt: new Date().toISOString(), collectedAmount: 0 }
           : c
       )
     );
