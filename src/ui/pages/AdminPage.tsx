@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Tabs,
@@ -11,79 +11,20 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import type { Campaign } from "../../domain/campagns/entites/campaign";
-import { CampaignId } from "../../domain/campagns/entites/campaign";
-import { ProjectId } from "../../domain/projects/entities/project";
-import { UserId } from "../../domain/users/entities/user";
+import type { ViewAllCampaigns } from "../../domain/campagns/uses-cases/view-all-campaigns";
 
-// Mock data for campaigns
-const mockCampaigns: Campaign[] = [
-  {
-    id: CampaignId("1"),
-    projectId: ProjectId("p1"),
-    title: "Campaign 1",
-    description: "Description 1",
-    goal: 1000,
-    endDate: "2024-12-31",
-    ownerId: UserId("u1"),
-    createdAt: "2024-01-01",
-    status: "pending_validation",
-  },
-  {
-    id: CampaignId("2"),
-    projectId: ProjectId("p2"),
-    title: "Campaign 2",
-    description: "Description 2",
-    goal: 2000,
-    endDate: "2024-12-31",
-    ownerId: UserId("u2"),
-    createdAt: "2024-01-01",
-    status: "pending_validation"
-  },
-  {
-    id: CampaignId("3"),
-    projectId: ProjectId("p3"),
-    title: "Campaign 3",
-    description: "Description 3",
-    goal: 1500,
-    endDate: "2024-12-31",
-    ownerId: UserId("u3"),
-    createdAt: "2024-01-01",
-    status: "succeeded",
-    startedAt: "2024-01-15",
-    completedAt: "2024-06-01",
-    collectedAmount: 1600,
-  },
-  {
-    id: CampaignId("4"),
-    projectId: ProjectId("p4"),
-    title: "Campaign 4",
-    description: "Description 4",
-    goal: 3000,
-    endDate: "2024-12-31",
-    ownerId: UserId("u4"),
-    createdAt: "2024-01-01",
-    status: "failed",
-    startedAt: "2024-01-15",
-    completedAt: "2024-12-31",
-    collectedAmount: 500,
-  },
-  {
-    id: CampaignId("5"),
-    projectId: ProjectId("p5"),
-    title: "Campaign 5",
-    description: "Description 5",
-    goal: 2500,
-    endDate: "2024-12-31",
-    ownerId: UserId("u5"),
-    createdAt: "2024-01-01",
-    status: "rejected",
-  },
-];
+interface AdminPageProps {
+  viewAllCampaigns: ViewAllCampaigns;
+}
 
-function AdminPage() {
+function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   const { t } = useTranslation();
-  const [campaigns, setCampaigns] = useState<Campaign[]>(mockCampaigns);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [tabValue, setTabValue] = useState(0);
+
+  useEffect(() => {
+    void viewAllCampaigns.execute().then(setCampaigns);
+  }, [viewAllCampaigns]);
 
   const statuses = [
     "pending_validation",
@@ -120,7 +61,6 @@ function AdminPage() {
   const filteredCampaigns = campaigns.filter(
     (c) => c.status === statuses[tabValue]
   );
-
 
   return (
     <Box sx={{ width: "100%" }}>

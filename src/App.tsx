@@ -235,7 +235,7 @@ function App() {
             />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin" element={<AdminPage viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
           </Routes>
         </MainLayout>
