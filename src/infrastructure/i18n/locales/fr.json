@@ -94,6 +94,17 @@
       "endDateRequired": "La date de fin est obligatoire"
     }
   },
+  "funding": {
+    "title": "Soutenir cette campagne",
+    "subtitle": "Choisissez un montant et validez votre contribution de demonstration.",
+    "amount": "Montant de la contribution",
+    "helper": "Exemple : 25 EUR",
+    "submit": "Financer la campagne",
+    "success": "Contribution enregistree avec succes !",
+    "errors": {
+      "amountPositive": "Le montant doit etre superieur a 0"
+    }
+  },
   "project": {
     "notFound": "Projet introuvable",
     "edit": "Modifier le projet",

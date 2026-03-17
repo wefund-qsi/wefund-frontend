@@ -94,6 +94,17 @@
       "endDateRequired": "End date is required"
     }
   },
+  "funding": {
+    "title": "Support this campaign",
+    "subtitle": "Choose an amount and submit your demo contribution.",
+    "amount": "Contribution amount",
+    "helper": "Example: EUR 25",
+    "submit": "Fund campaign",
+    "success": "Contribution saved successfully!",
+    "errors": {
+      "amountPositive": "Amount must be greater than 0"
+    }
+  },
   "project": {
     "notFound": "Project not found",
     "edit": "Edit project",

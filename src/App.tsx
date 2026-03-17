@@ -14,6 +14,8 @@ import { ViewProjectCampaigns } from './domain/campagns/uses-cases/view-project-
 import { InMemoryAuthRepository } from './domain/auth/adapters/auth-repository.in-memory';
 import { Login } from './domain/auth/uses-cases/login';
 import { Signup } from './domain/auth/uses-cases/signup';
+import { InMemoryContributionRepository } from './domain/contributions/adapters/contribution-repository.in-memory';
+import { FundCampaign } from './domain/contributions/uses-cases/fund-campaign';
 import { InMemoryProjectRepository } from './domain/projects/adapters/project-repository.in-memory';
 import { ProjectId } from './domain/projects/entities/project';
 import { CreateProject } from './domain/projects/uses-cases/create-project';
@@ -76,6 +78,7 @@ const seededCampaigns = [
     createdAt: '2026-02-01T10:00:00.000Z',
     status: 'active' as const,
     startedAt: '2026-02-15T10:00:00.000Z',
+    collectedAmount: 5400,
   },
   {
     id: CampaignId('campaign-animal-2'),
@@ -124,10 +127,12 @@ const seededCampaigns = [
     createdAt: '2026-02-18T10:00:00.000Z',
     status: 'active' as const,
     startedAt: '2026-03-01T10:00:00.000Z',
+    collectedAmount: 7200,
   },
 ];
 
 const CURRENT_USER_ID = UserId('seed-owner-1');
+const CURRENT_CONTRIBUTOR_ID = UserId('seed-contributor-1');
 
 const projectRepository = new InMemoryProjectRepository(seededProjects);
 const createProject = new CreateProject(projectRepository, new RealIdGenerator(), new RealDateGenerator());
@@ -142,9 +147,11 @@ const signup = new Signup(authRepository);
 const login = new Login(authRepository);
 
 const campaignRepository = new InMemoryCampaignRepository(seededCampaigns);
+const contributionRepository = new InMemoryContributionRepository();
 const createCampaign = new CreateCampaign(campaignRepository, new RealIdGenerator(), new RealDateGenerator());
 const updateCampaign = new UpdateCampaign(campaignRepository);
 const deleteCampaign = new DeleteCampaign(campaignRepository);
+const fundCampaign = new FundCampaign(campaignRepository, contributionRepository, new RealIdGenerator(), new RealDateGenerator());
 const viewAllCampaigns = new ViewAllCampaigns(campaignRepository);
 const viewCampaign = new ViewCampaign(campaignRepository);
 const viewProjectCampaigns = new ViewProjectCampaigns(campaignRepository);
@@ -158,7 +165,18 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} />} />
             <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} />} />
-            <Route path="/campaigns/:id" element={<CampaignDetailsPage currentUserId={CURRENT_USER_ID} viewCampaign={viewCampaign} deleteCampaign={deleteCampaign} />} />
+            <Route
+              path="/campaigns/:id"
+              element={
+                <CampaignDetailsPage
+                  currentUserId={CURRENT_USER_ID}
+                  contributorId={CURRENT_CONTRIBUTOR_ID}
+                  viewCampaign={viewCampaign}
+                  deleteCampaign={deleteCampaign}
+                  fundCampaign={fundCampaign}
+                />
+              }
+            />
             <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
             <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
             <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />

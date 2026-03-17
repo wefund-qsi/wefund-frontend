@@ -1,6 +1,6 @@
-import { Box, Card, CardActionArea, CardContent, Chip, Stack, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Chip, LinearProgress, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import type { Campaign } from "../../domain/campagns/entites/campaign";
+import { getCampaignCollectedAmount, getCampaignProgress, type Campaign } from "../../domain/campagns/entites/campaign";
 
 interface CampaignCardProps {
   campaign: Campaign;
@@ -28,6 +28,20 @@ function CampaignCard({ campaign }: CampaignCardProps) {
           </Typography>
           <Box>
             <Typography variant="subtitle2">Objectif: {campaign.goal.toLocaleString()} EUR</Typography>
+            <Typography variant="subtitle2">
+              Collecte: {getCampaignCollectedAmount(campaign).toLocaleString()} EUR
+            </Typography>
+            <LinearProgress
+              variant="determinate"
+              value={getCampaignProgress(campaign)}
+              sx={{
+                mt: 1,
+                height: 8,
+                borderRadius: 999,
+                bgcolor: "rgba(254, 250, 224, 0.25)",
+                "& .MuiLinearProgress-bar": { bgcolor: "#fefae0" },
+              }}
+            />
             <Typography variant="caption">Fin: {campaign.endDate}</Typography>
           </Box>
         </CardContent>

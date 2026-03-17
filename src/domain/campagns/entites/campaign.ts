@@ -42,6 +42,7 @@ export interface PendingCampaign extends CampaignBase {
 export interface ActiveCampaign extends CampaignBase {
   status: "active";
   startedAt: string;
+  collectedAmount: number;
 }
 
 export interface SucceededCampaign extends CampaignBase {
@@ -69,6 +70,23 @@ export type Campaign =
   | SucceededCampaign
   | FailedCampaign
   | RejectedCampaign;
+
+export function getCampaignCollectedAmount(campaign: Campaign): number {
+  if (
+    campaign.status === "active" ||
+    campaign.status === "succeeded" ||
+    campaign.status === "failed"
+  ) {
+    return campaign.collectedAmount;
+  }
+
+  return 0;
+}
+
+export function getCampaignProgress(campaign: Campaign): number {
+  const collectedAmount = getCampaignCollectedAmount(campaign);
+  return Math.min(100, Math.round((collectedAmount / campaign.goal) * 100));
+}
 
 // --- Schéma Zod (uniquement ce que l'utilisateur saisit) ---
 
