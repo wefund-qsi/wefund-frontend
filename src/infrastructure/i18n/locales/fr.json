@@ -4,6 +4,7 @@
     "exploreProjects": "Explorer les projets",
     "exploreCampaigns": "Explorer les campagnes",
     "myProjects": "Mes projets",
+    "myContributions": "Mes contributions",
     "signup": "S'enregistrer",
     "login": "Se connecter",
     "logout": "Se déconnecter"
@@ -104,6 +105,18 @@
     "errors": {
       "amountPositive": "Le montant doit etre superieur a 0"
     }
+  },
+  "contributions": {
+    "title": "Mes contributions",
+    "empty": "Aucune contribution pour le moment.",
+    "amount": "Montant",
+    "createdAt": "Date de contribution",
+    "campaignTotal": "Collecte actuelle de la campagne",
+    "edit": "Modifier",
+    "refund": "Demander le remboursement",
+    "save": "Enregistrer le nouveau montant",
+    "updated": "Contribution mise a jour avec succes !",
+    "editDialogTitle": "Modifier ma contribution"
   },
   "project": {
     "notFound": "Projet introuvable",

@@ -53,15 +53,15 @@ describe("FundCampaign", () => {
     expect(result.status === "active" ? result.collectedAmount : 0).toBe(500);
   });
 
-  it("cloture la campagne quand l objectif est atteint", async () => {
+  it("laisse la campagne active meme si l objectif est depasse", async () => {
     const result = await fundCampaign.execute({
       campaignId: CampaignId("campaign-1"),
       contributorId: UserId("contributor-1"),
       amount: 800,
     });
 
-    expect(result.status).toBe("succeeded");
-    expect(result.status === "succeeded" ? result.collectedAmount : 0).toBe(1100);
+    expect(result.status).toBe("active");
+    expect(result.status === "active" ? result.collectedAmount : 0).toBe(1100);
   });
 
   it("refuse le financement d une campagne non active", async () => {

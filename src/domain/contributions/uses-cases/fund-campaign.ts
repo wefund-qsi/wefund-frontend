@@ -48,17 +48,6 @@ export class FundCampaign {
       createdAt: this.dateGenerator.now().toISOString(),
     });
 
-    if (nextCollectedAmount >= campaign.goal) {
-      const succeededCampaign: Campaign = {
-        ...campaign,
-        status: "succeeded",
-        collectedAmount: nextCollectedAmount,
-        completedAt: this.dateGenerator.now().toISOString(),
-      };
-
-      return this.campaignRepository.update(succeededCampaign);
-    }
-
     return this.campaignRepository.update({
       ...campaign,
       collectedAmount: nextCollectedAmount,

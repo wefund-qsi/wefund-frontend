@@ -15,7 +15,11 @@ import { InMemoryAuthRepository } from './domain/auth/adapters/auth-repository.i
 import { Login } from './domain/auth/uses-cases/login';
 import { Signup } from './domain/auth/uses-cases/signup';
 import { InMemoryContributionRepository } from './domain/contributions/adapters/contribution-repository.in-memory';
+import { ContributionId } from './domain/contributions/entities/contribution';
 import { FundCampaign } from './domain/contributions/uses-cases/fund-campaign';
+import { RefundContribution } from './domain/contributions/uses-cases/refund-contribution';
+import { UpdateContribution } from './domain/contributions/uses-cases/update-contribution';
+import { ViewUserContributions } from './domain/contributions/uses-cases/view-user-contributions';
 import { InMemoryProjectRepository } from './domain/projects/adapters/project-repository.in-memory';
 import { ProjectId } from './domain/projects/entities/project';
 import { CreateProject } from './domain/projects/uses-cases/create-project';
@@ -33,6 +37,7 @@ import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
 import EditCampaignPage from './ui/pages/EditCampaignPage';
 import EditProjectPage from './ui/pages/EditProjectPage';
+import MyContributionsPage from './ui/pages/MyContributionsPage';
 import MyProjectsPage from './ui/pages/MyProjectsPage';
 import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
@@ -134,6 +139,30 @@ const seededCampaigns = [
 const CURRENT_USER_ID = UserId('seed-owner-1');
 const CURRENT_CONTRIBUTOR_ID = UserId('seed-contributor-1');
 
+const seededContributions = [
+  {
+    id: ContributionId('contribution-1'),
+    campaignId: CampaignId('campaign-animal-1'),
+    contributorId: CURRENT_CONTRIBUTOR_ID,
+    amount: 120,
+    createdAt: '2026-03-03T10:00:00.000Z',
+  },
+  {
+    id: ContributionId('contribution-2'),
+    campaignId: CampaignId('campaign-humanitarian-1'),
+    contributorId: CURRENT_CONTRIBUTOR_ID,
+    amount: 75,
+    createdAt: '2026-03-08T10:00:00.000Z',
+  },
+  {
+    id: ContributionId('contribution-3'),
+    campaignId: CampaignId('campaign-animal-3'),
+    contributorId: CURRENT_CONTRIBUTOR_ID,
+    amount: 50,
+    createdAt: '2026-02-15T10:00:00.000Z',
+  },
+];
+
 const projectRepository = new InMemoryProjectRepository(seededProjects);
 const createProject = new CreateProject(projectRepository, new RealIdGenerator(), new RealDateGenerator());
 const updateProject = new UpdateProject(projectRepository);
@@ -147,11 +176,14 @@ const signup = new Signup(authRepository);
 const login = new Login(authRepository);
 
 const campaignRepository = new InMemoryCampaignRepository(seededCampaigns);
-const contributionRepository = new InMemoryContributionRepository();
+const contributionRepository = new InMemoryContributionRepository(seededContributions);
 const createCampaign = new CreateCampaign(campaignRepository, new RealIdGenerator(), new RealDateGenerator());
 const updateCampaign = new UpdateCampaign(campaignRepository);
 const deleteCampaign = new DeleteCampaign(campaignRepository);
 const fundCampaign = new FundCampaign(campaignRepository, contributionRepository, new RealIdGenerator(), new RealDateGenerator());
+const updateContribution = new UpdateContribution(contributionRepository, campaignRepository);
+const refundContribution = new RefundContribution(contributionRepository, campaignRepository);
+const viewUserContributions = new ViewUserContributions(contributionRepository);
 const viewAllCampaigns = new ViewAllCampaigns(campaignRepository);
 const viewCampaign = new ViewCampaign(campaignRepository);
 const viewProjectCampaigns = new ViewProjectCampaigns(campaignRepository);
@@ -182,6 +214,18 @@ function App() {
             <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
             <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} />} />
             <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
+            <Route
+              path="/my-contributions"
+              element={
+                <MyContributionsPage
+                  contributorId={CURRENT_CONTRIBUTOR_ID}
+                  viewCampaign={viewCampaign}
+                  viewUserContributions={viewUserContributions}
+                  updateContribution={updateContribution}
+                  refundContribution={refundContribution}
+                />
+              }
+            />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />

@@ -13,9 +13,12 @@ type FundingFormValues = z.infer<typeof fundingSchema>;
 
 interface FundingFormProps {
   onSubmit: (amount: number) => Promise<void> | void;
+  initialAmount?: number;
+  submitLabel?: string;
+  successMessage?: string;
 }
 
-function FundingForm({ onSubmit }: FundingFormProps) {
+function FundingForm({ onSubmit, initialAmount, submitLabel, successMessage }: FundingFormProps) {
   const { t } = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -27,19 +30,19 @@ function FundingForm({ onSubmit }: FundingFormProps) {
   } = useForm<FundingFormValues>({
     resolver: zodResolver(fundingSchema),
     defaultValues: {
-      amount: undefined,
+      amount: initialAmount,
     },
   });
 
   const onValid = async (values: FundingFormValues) => {
     await onSubmit(values.amount);
     setIsSubmitted(true);
-    reset({ amount: undefined });
+    reset({ amount: initialAmount });
   };
 
   return (
     <Stack component="form" spacing={2} onSubmit={(event) => void handleSubmit(onValid)(event)}>
-      {isSubmitted ? <Alert severity="success">{t("funding.success")}</Alert> : null}
+      {isSubmitted ? <Alert severity="success">{successMessage ?? t("funding.success")}</Alert> : null}
       <TextField
         label={t("funding.amount")}
         type="number"
@@ -49,7 +52,7 @@ function FundingForm({ onSubmit }: FundingFormProps) {
         helperText={errors.amount ? t(errors.amount.message!) : t("funding.helper")}
       />
       <Button type="submit" variant="contained">
-        {t("funding.submit")}
+        {submitLabel ?? t("funding.submit")}
       </Button>
     </Stack>
   );

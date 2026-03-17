@@ -85,7 +85,11 @@ export function getCampaignCollectedAmount(campaign: Campaign): number {
 
 export function getCampaignProgress(campaign: Campaign): number {
   const collectedAmount = getCampaignCollectedAmount(campaign);
-  return Math.min(100, Math.round((collectedAmount / campaign.goal) * 100));
+  return Math.round((collectedAmount / campaign.goal) * 100);
+}
+
+export function getCampaignProgressForBar(campaign: Campaign): number {
+  return Math.min(100, getCampaignProgress(campaign));
 }
 
 // --- Schéma Zod (uniquement ce que l'utilisateur saisit) ---

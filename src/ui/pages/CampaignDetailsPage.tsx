@@ -2,7 +2,7 @@ import { Alert, Box, Button, Chip, Container, LinearProgress, Stack, Typography 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { CampaignId, getCampaignCollectedAmount, getCampaignProgress, type Campaign } from "../../domain/campagns/entites/campaign";
+import { CampaignId, getCampaignCollectedAmount, getCampaignProgress, getCampaignProgressForBar, type Campaign } from "../../domain/campagns/entites/campaign";
 import type { DeleteCampaign } from "../../domain/campagns/uses-cases/delete-campaign";
 import type { ViewCampaign } from "../../domain/campagns/uses-cases/view-campaign";
 import type { FundCampaign } from "../../domain/contributions/uses-cases/fund-campaign";
@@ -84,7 +84,7 @@ function CampaignDetailsPage({
           </Typography>
           <LinearProgress
             variant="determinate"
-            value={getCampaignProgress(campaign)}
+            value={getCampaignProgressForBar(campaign)}
             sx={{ mt: 1, mb: 1.5, height: 10, borderRadius: 999 }}
           />
           <Typography variant="body2">{getCampaignProgress(campaign)}% de l objectif atteint</Typography>
