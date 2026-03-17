@@ -31,7 +31,7 @@ function Header() {
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <IconButton onClick={handleLanguageMenuOpen} color="inherit">
+          <IconButton onClick={handleLanguageMenuOpen} color="inherit">
             <LanguageIcon />
           </IconButton>
           <Menu
@@ -46,7 +46,8 @@ function Header() {
               English
             </MenuItem>
           </Menu>
-          
+          <Button color="inherit" onClick={() => void navigate("/campaigns")}>{t("header.exploreCampaigns")}</Button>
+          <Button color="inherit" onClick={() => void navigate("/my-projects")}>{t("header.myProjects")}</Button>
           <Button color="inherit" onClick={() => void navigate("/projects/create")}>{t("header.createProject")}</Button>
           <Button variant="outlined" sx={{ color: "primary.contrastText", borderColor: "primary.contrastText" }} onClick={() => void navigate("/signup")}>{t("header.signup")}</Button>
           <Button variant="contained" sx={{ bgcolor: "primary.dark", color: "primary.contrastText", "&:hover": { bgcolor: "#1a2410" } }} onClick={() => void navigate("/login")}>{t("header.login")}</Button>

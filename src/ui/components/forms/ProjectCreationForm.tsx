@@ -16,9 +16,21 @@ import { projectSchema, type ProjectFormValues } from "../../../domain/projects/
 
 interface ProjectCreationFormProps {
   onSubmit: (payload: ProjectFormValues) => void;
+  initialValues?: ProjectFormValues;
+  submitLabel?: string;
+  successMessage?: string;
+  title?: string;
+  subtitle?: string;
 }
 
-function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
+function ProjectCreationForm({
+  onSubmit,
+  initialValues,
+  submitLabel,
+  successMessage,
+  title,
+  subtitle,
+}: ProjectCreationFormProps) {
   const { t } = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -29,7 +41,7 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
     formState: { errors },
   } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
-    defaultValues: { title: "", description: "", photoUrl: "" },
+    defaultValues: initialValues ?? { title: "", description: "", photoUrl: "" },
   });
 
   const onValid = (data: ProjectFormValues) => {
@@ -40,12 +52,15 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
 
   return (
     <Card sx={{ width: "100%", maxWidth: { xs: "100%", sm: 720 }, mx: "auto" }}>
-      <CardHeader title={t("projectForm.title")} subheader={t("projectForm.subtitle")} />
+      <CardHeader
+        title={title ?? t("projectForm.title")}
+        subheader={subtitle ?? t("projectForm.subtitle")}
+      />
       <CardContent>
         <Box component="form" onSubmit={(e) => void handleSubmit(onValid)(e)} noValidate>
           <Stack spacing={2}>
             {isSubmitted ? (
-              <Alert severity="success">{t("projectForm.success")}</Alert>
+              <Alert severity="success">{successMessage ?? t("projectForm.success")}</Alert>
             ) : null}
 
             <TextField
@@ -80,7 +95,7 @@ function ProjectCreationForm({ onSubmit }: ProjectCreationFormProps) {
             />
 
             <Button variant="contained" type="submit" sx={{ alignSelf: { xs: "stretch", sm: "flex-start" } }}>
-              {t("projectForm.submit")}
+              {submitLabel ?? t("projectForm.submit")}
             </Button>
           </Stack>
         </Box>

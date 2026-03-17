@@ -2,8 +2,11 @@
   "header": {
     "createProject": "Create your project",
     "exploreProjects": "Explore projects",
-    "register": "SignUp",
-    "login": "Log in"
+    "exploreCampaigns": "Explore campaigns",
+    "myProjects": "My projects",
+    "signup": "Sign up",
+    "login": "Log in",
+    "logout": "Log out"
   },
   "welcome": "Welcome to WeFund",
   "homePage": {
@@ -62,12 +65,38 @@
     }
   },
   "campaign": {
+    "listTitle": "Campaigns",
     "createCampaign": "Create a Campaign",
     "noCampaignYet": "No campaign created yet for this project",
-    "createNew": "Create a Campaign"
+    "createNew": "Create a Campaign",
+    "projectSectionTitle": "Project campaigns",
+    "projectSummary": "{{count}} campaign(s) linked to this project.",
+    "emptyList": "No campaigns available yet.",
+    "notFound": "Campaign not found",
+    "edit": "Edit campaign",
+    "delete": "Delete campaign"
+  },
+  "campaignForm": {
+    "title": "Create a campaign",
+    "subtitle": "Title, description, target amount and end date",
+    "submit": "Save campaign",
+    "success": "Campaign created successfully!",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "goal": "Funding goal",
+      "endDate": "End date"
+    },
+    "errors": {
+      "titleRequired": "Title is required",
+      "descriptionRequired": "Description is required",
+      "goalPositive": "Goal must be greater than 0",
+      "endDateRequired": "End date is required"
+    }
   },
   "project": {
     "notFound": "Project not found",
+    "edit": "Edit project",
     "newsTitle": "News",
     "noNews": "No news are available yet."
   }
