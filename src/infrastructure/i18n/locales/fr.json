@@ -2,7 +2,11 @@
   "header": {
     "createProject": "Créer votre projet",
     "exploreProjects": "Explorer les projets",
+    "exploreCampaigns": "Explorer les campagnes",
+    "myProjects": "Mes projets",
+    "myContributions": "Mes contributions",
     "register": "S'enregistrer",
+    "signup": "S'inscrire",
     "login": "Se connecter"
   },
   "welcome": "Bienvenue sur WeFund",
