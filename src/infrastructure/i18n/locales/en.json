@@ -2,8 +2,12 @@
   "header": {
     "createProject": "Create your project",
     "exploreProjects": "Explore projects",
-    "register": "SignUp",
-    "login": "Log in"
+    "exploreCampaigns": "Explore campaigns",
+    "myProjects": "My projects",
+    "myContributions": "My contributions",
+    "signup": "Sign up",
+    "login": "Log in",
+    "logout": "Log out"
   },
   "welcome": "Welcome to WeFund",
   "homePage": {
@@ -62,12 +66,105 @@
     }
   },
   "campaign": {
+    "listTitle": "Campaigns",
     "createCampaign": "Create a Campaign",
     "noCampaignYet": "No campaign created yet for this project",
-    "createNew": "Create a Campaign"
+    "createNew": "Create a Campaign",
+    "projectSectionTitle": "Project campaigns",
+    "projectSummary": "{{count}} campaign(s) linked to this project.",
+    "emptyList": "No campaigns available yet.",
+    "notFound": "Campaign not found",
+    "edit": "Edit campaign",
+    "delete": "Delete campaign"
+  },
+  "campaignForm": {
+    "title": "Create a campaign",
+    "subtitle": "Title, description, target amount and end date",
+    "submit": "Save campaign",
+    "success": "Campaign created successfully!",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "goal": "Funding goal",
+      "endDate": "End date"
+    },
+    "errors": {
+      "titleRequired": "Title is required",
+      "descriptionRequired": "Description is required",
+      "goalPositive": "Goal must be greater than 0",
+      "endDateRequired": "End date is required"
+    }
+  },
+  "funding": {
+    "title": "Support this campaign",
+    "subtitle": "Use our demo banking flow to complete your contribution.",
+    "amount": "Contribution amount",
+    "helper": "Example: EUR 25",
+    "submit": "Fund campaign",
+    "success": "Contribution saved successfully!",
+    "errors": {
+      "amountPositive": "Amount must be greater than 0"
+    }
+  },
+  "payment": {
+    "title": "Bank payment",
+    "subtitle": "Secure payment simulation for this contribution.",
+    "back": "Back to campaign",
+    "currentFunding": "Current funding",
+    "goal": "Goal",
+    "submit": "Pay now",
+    "success": "Payment approved. Your contribution has been recorded.",
+    "processing": "Connecting to the bank...",
+    "processingHint": "Checking card details, bank authorization and payment confirmation.",
+    "amountHelper": "Choose any amount you want to contribute.",
+    "cardNumberHelper": "Enter a fake 16-digit card number.",
+    "expiryHelper": "Format MM/YY",
+    "fields": {
+      "amount": "Amount",
+      "cardholderName": "Cardholder name",
+      "cardNumber": "Card number",
+      "expiryDate": "Expiry date",
+      "cvc": "CVC"
+    },
+    "errors": {
+      "cardholderRequired": "Cardholder name is required",
+      "cardNumberInvalid": "Card number must contain 16 digits",
+      "expiryInvalid": "Expiry date must use MM/YY format",
+      "cvcInvalid": "CVC must contain 3 or 4 digits"
+    }
+  },
+  "contributions": {
+    "title": "My contributions",
+    "empty": "No contributions yet.",
+    "amount": "Amount",
+    "createdAt": "Contribution date",
+    "campaignTotal": "Current campaign total",
+    "refund": "Request refund",
+    "cancel": "Cancel",
+    "refunded": "Refund request recorded successfully!",
+    "refundDialogTitle": "Confirm refund",
+    "refundDialogBody": "Do you really want to withdraw your support and request a refund for this contribution?",
+    "processingRefund": "Processing refund...",
+    "processingHint": "Simulating banking checks and contribution update."
+  },
+  "refund": {
+    "submit": "Submit refund request",
+    "ibanHelper": "Example: FR7612345987650123456789014",
+    "reasonHelper": "Briefly explain why you want to withdraw your support.",
+    "fields": {
+      "accountHolder": "Account holder",
+      "iban": "Refund IBAN",
+      "reason": "Request reason"
+    },
+    "errors": {
+      "accountHolderRequired": "Account holder is required",
+      "ibanInvalid": "IBAN must be valid",
+      "reasonRequired": "Request reason is required"
+    }
   },
   "project": {
     "notFound": "Project not found",
+    "edit": "Edit project",
     "newsTitle": "News",
     "noNews": "No news are available yet."
   }

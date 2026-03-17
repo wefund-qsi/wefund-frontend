@@ -22,6 +22,13 @@ export class InMemoryProjectRepository implements IProjectRepository {
         return Promise.resolve(project);
     }
 
+    update(project: Project): Promise<Project> {
+        this.projects = this.projects.map((currentProject) =>
+            currentProject.id === project.id ? project : currentProject,
+        );
+        return Promise.resolve(project);
+    }
+
     delete(id: ProjectId): Promise<boolean> {
         const index = this.projects.findIndex(project => project.id === id);
         if (index === -1) {

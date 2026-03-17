@@ -1,21 +1,28 @@
-import { Box, Button, Container, Grid, Typography, CircularProgress, IconButton } from "@mui/material";
+import { Box, Button, Container, Grid, Typography, CircularProgress, IconButton, Stack } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import { ProjectId, type Project } from "../../domain/projects/entities/project";
+import type { Campaign } from "../../domain/campagns/entites/campaign";
 import type { ViewProject } from "../../domain/projects/uses-cases/view-project";
 import type { CampaignNews } from "../../domain/campagns/entites/campaign-news";
+import type { ViewProjectCampaigns } from "../../domain/campagns/uses-cases/view-project-campaigns";
+import type { UserId } from "../../domain/users/entities/user";
+import CampaignCard from "../components/CampaignCard";
 
 interface ProjectDetailsProps {
   viewProject: ViewProject;
+  viewProjectCampaigns: ViewProjectCampaigns;
+  currentUserId: UserId;
 }
 
-function ProjectDetails({ viewProject }: ProjectDetailsProps) {
+function ProjectDetails({ viewProject, viewProjectCampaigns, currentUserId }: ProjectDetailsProps) {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [newsList] = useState<CampaignNews[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,8 +35,9 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
         console.error(err);
         setLoading(false);
       });
+      viewProjectCampaigns.execute(ProjectId(id)).then(setCampaigns).catch(console.error);
     }
-  }, [id, viewProject]);
+  }, [id, viewProject, viewProjectCampaigns]);
 
   if (loading) {
     return (
@@ -46,6 +54,8 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
       </Container>
     );
   }
+
+  const isOwner = currentUserId === project.ownerId;
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -115,7 +125,7 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
                 mb: 1,
               }}
             >
-              {t("campaign.createCampaign")}
+              {campaigns.length > 0 ? t("campaign.projectSectionTitle") : t("campaign.createCampaign")}
             </Typography>
             <Typography
               variant="body2"
@@ -125,24 +135,36 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
                 lineHeight: 1.6,
               }}
             >
-              {t("campaign.noCampaignYet")}
+              {campaigns.length > 0 ? t("campaign.projectSummary", { count: campaigns.length }) : t("campaign.noCampaignYet")}
             </Typography>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#FEFAE0",
-                color: "#283618",
-                fontWeight: 600,
-                px: 3,
-                py: 1.5,
-                "&:hover": {
-                  backgroundColor: "#E5E1C9",
-                  color: "#283618",
-                },
-              }}
-            >
-              {t("campaign.createNew")}
-            </Button>
+            {isOwner ? (
+              <Stack spacing={2} width="100%">
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#FEFAE0",
+                    color: "#283618",
+                    fontWeight: 600,
+                    px: 3,
+                    py: 1.5,
+                    "&:hover": {
+                      backgroundColor: "#E5E1C9",
+                      color: "#283618",
+                    },
+                  }}
+                  onClick={() => { void navigate(`/projects/${project.id}/campaigns/create`); }}
+                >
+                  {t("campaign.createNew")}
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{ color: "#FEFAE0", borderColor: "#FEFAE0" }}
+                  onClick={() => { void navigate(`/projects/${project.id}/edit`); }}
+                >
+                  {t("project.edit")}
+                </Button>
+              </Stack>
+            ) : null}
           </Box>
         </Grid>
       </Grid>
@@ -161,6 +183,28 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
         </Typography>
       </Box>
       <Box sx={{ mt: 4 }}>
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{ fontWeight: 700, mb: 3, color: "primary.dark" }}
+        >
+          {t("campaign.projectSectionTitle")}
+        </Typography>
+
+        {campaigns.length === 0 ? (
+          <Typography variant="body1" sx={{ color: "text.secondary", fontStyle: "italic", mb: 4 }}>
+            {t("campaign.noCampaignYet")}
+          </Typography>
+        ) : (
+          <Grid container spacing={3} sx={{ mb: 5 }}>
+            {campaigns.map((campaign) => (
+              <Grid size={{ xs: 12, md: 6 }} key={campaign.id}>
+                <CampaignCard campaign={campaign} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+
         <Typography
           variant="h4"
           component="h2"
@@ -198,4 +242,3 @@ function ProjectDetails({ viewProject }: ProjectDetailsProps) {
 }
 
 export default ProjectDetails;
-

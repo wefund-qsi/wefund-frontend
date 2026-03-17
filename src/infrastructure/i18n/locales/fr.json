@@ -2,8 +2,12 @@
   "header": {
     "createProject": "Créer votre projet",
     "exploreProjects": "Explorer les projets",
+    "exploreCampaigns": "Explorer les campagnes",
+    "myProjects": "Mes projets",
+    "myContributions": "Mes contributions",
     "signup": "S'enregistrer",
-    "login": "Se connecter"
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
   },
   "welcome": "Bienvenue sur WeFund",
   "homePage": {
@@ -62,12 +66,105 @@
     }
   },
   "campaign": {
+    "listTitle": "Les campagnes",
     "createCampaign": "Créer une campagne",
     "noCampaignYet": "Aucune campagne créée pour le moment pour ce projet",
-    "createNew": "Créer une campagne"
+    "createNew": "Créer une campagne",
+    "projectSectionTitle": "Campagnes du projet",
+    "projectSummary": "{{count}} campagne(s) liée(s) à ce projet.",
+    "emptyList": "Aucune campagne disponible pour le moment.",
+    "notFound": "Campagne introuvable",
+    "edit": "Modifier la campagne",
+    "delete": "Supprimer la campagne"
+  },
+  "campaignForm": {
+    "title": "Créer une campagne",
+    "subtitle": "Titre, description, objectif et date de fin",
+    "submit": "Enregistrer la campagne",
+    "success": "Campagne créée avec succès !",
+    "fields": {
+      "title": "Titre",
+      "description": "Description",
+      "goal": "Objectif financier",
+      "endDate": "Date de fin"
+    },
+    "errors": {
+      "titleRequired": "Le titre est obligatoire",
+      "descriptionRequired": "La description est obligatoire",
+      "goalPositive": "L'objectif doit être supérieur à 0",
+      "endDateRequired": "La date de fin est obligatoire"
+    }
+  },
+  "funding": {
+    "title": "Soutenir cette campagne",
+    "subtitle": "Passez par notre paiement bancaire de demonstration pour finaliser votre contribution.",
+    "amount": "Montant de la contribution",
+    "helper": "Exemple : 25 EUR",
+    "submit": "Financer la campagne",
+    "success": "Contribution enregistree avec succes !",
+    "errors": {
+      "amountPositive": "Le montant doit etre superieur a 0"
+    }
+  },
+  "payment": {
+    "title": "Paiement bancaire",
+    "subtitle": "Simulation de paiement securise pour la contribution.",
+    "back": "Retour a la campagne",
+    "currentFunding": "Collecte actuelle",
+    "goal": "Objectif",
+    "submit": "Payer maintenant",
+    "success": "Paiement accepte. Votre contribution a bien ete prise en compte.",
+    "processing": "Connexion a la banque en cours...",
+    "processingHint": "Verification de la carte, autorisation et validation du paiement bancaire.",
+    "amountHelper": "Choisissez librement le montant que vous souhaitez verser.",
+    "cardNumberHelper": "Entrez un numero fictif sur 16 chiffres.",
+    "expiryHelper": "Format MM/AA",
+    "fields": {
+      "amount": "Montant",
+      "cardholderName": "Nom du titulaire",
+      "cardNumber": "Numero de carte",
+      "expiryDate": "Date d expiration",
+      "cvc": "CVC"
+    },
+    "errors": {
+      "cardholderRequired": "Le nom du titulaire est obligatoire",
+      "cardNumberInvalid": "Le numero de carte doit contenir 16 chiffres",
+      "expiryInvalid": "La date doit etre au format MM/AA",
+      "cvcInvalid": "Le CVC doit contenir 3 ou 4 chiffres"
+    }
+  },
+  "contributions": {
+    "title": "Mes contributions",
+    "empty": "Aucune contribution pour le moment.",
+    "amount": "Montant",
+    "createdAt": "Date de contribution",
+    "campaignTotal": "Collecte actuelle de la campagne",
+    "refund": "Demander le remboursement",
+    "cancel": "Annuler",
+    "refunded": "Demande de remboursement enregistree avec succes !",
+    "refundDialogTitle": "Confirmer le remboursement",
+    "refundDialogBody": "Voulez-vous vraiment retirer votre soutien et demander le remboursement de cette contribution ?",
+    "processingRefund": "Traitement du remboursement en cours...",
+    "processingHint": "Simulation du traitement bancaire et de la mise a jour de votre engagement."
+  },
+  "refund": {
+    "submit": "Envoyer la demande de remboursement",
+    "ibanHelper": "Exemple : FR7612345987650123456789014",
+    "reasonHelper": "Expliquez brievement pourquoi vous souhaitez retirer votre soutien.",
+    "fields": {
+      "accountHolder": "Titulaire du compte",
+      "iban": "IBAN de remboursement",
+      "reason": "Motif de la demande"
+    },
+    "errors": {
+      "accountHolderRequired": "Le titulaire du compte est obligatoire",
+      "ibanInvalid": "L IBAN doit etre valide",
+      "reasonRequired": "Le motif de la demande est obligatoire"
+    }
   },
   "project": {
     "notFound": "Projet introuvable",
+    "edit": "Modifier le projet",
     "newsTitle": "Actualités",
     "noNews": "Aucune actualité pour le moment."
   }
