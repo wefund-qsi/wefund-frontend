@@ -18,7 +18,6 @@ import { InMemoryContributionRepository } from './domain/contributions/adapters/
 import { ContributionId } from './domain/contributions/entities/contribution';
 import { FundCampaign } from './domain/contributions/uses-cases/fund-campaign';
 import { RefundContribution } from './domain/contributions/uses-cases/refund-contribution';
-import { UpdateContribution } from './domain/contributions/uses-cases/update-contribution';
 import { ViewUserContributions } from './domain/contributions/uses-cases/view-user-contributions';
 import { InMemoryProjectRepository } from './domain/projects/adapters/project-repository.in-memory';
 import { ProjectId } from './domain/projects/entities/project';
@@ -31,6 +30,7 @@ import { ViewProject } from './domain/projects/uses-cases/view-project';
 import { UserId } from './domain/users/entities/user';
 import MainLayout from './ui/components/layouts/MainLayout';
 import CampaignDetailsPage from './ui/pages/CampaignDetailsPage';
+import CampaignPaymentPage from './ui/pages/CampaignPaymentPage';
 import CampaignsPage from './ui/pages/CampaignsPage';
 import CreateCampaignPage from './ui/pages/CreateCampaignPage';
 import HomePage from './ui/pages/HomePage';
@@ -181,7 +181,6 @@ const createCampaign = new CreateCampaign(campaignRepository, new RealIdGenerato
 const updateCampaign = new UpdateCampaign(campaignRepository);
 const deleteCampaign = new DeleteCampaign(campaignRepository);
 const fundCampaign = new FundCampaign(campaignRepository, contributionRepository, new RealIdGenerator(), new RealDateGenerator());
-const updateContribution = new UpdateContribution(contributionRepository, campaignRepository);
 const refundContribution = new RefundContribution(contributionRepository, campaignRepository);
 const viewUserContributions = new ViewUserContributions(contributionRepository);
 const viewAllCampaigns = new ViewAllCampaigns(campaignRepository);
@@ -202,9 +201,17 @@ function App() {
               element={
                 <CampaignDetailsPage
                   currentUserId={CURRENT_USER_ID}
-                  contributorId={CURRENT_CONTRIBUTOR_ID}
                   viewCampaign={viewCampaign}
                   deleteCampaign={deleteCampaign}
+                />
+              }
+            />
+            <Route
+              path="/campaigns/:id/fund"
+              element={
+                <CampaignPaymentPage
+                  contributorId={CURRENT_CONTRIBUTOR_ID}
+                  viewCampaign={viewCampaign}
                   fundCampaign={fundCampaign}
                 />
               }
@@ -221,7 +228,6 @@ function App() {
                   contributorId={CURRENT_CONTRIBUTOR_ID}
                   viewCampaign={viewCampaign}
                   viewUserContributions={viewUserContributions}
-                  updateContribution={updateContribution}
                   refundContribution={refundContribution}
                 />
               }

@@ -1,14 +1,13 @@
-import { Alert, Button, Card, CardContent, Chip, Dialog, DialogContent, DialogTitle, Grid, Stack, Typography } from "@mui/material";
+import { Alert, Button, Card, CardContent, Chip, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, Typography } from "@mui/material";
 import { startTransition, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getCampaignCollectedAmount, type Campaign } from "../../domain/campagns/entites/campaign";
 import type { ViewCampaign } from "../../domain/campagns/uses-cases/view-campaign";
 import type { RefundContribution } from "../../domain/contributions/uses-cases/refund-contribution";
-import type { UpdateContribution } from "../../domain/contributions/uses-cases/update-contribution";
 import type { ViewUserContributions } from "../../domain/contributions/uses-cases/view-user-contributions";
 import type { Contribution } from "../../domain/contributions/entities/contribution";
 import type { UserId } from "../../domain/users/entities/user";
-import FundingForm from "../components/forms/FundingForm";
+import RefundRequestForm from "../components/forms/RefundRequestForm";
 
 type ContributionWithCampaign = {
   contribution: Contribution;
@@ -19,7 +18,6 @@ interface MyContributionsPageProps {
   contributorId: UserId;
   viewCampaign: ViewCampaign;
   viewUserContributions: ViewUserContributions;
-  updateContribution: UpdateContribution;
   refundContribution: RefundContribution;
 }
 
@@ -27,13 +25,14 @@ function MyContributionsPage({
   contributorId,
   viewCampaign,
   viewUserContributions,
-  updateContribution,
   refundContribution,
 }: MyContributionsPageProps) {
   const { t } = useTranslation();
   const [items, setItems] = useState<ContributionWithCampaign[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [editingContribution, setEditingContribution] = useState<ContributionWithCampaign | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [refundingContribution, setRefundingContribution] = useState<ContributionWithCampaign | null>(null);
+  const [isRefunding, setIsRefunding] = useState(false);
 
   const loadContributions = useCallback(async () => {
     const contributions = await viewUserContributions.execute(contributorId);
@@ -66,7 +65,12 @@ function MyContributionsPage({
   const handleRefund = async (contributionId: Contribution["id"]) => {
     try {
       setErrorMessage(null);
+      setSuccessMessage(null);
+      setIsRefunding(true);
+      await new Promise<void>((resolve) => setTimeout(resolve, 5000));
       await refundContribution.execute(contributionId);
+      setRefundingContribution(null);
+      setSuccessMessage(t("contributions.refunded"));
       startTransition(() => {
         void loadContributions().then(setItems);
       });
@@ -74,28 +78,8 @@ function MyContributionsPage({
       if (error instanceof Error) {
         setErrorMessage(error.message);
       }
-    }
-  };
-
-  const handleUpdate = async (amount: number) => {
-    if (!editingContribution) {
-      return;
-    }
-
-    try {
-      setErrorMessage(null);
-      await updateContribution.execute({
-        contributionId: editingContribution.contribution.id,
-        amount,
-      });
-      setEditingContribution(null);
-      startTransition(() => {
-        void loadContributions().then(setItems);
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      }
+    } finally {
+      setIsRefunding(false);
     }
   };
 
@@ -106,6 +90,7 @@ function MyContributionsPage({
       </Typography>
 
       {errorMessage ? <Alert severity="error">{errorMessage}</Alert> : null}
+      {successMessage ? <Alert severity="success">{successMessage}</Alert> : null}
 
       {items.length === 0 ? (
         <Typography color="text.secondary">{t("contributions.empty")}</Typography>
@@ -144,17 +129,10 @@ function MyContributionsPage({
 
                       <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
                         <Button
-                          variant="outlined"
-                          disabled={!canEdit}
-                          onClick={() => setEditingContribution({ contribution, campaign })}
-                        >
-                          {t("contributions.edit")}
-                        </Button>
-                        <Button
                           color="error"
                           variant="outlined"
                           disabled={!canEdit}
-                          onClick={() => { void handleRefund(contribution.id); }}
+                          onClick={() => setRefundingContribution({ contribution, campaign })}
                         >
                           {t("contributions.refund")}
                         </Button>
@@ -168,18 +146,37 @@ function MyContributionsPage({
         </Grid>
       )}
 
-      <Dialog open={editingContribution !== null} onClose={() => setEditingContribution(null)} fullWidth maxWidth="sm">
-        <DialogTitle>{t("contributions.editDialogTitle")}</DialogTitle>
+      <Dialog open={refundingContribution !== null} onClose={() => setRefundingContribution(null)} fullWidth maxWidth="sm">
+        <DialogTitle>{t("contributions.refundDialogTitle")}</DialogTitle>
         <DialogContent>
-          {editingContribution ? (
-            <FundingForm
-              initialAmount={editingContribution.contribution.amount}
-              submitLabel={t("contributions.save")}
-              successMessage={t("contributions.updated")}
-              onSubmit={handleUpdate}
-            />
+          {isRefunding ? (
+            <Stack spacing={2} alignItems="center" sx={{ py: 4 }}>
+              <CircularProgress />
+              <Typography variant="body1">{t("contributions.processingRefund")}</Typography>
+              <Typography variant="body2" color="text.secondary">
+                {t("contributions.processingHint")}
+              </Typography>
+            </Stack>
+          ) : refundingContribution ? (
+            <Stack spacing={3}>
+              <Typography variant="body1">
+                {t("contributions.refundDialogBody")}
+              </Typography>
+              <RefundRequestForm
+                isSubmitting={isRefunding}
+                errorMessage={errorMessage}
+                onSubmit={async () => {
+                  await handleRefund(refundingContribution.contribution.id);
+                }}
+              />
+            </Stack>
           ) : null}
         </DialogContent>
+        {!isRefunding ? (
+          <DialogActions>
+            <Button onClick={() => setRefundingContribution(null)}>{t("contributions.cancel")}</Button>
+          </DialogActions>
+        ) : null}
       </Dialog>
     </Stack>
   );

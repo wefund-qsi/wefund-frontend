@@ -1,34 +1,27 @@
-import { Alert, Box, Button, Chip, Container, LinearProgress, Stack, Typography } from "@mui/material";
+import { Box, Button, Chip, Container, LinearProgress, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { CampaignId, getCampaignCollectedAmount, getCampaignProgress, getCampaignProgressForBar, type Campaign } from "../../domain/campagns/entites/campaign";
 import type { DeleteCampaign } from "../../domain/campagns/uses-cases/delete-campaign";
 import type { ViewCampaign } from "../../domain/campagns/uses-cases/view-campaign";
-import type { FundCampaign } from "../../domain/contributions/uses-cases/fund-campaign";
 import type { UserId } from "../../domain/users/entities/user";
-import FundingForm from "../components/forms/FundingForm";
 
 interface CampaignDetailsPageProps {
   currentUserId: UserId;
-  contributorId: UserId;
   viewCampaign: ViewCampaign;
   deleteCampaign: DeleteCampaign;
-  fundCampaign: FundCampaign;
 }
 
 function CampaignDetailsPage({
   currentUserId,
-  contributorId,
   viewCampaign,
   deleteCampaign,
-  fundCampaign,
 }: CampaignDetailsPageProps) {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
-  const [fundingError, setFundingError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) {
@@ -47,22 +40,6 @@ function CampaignDetailsPage({
   const handleDelete = async () => {
     await deleteCampaign.execute(campaign.id);
     void navigate("/campaigns");
-  };
-
-  const handleFunding = async (amount: number) => {
-    try {
-      setFundingError(null);
-      const updatedCampaign = await fundCampaign.execute({
-        campaignId: campaign.id,
-        contributorId,
-        amount,
-      });
-      setCampaign(updatedCampaign);
-    } catch (error) {
-      if (error instanceof Error) {
-        setFundingError(error.message);
-      }
-    }
   };
 
   return (
@@ -100,8 +77,9 @@ function CampaignDetailsPage({
             <Typography variant="body2" color="text.secondary" mb={2}>
               {t("funding.subtitle")}
             </Typography>
-            {fundingError ? <Alert severity="error" sx={{ mb: 2 }}>{fundingError}</Alert> : null}
-            <FundingForm onSubmit={handleFunding} />
+            <Button variant="contained" onClick={() => { void navigate(`/campaigns/${campaign.id}/fund`); }}>
+              {t("funding.submit")}
+            </Button>
           </Box>
         ) : null}
 
