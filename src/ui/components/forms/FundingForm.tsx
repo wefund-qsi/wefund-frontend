@@ -46,7 +46,7 @@ function FundingForm({ onSubmit, initialAmount, submitLabel, successMessage }: F
       <TextField
         label={t("funding.amount")}
         type="number"
-        inputProps={{ min: 1, step: 1 }}
+        slotProps={{ htmlInput: { min: 1, step: 1 } }}
         {...register("amount", { valueAsNumber: true })}
         error={Boolean(errors.amount)}
         helperText={errors.amount ? t(errors.amount.message!) : t("funding.helper")}

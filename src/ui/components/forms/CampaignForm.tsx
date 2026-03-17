@@ -95,7 +95,7 @@ function CampaignForm({
               fullWidth
               required
               type="number"
-              inputProps={{ min: 1, step: 100 }}
+              slotProps={{ htmlInput: { min: 1, step: 100 } }}
               error={Boolean(errors.goal)}
               helperText={errors.goal ? t(errors.goal.message!) : undefined}
             />
