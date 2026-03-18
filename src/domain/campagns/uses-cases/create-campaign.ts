@@ -32,7 +32,7 @@ export class CreateCampaign implements Executable<CreateCampaignPayload, Campaig
             endDate: data.endDate,
             ownerId: data.ownerId,
             createdAt: this.dateGenerator.now().toISOString(),
-            status: "draft",
+            status: "BROUILLON",
         };
 
         return this.campaignRepository.create(campaign);

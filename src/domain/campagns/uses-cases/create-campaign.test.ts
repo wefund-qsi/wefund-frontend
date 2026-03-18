@@ -35,7 +35,7 @@ describe("CreateCampaign", () => {
 
         expect(campaign.id).toBe("campaign-1");
         expect(campaign.projectId).toBe("project-1");
-        expect(campaign.status).toBe("draft");
+        expect(campaign.status).toBe("BROUILLON");
         expect(campaign.goal).toBe(2500);
     });
 });

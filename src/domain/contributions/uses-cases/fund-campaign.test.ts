@@ -33,7 +33,7 @@ describe("FundCampaign", () => {
         endDate: "2026-09-01",
         ownerId: UserId("owner-1"),
         createdAt: "2026-01-01T10:00:00.000Z",
-        status: "active",
+        status: "ACTIVE",
         startedAt: "2026-02-01T10:00:00.000Z",
         collectedAmount: 300,
       },
@@ -49,8 +49,8 @@ describe("FundCampaign", () => {
       amount: 200,
     });
 
-    expect(result.status).toBe("active");
-    expect(result.status === "active" ? result.collectedAmount : 0).toBe(500);
+    expect(result.status).toBe("ACTIVE");
+    expect(result.status === "ACTIVE" ? result.collectedAmount : 0).toBe(500);
   });
 
   it("laisse la campagne active meme si l objectif est depasse", async () => {
@@ -60,8 +60,8 @@ describe("FundCampaign", () => {
       amount: 800,
     });
 
-    expect(result.status).toBe("active");
-    expect(result.status === "active" ? result.collectedAmount : 0).toBe(1100);
+    expect(result.status).toBe("ACTIVE");
+    expect(result.status === "ACTIVE" ? result.collectedAmount : 0).toBe(1100);
   });
 
   it("refuse le financement d une campagne non active", async () => {
@@ -75,7 +75,7 @@ describe("FundCampaign", () => {
         endDate: "2026-09-01",
         ownerId: UserId("owner-1"),
         createdAt: "2026-01-01T10:00:00.000Z",
-        status: "draft",
+        status: "BROUILLON",
       },
     ]);
     const useCase = new FundCampaign(inactiveRepository, contributionRepository, idGenerator, dateGenerator);

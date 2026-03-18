@@ -24,7 +24,7 @@ describe("RefundContribution", () => {
         endDate: "2026-09-01",
         ownerId: UserId("owner-1"),
         createdAt: "2026-01-01T10:00:00.000Z",
-        status: "active",
+        status: "ACTIVE",
         startedAt: "2026-02-01T10:00:00.000Z",
         collectedAmount: 300,
       },
@@ -44,8 +44,8 @@ describe("RefundContribution", () => {
   it("rembourse une contribution et baisse la collecte", async () => {
     const campaign = await refundContribution.execute(ContributionId("contribution-1"));
 
-    expect(campaign.status).toBe("active");
-    expect(campaign.status === "active" ? campaign.collectedAmount : 0).toBe(200);
+    expect(campaign.status).toBe("ACTIVE");
+    expect(campaign.status === "ACTIVE" ? campaign.collectedAmount : 0).toBe(200);
     await expect(contributionRepository.findById(ContributionId("contribution-1"))).resolves.toBeNull();
   });
 
@@ -60,7 +60,7 @@ describe("RefundContribution", () => {
         endDate: "2026-09-01",
         ownerId: UserId("owner-1"),
         createdAt: "2026-01-01T10:00:00.000Z",
-        status: "failed",
+        status: "ECHOUEE",
         startedAt: "2026-02-01T10:00:00.000Z",
         completedAt: "2026-03-01T10:00:00.000Z",
         collectedAmount: 400,

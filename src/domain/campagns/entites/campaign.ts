@@ -5,14 +5,16 @@ import type { UserId } from "../../users/entities/user";
 
 // --- Enum Statut Campagne ---
 
-export enum StatutCampagne {
-  BROUILLON = 'BROUILLON',
-  EN_ATTENTE = 'EN_ATTENTE',
-  ACTIVE = 'ACTIVE',
-  REUSSIE = 'REUSSIE',
-  ECHOUEE = 'ECHOUEE',
-  REFUSEE = 'REFUSEE'
-}
+export const StatutCampagne = {
+  BROUILLON: 'BROUILLON',
+  EN_ATTENTE: 'EN_ATTENTE',
+  ACTIVE: 'ACTIVE',
+  REUSSIE: 'REUSSIE',
+  ECHOUEE: 'ECHOUEE',
+  REFUSEE: 'REFUSEE'
+} as const;
+
+export type StatutCampagneType = typeof StatutCampagne[keyof typeof StatutCampagne];
 
 // --- Branded Type CampaignId ---
 
