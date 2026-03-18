@@ -89,7 +89,7 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
                 <Typography variant="body2">
                   {t("admin.endDate")}: {campaign.endDate}
                 </Typography>
-                {campaign.status === StatutCampagne.EN_ATTENTE && (
+                {campaign.status === 'EN_ATTENTE' && (
                   <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
                     <Button
                       variant="contained"
