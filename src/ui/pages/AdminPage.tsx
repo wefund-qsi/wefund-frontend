@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import type { Campaign, CampaignStatus } from "../../domain/campagns/entites/campaign";
-import { StatutCampagne } from "../../domain/campagns/entites/campaign";
 import type { ViewAllCampaigns } from "../../domain/campagns/uses-cases/view-all-campaigns";
 
 interface AdminPageProps {
