@@ -28,7 +28,7 @@ export class UpdateContribution {
 
     const campaign = await this.campaignRepository.findById(contribution.campaignId);
 
-    if (!campaign || campaign.status !== "active") {
+    if (!campaign || campaign.status !== 'ACTIVE') {
       throw new ContributionActionForbiddenException();
     }
 

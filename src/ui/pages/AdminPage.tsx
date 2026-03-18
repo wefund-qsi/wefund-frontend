@@ -10,7 +10,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import type { Campaign } from "../../domain/campagns/entites/campaign";
+import type { Campaign, CampaignStatus } from "../../domain/campagns/entites/campaign";
 import { StatutCampagne } from "../../domain/campagns/entites/campaign";
 import type { ViewAllCampaigns } from "../../domain/campagns/uses-cases/view-all-campaigns";
 
@@ -27,12 +27,12 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
     void viewAllCampaigns.execute().then(setCampaigns);
   }, [viewAllCampaigns]);
 
-  const statuses = [
-    StatutCampagne.EN_ATTENTE,
-    StatutCampagne.ACTIVE,
-    StatutCampagne.REUSSIE,
-    StatutCampagne.ECHOUEE,
-    StatutCampagne.REFUSEE,
+  const statuses: CampaignStatus[] = [
+    'EN_ATTENTE',
+    'ACTIVE',
+    'REUSSIE',
+    'ECHOUEE',
+    'REFUSEE',
   ];
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -42,8 +42,8 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   const handleAccept = (id: string) => {
     setCampaigns((prev: Campaign[]) =>
       prev.map((c: Campaign) =>
-        c.id === id && c.status === StatutCampagne.EN_ATTENTE
-          ? { ...c, status: StatutCampagne.ACTIVE, startedAt: new Date().toISOString(), collectedAmount: 0 }
+        c.id === id && c.status === 'EN_ATTENTE'
+          ? { ...c, status: 'ACTIVE', startedAt: new Date().toISOString(), collectedAmount: 0 }
           : c
       )
     );
@@ -52,8 +52,8 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   const handleReject = (id: string) => {
     setCampaigns((prev: Campaign[]) =>
       prev.map((c: Campaign) =>
-        c.id === id && c.status === StatutCampagne.EN_ATTENTE
-          ? { ...c, status: StatutCampagne.REFUSEE }
+        c.id === id && c.status === 'EN_ATTENTE'
+          ? { ...c, status: 'REFUSEE' }
           : c
       )
     );

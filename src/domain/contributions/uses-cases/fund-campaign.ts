@@ -34,7 +34,7 @@ export class FundCampaign {
   async execute({ campaignId, contributorId, amount }: FundCampaignPayload): Promise<Campaign> {
     const campaign = await this.campaignRepository.findById(campaignId);
 
-    if (!campaign || campaign.status !== "active") {
+    if (!campaign || campaign.status !== 'ACTIVE') {
       throw new CampaignNotActiveException();
     }
 
