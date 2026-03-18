@@ -43,35 +43,35 @@ interface CampaignBase {
 }
 
 export interface DraftCampaign extends CampaignBase {
-  status: "draft";
+  status: 'BROUILLON';
 }
 
 export interface PendingCampaign extends CampaignBase {
-  status: "pending_validation";
+  status: 'EN_ATTENTE';
 }
 
 export interface ActiveCampaign extends CampaignBase {
-  status: "active";
+  status: 'ACTIVE';
   startedAt: string;
   collectedAmount: number;
 }
 
 export interface SucceededCampaign extends CampaignBase {
-  status: "succeeded";
+  status: 'REUSSIE';
   startedAt: string;
   completedAt: string;
   collectedAmount: number;
 }
 
 export interface FailedCampaign extends CampaignBase {
-  status: "failed";
+  status: 'ECHOUEE';
   startedAt: string;
   completedAt: string;
   collectedAmount: number;
 }
 
 export interface RejectedCampaign extends CampaignBase {
-  status: "rejected";
+  status: 'REFUSEE';
 }
 
 export type Campaign =
@@ -84,9 +84,9 @@ export type Campaign =
 
 export function getCampaignCollectedAmount(campaign: Campaign): number {
   if (
-    campaign.status === "active" ||
-    campaign.status === "succeeded" ||
-    campaign.status === "failed"
+    campaign.status === 'ACTIVE' ||
+    campaign.status === 'REUSSIE' ||
+    campaign.status === 'ECHOUEE'
   ) {
     return campaign.collectedAmount;
   }

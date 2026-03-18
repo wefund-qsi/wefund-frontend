@@ -40,8 +40,8 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   };
 
   const handleAccept = (id: string) => {
-    setCampaigns((prev) =>
-      prev.map((c) =>
+    setCampaigns((prev: Campaign[]) =>
+      prev.map((c: Campaign) =>
         c.id === id && c.status === StatutCampagne.EN_ATTENTE
           ? { ...c, status: StatutCampagne.ACTIVE, startedAt: new Date().toISOString(), collectedAmount: 0 }
           : c
@@ -50,8 +50,8 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   };
 
   const handleReject = (id: string) => {
-    setCampaigns((prev) =>
-      prev.map((c) =>
+    setCampaigns((prev: Campaign[]) =>
+      prev.map((c: Campaign) =>
         c.id === id && c.status === StatutCampagne.EN_ATTENTE
           ? { ...c, status: StatutCampagne.REFUSEE }
           : c
@@ -60,7 +60,7 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   };
 
   const filteredCampaigns = campaigns.filter(
-    (c) => c.status === statuses[tabValue]
+    (c: Campaign) => c.status === statuses[tabValue]
   );
 
   return (
@@ -76,7 +76,7 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
         <Tab label={t("admin.tabs.rejected")} />
       </Tabs>
       <Box sx={{ mt: 2, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 2 }}>
-        {filteredCampaigns.map((campaign) => (
+        {filteredCampaigns.map((campaign: Campaign) => (
             <Card key={campaign.id}>
               <CardContent>
                 <Typography variant="h6">{campaign.title}</Typography>
