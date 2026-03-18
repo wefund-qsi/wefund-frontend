@@ -3,6 +3,17 @@ import type { Brand } from "../../../shared/utils";
 import type { ProjectId } from "../../projects/entities/project";
 import type { UserId } from "../../users/entities/user";
 
+// --- Enum Statut Campagne ---
+
+export enum StatutCampagne {
+  BROUILLON = 'BROUILLON',
+  EN_ATTENTE = 'EN_ATTENTE',
+  ACTIVE = 'ACTIVE',
+  REUSSIE = 'REUSSIE',
+  ECHOUEE = 'ECHOUEE',
+  REFUSEE = 'REFUSEE'
+}
+
 // --- Branded Type CampaignId ---
 
 export type CampaignId = Brand<string, "CampaignId">;
@@ -11,12 +22,12 @@ export const CampaignId = (value: string): CampaignId => value as CampaignId;
 // --- Discriminated Union pour le statut (cardinalité = 6, pas infini) ---
 
 export type CampaignStatus =
-  | "draft"
-  | "pending_validation"
-  | "active"
-  | "succeeded"
-  | "failed"
-  | "rejected";
+  | 'BROUILLON'
+  | 'EN_ATTENTE'
+  | 'ACTIVE'
+  | 'REUSSIE'
+  | 'ECHOUEE'
+  | 'REFUSEE';
 
 // --- Types métier avec discriminated union par statut ---
 

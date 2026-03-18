@@ -5,9 +5,9 @@
     "exploreCampaigns": "Explorer les campagnes",
     "myProjects": "Mes projets",
     "myContributions": "Mes contributions",
-    "register": "S'enregistrer",
-    "signup": "S'inscrire",
-    "login": "Se connecter"
+    "signup": "S'enregistrer",
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
   },
   "welcome": "Bienvenue sur WeFund",
   "admin": {

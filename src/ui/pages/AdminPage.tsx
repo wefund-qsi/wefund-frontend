@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import type { Campaign } from "../../domain/campagns/entites/campaign";
+import { StatutCampagne } from "../../domain/campagns/entites/campaign";
 import type { ViewAllCampaigns } from "../../domain/campagns/uses-cases/view-all-campaigns";
 
 interface AdminPageProps {
@@ -27,11 +28,11 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   }, [viewAllCampaigns]);
 
   const statuses = [
-    "pending_validation",
-    "active",
-    "succeeded",
-    "failed",
-    "rejected",
+    StatutCampagne.EN_ATTENTE,
+    StatutCampagne.ACTIVE,
+    StatutCampagne.REUSSIE,
+    StatutCampagne.ECHOUEE,
+    StatutCampagne.REFUSEE,
   ];
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -41,8 +42,8 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   const handleAccept = (id: string) => {
     setCampaigns((prev) =>
       prev.map((c) =>
-        c.id === id && c.status === "pending_validation"
-          ? { ...c, status: "active", startedAt: new Date().toISOString(), collectedAmount: 0 }
+        c.id === id && c.status === StatutCampagne.EN_ATTENTE
+          ? { ...c, status: StatutCampagne.ACTIVE, startedAt: new Date().toISOString(), collectedAmount: 0 }
           : c
       )
     );
@@ -51,8 +52,8 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
   const handleReject = (id: string) => {
     setCampaigns((prev) =>
       prev.map((c) =>
-        c.id === id && c.status === "pending_validation"
-          ? { ...c, status: "rejected" }
+        c.id === id && c.status === StatutCampagne.EN_ATTENTE
+          ? { ...c, status: StatutCampagne.REFUSEE }
           : c
       )
     );
@@ -88,7 +89,7 @@ function AdminPage({ viewAllCampaigns }: AdminPageProps) {
                 <Typography variant="body2">
                   {t("admin.endDate")}: {campaign.endDate}
                 </Typography>
-                {campaign.status === "pending_validation" && (
+                {campaign.status === StatutCampagne.EN_ATTENTE && (
                   <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
                     <Button
                       variant="contained"
