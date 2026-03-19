@@ -61,7 +61,7 @@ export class InMemoryAuthRepository implements IAuthRepository {
             return Promise.reject(new InvalidCredentialsException());
         }
 
-        const payload = btoa(JSON.stringify({ sub: user.id, role: user.role }));
+        const payload = btoa(JSON.stringify({ sub: user.id, username: user.username, role: user.role }));
 
         return Promise.resolve({
             statusCode: 200,
