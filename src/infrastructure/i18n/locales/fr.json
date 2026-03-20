@@ -110,14 +110,27 @@
       "passwordMaxLength": "Le mot de passe ne doit pas dépasser 50 caractères"
     },
     "signup": {
+      "eyebrow": "Inscription",
       "title": "Inscription",
       "subtitle": "Créez votre compte WeFund",
+      "pageTitle": "Bienvenue sur WeFund",
+      "pageDescription": "Créez votre espace pour lancer un projet, suivre vos campagnes et participer plus facilement aux initiatives qui vous inspirent.",
+      "secondaryPrompt": "Vous avez déjà un compte ?",
+      "secondaryCta": "Se connecter",
       "submit": "S'enregistrer",
       "success": "Inscription réussie !"
     },
     "login": {
+      "eyebrow": "Connexion",
       "title": "Connexion",
       "subtitle": "Connectez-vous à votre compte",
+      "pageTitle": "Bon retour sur WeFund",
+      "pageDescription": "Accédez à votre espace WeFund pour suivre vos campagnes en cours, gérer vos projets et poursuivre votre navigation sans friction.",
+      "secondaryPrompt": "Pas encore de compte ?",
+      "pointOne": "Consultez vos projets et leurs campagnes en un seul endroit.",
+      "pointTwo": "Gérez vos actions sans perdre le fil de votre espace.",
+      "pointThree": "Revenez facilement soutenir, modifier ou créer.",
+      "secondaryCta": "Créer un compte",
       "submit": "Se connecter",
       "success": "Connexion réussie !"
     }

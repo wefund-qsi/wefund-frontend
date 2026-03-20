@@ -111,14 +111,27 @@
       "passwordMaxLength": "Password must not exceed 50 characters"
     },
     "signup": {
+      "eyebrow": "Sign up",
       "title": "Sign up",
       "subtitle": "Create your WeFund account",
+      "pageTitle": "Welcome to WeFund",
+      "pageDescription": "Create your space to launch a project, follow your campaigns, and support the initiatives that inspire you more easily.",
+      "secondaryPrompt": "Already have an account?",
+      "secondaryCta": "Log in",
       "submit": "Register",
       "success": "Registration successful!"
     },
     "login": {
+      "eyebrow": "Log in",
       "title": "Log in",
       "subtitle": "Log in to your account",
+      "pageTitle": "Welcome back to WeFund",
+      "pageDescription": "Access your WeFund space to follow ongoing campaigns, manage your projects, and continue browsing without friction.",
+      "secondaryPrompt": "No account yet?",
+      "pointOne": "Review your projects and their campaigns in one place.",
+      "pointTwo": "Manage your actions without losing the thread of your space.",
+      "pointThree": "Come back easily to support, edit, or create.",
+      "secondaryCta": "Create an account",
       "submit": "Log in",
       "success": "Login successful!"
     }
