@@ -2,6 +2,7 @@ import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import wefundLogo from "../../public/wefund-logo.svg";
+import { navigationLinkButtonSx } from "./navigation-link.styles";
 
 function Footer() {
   const { t } = useTranslation();
@@ -89,87 +90,21 @@ function Footer() {
             <Button
               color="inherit"
               onClick={() => void navigate("/campaigns")}
-              sx={{
-                px: 0,
-                py: 0.75,
-                borderRadius: 0,
-                position: "relative",
-                fontWeight: 500,
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  left: 0,
-                  bottom: 4,
-                  width: 0,
-                  height: 1.5,
-                  bgcolor: "secondary.main",
-                  transition: "width 180ms ease",
-                },
-                "&:hover": {
-                  bgcolor: "transparent",
-                },
-                "&:hover::after": {
-                  width: "100%",
-                },
-              }}
+              sx={navigationLinkButtonSx}
             >
               {t("header.exploreCampaigns")}
             </Button>
             <Button
               color="inherit"
-              onClick={() => void navigate("/my-projects")}
-              sx={{
-                px: 0,
-                py: 0.75,
-                borderRadius: 0,
-                position: "relative",
-                fontWeight: 500,
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  left: 0,
-                  bottom: 4,
-                  width: 0,
-                  height: 1.5,
-                  bgcolor: "secondary.main",
-                  transition: "width 180ms ease",
-                },
-                "&:hover": {
-                  bgcolor: "transparent",
-                },
-                "&:hover::after": {
-                  width: "100%",
-                },
-              }}
+              onClick={() => void navigate("/projects")}
+              sx={navigationLinkButtonSx}
             >
-              {t("header.myProjects")}
+              {t("header.exploreProjects")}
             </Button>
             <Button
               color="inherit"
               onClick={() => void navigate("/projects/create")}
-              sx={{
-                px: 0,
-                py: 0.75,
-                borderRadius: 0,
-                position: "relative",
-                fontWeight: 500,
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  left: 0,
-                  bottom: 4,
-                  width: 0,
-                  height: 1.5,
-                  bgcolor: "secondary.main",
-                  transition: "width 180ms ease",
-                },
-                "&:hover": {
-                  bgcolor: "transparent",
-                },
-                "&:hover::after": {
-                  width: "100%",
-                },
-              }}
+              sx={navigationLinkButtonSx}
             >
               {t("header.createProject")}
             </Button>
@@ -188,64 +123,14 @@ function Footer() {
             <Button
               color="inherit"
               onClick={() => void navigate("/who-we-are")}
-              sx={{
-                px: 0,
-                py: 0.75,
-                minWidth: "fit-content",
-                justifyContent: "flex-start",
-                alignSelf: "flex-start",
-                borderRadius: 0,
-                position: "relative",
-                fontWeight: 500,
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  left: 0,
-                  bottom: 4,
-                  width: 0,
-                  height: 1.5,
-                  bgcolor: "secondary.main",
-                  transition: "width 180ms ease",
-                },
-                "&:hover": {
-                  bgcolor: "transparent",
-                },
-                "&:hover::after": {
-                  width: "100%",
-                },
-              }}
+              sx={navigationLinkButtonSx}
             >
               {t("footer.aboutLink")}
             </Button>
             <Button
               color="inherit"
               onClick={() => void navigate("/legal-notice")}
-              sx={{
-                px: 0,
-                py: 0.75,
-                minWidth: "fit-content",
-                justifyContent: "flex-start",
-                alignSelf: "flex-start",
-                borderRadius: 0,
-                position: "relative",
-                fontWeight: 500,
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  left: 0,
-                  bottom: 4,
-                  width: 0,
-                  height: 1.5,
-                  bgcolor: "secondary.main",
-                  transition: "width 180ms ease",
-                },
-                "&:hover": {
-                  bgcolor: "transparent",
-                },
-                "&:hover::after": {
-                  width: "100%",
-                },
-              }}
+              sx={navigationLinkButtonSx}
             >
               {t("footer.legalLink")}
             </Button>

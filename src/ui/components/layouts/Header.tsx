@@ -4,10 +4,13 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, type MouseEvent } from "react";
 import wefundLogo from "../../public/wefund-logo.svg";
+import { useAuth } from "../../contexts/use-auth";
+import { navigationLinkButtonSx } from "./navigation-link.styles";
 
 function Header() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -31,31 +34,6 @@ function Header() {
   const handleLanguageChange = (lng: string) => {
     void i18n.changeLanguage(lng);
     setAnchorEl(null);
-  };
-
-  const navigationButtonSx = {
-    px: 0,
-    py: 0.75,
-    minWidth: "fit-content",
-    borderRadius: 0,
-    position: "relative",
-    fontWeight: 500,
-    "&::after": {
-      content: '""',
-      position: "absolute",
-      left: 0,
-      bottom: 4,
-      width: 0,
-      height: 1.5,
-      bgcolor: "secondary.main",
-      transition: "width 180ms ease",
-    },
-    "&:hover": {
-      bgcolor: "transparent",
-    },
-    "&:hover::after": {
-      width: "100%",
-    },
   };
 
   return (
@@ -158,40 +136,49 @@ function Header() {
                 English
               </MenuItem>
             </Menu>
-            <Button color="inherit" sx={navigationButtonSx} onClick={() => void navigate("/campaigns")}>{t("header.exploreCampaigns")}</Button>
-            <Button color="inherit" sx={navigationButtonSx} onClick={() => void navigate("/my-projects")}>{t("header.myProjects")}</Button>
-            <Button color="inherit" sx={navigationButtonSx} onClick={() => void navigate("/my-contributions")}>{t("header.myContributions")}</Button>
-            <Button color="inherit" sx={navigationButtonSx} onClick={() => void navigate("/projects/create")}>{t("header.createProject")}</Button>
-            <Button
-              variant="outlined"
-              sx={(theme) => ({
-                color: theme.palette.primary.main,
-                borderColor: theme.palette.secondary.light,
-                "&:hover": {
-                  borderColor: theme.palette.secondary.main,
-                  bgcolor: "rgba(182, 102, 56, 0.06)",
-                },
-              })}
-              onClick={() => void navigate("/signup")}
-            >
-              {t("header.signup")}
-            </Button>
-            <Button
-              variant="contained"
-              sx={(theme) => ({
-                bgcolor: theme.palette.primary.main,
-                color: theme.palette.primary.contrastText,
-                backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.success.main} 100%)`,
-                boxShadow: "none",
-                "&:hover": {
-                  boxShadow: "none",
-                  backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.success.dark} 100%)`,
-                },
-              })}
-              onClick={() => void navigate("/login")}
-            >
-              {t("header.login")}
-            </Button>
+            <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/projects")}>{t("header.exploreProjects")}</Button>
+            <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/campaigns")}>{t("header.exploreCampaigns")}</Button>
+            {currentUser ? (
+              <>
+                <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/my-projects")}>{t("header.myProjects")}</Button>
+                <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/my-contributions")}>{t("header.myContributions")}</Button>
+                <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/projects/create")}>{t("header.createProject")}</Button>
+              </>
+            ) : null}
+            {!currentUser ? (
+              <>
+                <Button
+                  variant="outlined"
+                  sx={(theme) => ({
+                    color: theme.palette.primary.main,
+                    borderColor: theme.palette.secondary.light,
+                    "&:hover": {
+                      borderColor: theme.palette.secondary.main,
+                      bgcolor: "rgba(182, 102, 56, 0.06)",
+                    },
+                  })}
+                  onClick={() => void navigate("/signup")}
+                >
+                  {t("header.signup")}
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={(theme) => ({
+                    bgcolor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.success.main} 100%)`,
+                    boxShadow: "none",
+                    "&:hover": {
+                      boxShadow: "none",
+                      backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.success.dark} 100%)`,
+                    },
+                  })}
+                  onClick={() => void navigate("/login")}
+                >
+                  {t("header.login")}
+                </Button>
+              </>
+            ) : null}
           </Box>
         </Toolbar>
       </AppBar>

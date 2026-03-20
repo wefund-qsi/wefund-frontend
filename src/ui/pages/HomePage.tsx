@@ -111,12 +111,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
               <Typography
                 variant="overline"
                 sx={{
-                  mb: 2,
                   color: "secondary.main",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  fontSize: { xs: "0.75rem", md: "0.875rem" },
                 }}
               >
                 {t("homePage.heroEyebrow")}

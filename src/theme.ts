@@ -77,9 +77,12 @@ const theme = createTheme({
     },
     overline: {
       fontFamily: 'var(--font-family-accent)',
-      fontWeight: 400,
+      fontWeight: 700,
+      fontSize: "0.875rem",
+      display: "block",
+      marginBottom: 2,
       letterSpacing: "0.08em",
-      textTransform: "none",
+      textTransform: "uppercase",
     },
   },
   components: {

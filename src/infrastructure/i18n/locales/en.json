@@ -1,8 +1,8 @@
 {
   "header": {
     "createProject": "Create your project",
-    "exploreProjects": "Explore projects",
-    "exploreCampaigns": "Explore campaigns",
+    "exploreProjects": "Projects",
+    "exploreCampaigns": "Campaigns",
     "myProjects": "My projects",
     "myContributions": "My contributions",
     "signup": "Sign up",
