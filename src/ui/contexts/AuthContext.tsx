@@ -2,11 +2,6 @@ import { createContext, useState, type ReactNode } from "react";
 import type { JwtPayload } from "../../domain/auth/entities/auth";
 
 const SESSION_KEY = "wefund_session";
-const MOCK_USER: JwtPayload = {
-    sub: "seed-owner-1",
-    username: "aymeric",
-    role: "USER",
-};
 
 export interface AuthContextValue {
     currentUser: JwtPayload | null;
@@ -19,15 +14,11 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthContextProvider({ children }: { children: ReactNode }) {
     const [currentUser, setCurrentUserState] = useState<JwtPayload | null>(() => {
         const stored = sessionStorage.getItem(SESSION_KEY);
-        if (!stored) {
-            sessionStorage.setItem(SESSION_KEY, JSON.stringify(MOCK_USER));
-            return MOCK_USER;
-        }
+        if (!stored) return null;
         try {
             return JSON.parse(stored) as JwtPayload;
         } catch {
-            sessionStorage.setItem(SESSION_KEY, JSON.stringify(MOCK_USER));
-            return MOCK_USER;
+            return null;
         }
     });
 
