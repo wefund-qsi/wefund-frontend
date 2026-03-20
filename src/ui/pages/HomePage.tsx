@@ -8,8 +8,7 @@ import type { Project } from "../../domain/projects/entities/project";
 import type { ViewAllProjects } from "../../domain/projects/uses-cases/view-all-projects";
 import CampaignCard from "../components/CampaignCard";
 import ProjectCard from "../components/ProjectCard";
-
-const heroImageUrl = "https://images.unsplash.com/photo-1537884444401-d79ef2b2990d?auto=format&fit=crop&w=1600&q=80";
+import heroImageUrl from "../public/wefund-hero.png";
 
 interface HomePageProps {
   viewAllProjects: ViewAllProjects;
@@ -73,8 +72,6 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
             inset: { xs: "auto -8% 2% auto", md: "8% 3% 2% auto" },
             width: { xs: "86%", md: "42%" },
             overflow: "hidden",
-            boxShadow: "0 22px 64px rgba(97, 95, 47, 0.10)",
-            backgroundColor: "transparent",
           }}
         >
           <Box
