@@ -44,6 +44,8 @@ import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
 import ProjectDetails from './ui/pages/ProjectDetails';
 import AdminPage from './ui/pages/AdminPage';
+import AboutPage from './ui/pages/AboutPage';
+import LegalNoticePage from './ui/pages/LegalNoticePage';
 import theme from './theme';
 
 const seededProjects = [
@@ -238,6 +240,8 @@ function App() {
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
             <Route path="/admin" element={<AdminPage viewAllCampaigns={viewAllCampaigns} />} />
+            <Route path="/who-we-are" element={<AboutPage />} />
+            <Route path="/legal-notice" element={<LegalNoticePage />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
           </Routes>
         </MainLayout>

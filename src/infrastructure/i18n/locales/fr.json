@@ -7,7 +7,34 @@
     "myContributions": "Mes contributions",
     "signup": "S'enregistrer",
     "login": "Se connecter",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "language": "Choisir la langue"
+  },
+  "footer": {
+    "description": "Une plateforme de financement participatif au ton humain, pensée pour valoriser les projets, leurs histoires et celles des personnes qui les soutiennent.",
+    "navigationTitle": "Navigation",
+    "informationTitle": "Informations",
+    "aboutLink": "Qui sommes-nous ?",
+    "legalLink": "Mentions légales",
+    "signature": "Financer avec confiance, porter des idées avec élégance.",
+    "baseline": "Crowdfunding sobre, éditorial et engagé."
+  },
+  "about": {
+    "title": "Qui sommes-nous ?",
+    "intro": "WeFund est un projet étudiant pensé comme une vitrine de financement participatif au ton éditorial, clair et accessible.",
+    "projectTitle": "Le projet",
+    "projectBody": "Ce projet a été imaginé et développé dans un cadre pédagogique, avec l ambition de proposer une expérience frontend soignée autour de la découverte de projets, de la consultation de campagnes et du soutien aux initiatives mises en avant.",
+    "promotionTitle": "La promotion",
+    "promotionBody": "Le projet est porté par la promotion du Master MIAGE 2025-2026. Il s inscrit dans une démarche de réalisation concrète, mêlant conception produit, expérience utilisateur et développement web.",
+    "teamTitle": "Groupe frontend"
+  },
+  "legal": {
+    "title": "Mentions légales",
+    "intro": "Cette page présente les principales informations de contexte et d usage liées au projet WeFund dans son cadre académique.",
+    "editorTitle": "Éditeur du projet",
+    "editorBody": "WeFund est un projet étudiant réalisé dans le cadre de la promotion du Master MIAGE 2025-2026.\n\nLe frontend a été conçu et développé par le groupe composé de Aymeric JAKOBOWSKI, Camille BARTHELEMY, Julien CONOIR, Florine PAWLOWSKI et Alyocha YAHI.",
+    "usageTitle": "Cadre d utilisation",
+    "usageBody": "Le site est présenté comme une démonstration académique.\n\nLes contenus, données et parcours affichés ont vocation à illustrer un travail de conception et de développement frontend. Ils ne constituent pas un service commercial réel ni une plateforme de financement active."
   },
   "welcome": "Bienvenue sur WeFund",
   "admin": {

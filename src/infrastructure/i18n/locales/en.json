@@ -7,7 +7,34 @@
     "myContributions": "My contributions",
     "signup": "Sign up",
     "login": "Log in",
-    "logout": "Log out"
+    "logout": "Log out",
+    "language": "Choose language"
+  },
+  "footer": {
+    "description": "A crowdfunding platform with a more human tone, designed to highlight projects, their stories, and the people who support them.",
+    "navigationTitle": "Navigation",
+    "informationTitle": "Information",
+    "aboutLink": "Who are we?",
+    "legalLink": "Legal notice",
+    "signature": "Fund with confidence, elevate ideas with elegance.",
+    "baseline": "Editorial, elegant and purposeful crowdfunding."
+  },
+  "about": {
+    "title": "Who are we?",
+    "intro": "WeFund is a student project designed as a crowdfunding showcase with a more editorial, clear, and accessible tone.",
+    "projectTitle": "The project",
+    "projectBody": "This project was imagined and developed in an academic context, with the goal of delivering a polished frontend experience around project discovery, campaign browsing, and support for the featured initiatives.",
+    "promotionTitle": "The class",
+    "promotionBody": "The project is carried by the Master MIAGE 2025-2026 cohort. It is part of a hands-on academic effort combining product thinking, user experience, and web development.",
+    "teamTitle": "Frontend team"
+  },
+  "legal": {
+    "title": "Legal notice",
+    "intro": "This page presents the main contextual and usage information related to the WeFund project within its academic framework.",
+    "editorTitle": "Project editor",
+    "editorBody": "WeFund is a student project created as part of the Master MIAGE 2025-2026 cohort.\n\nThe frontend was designed and developed by the group composed of Aymeric JAKOBOWSKI, Camille BARTHELEMY, Julien CONOIR, Florine PAWLOWSKI, and Alyocha YAHI.",
+    "usageTitle": "Usage scope",
+    "usageBody": "This website is presented as an academic demonstration.\n\nThe content, data, and user flows shown here are intended to illustrate frontend design and development work. They do not constitute a real commercial service or an active crowdfunding platform."
   },
   "welcome": "Welcome to WeFund",
   "admin": {
