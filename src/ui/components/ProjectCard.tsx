@@ -37,7 +37,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           onError={(e) => { (e.target as HTMLImageElement).src = noPicture; }}
         />
         <CardContent sx={{ flex: 1 }}>
-          <Typography variant="h6" component="h2" fontWeight={600} noWrap sx={{ color: "#FEFAE0" }}>
+          <Typography variant="h5" component="h3" fontWeight={600} noWrap sx={{ color: "#FEFAE0" }}>
             {project.title}
           </Typography>
         </CardContent>

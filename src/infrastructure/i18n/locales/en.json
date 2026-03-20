@@ -53,7 +53,16 @@
     "endDate": "End Date"
   },
   "homePage": {
-    "projectsTitle": "Projects",
+    "heroEyebrow": "Editorial and purposeful crowdfunding",
+    "heroTitle": "Projects worth seeing, supporting, and carrying further.",
+    "heroDescription": "WeFund gives projects and their campaigns a clearer place to be discovered. Explore what is active or launch your own.",
+    "heroPrimaryCta": "Explore campaigns",
+    "heroSecondaryCta": "Create a project",
+    "heroVisualHint": "An editorial visual can sit here to dress the top of the page.",
+    "campaignsTitle": "Active campaigns",
+    "campaignsLink": "See all campaigns",
+    "noCampaigns": "No active campaigns at the moment.",
+    "projectsTitle": "Projects to discover",
     "noProjects": "No projects yet."
   },
   "projectForm": {

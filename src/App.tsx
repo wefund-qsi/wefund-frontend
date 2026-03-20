@@ -30,6 +30,7 @@ import { ViawAllUserProject } from './domain/projects/uses-cases/view-all-user-p
 import { ViewProject } from './domain/projects/uses-cases/view-project';
 import { UserId } from './domain/users/entities/user';
 import MainLayout from './ui/components/layouts/MainLayout';
+import AuthGuard from './ui/components/routes/AuthGuard';
 import CampaignDetailsPage from './ui/pages/CampaignDetailsPage';
 import CampaignPaymentPage from './ui/pages/CampaignPaymentPage';
 import CampaignsPage from './ui/pages/CampaignsPage';
@@ -199,7 +200,7 @@ function App() {
       <BrowserRouter>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} />} />
+            <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} />} />
             <Route
               path="/campaigns/:id"
@@ -221,28 +222,30 @@ function App() {
                 />
               }
             />
-            <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
-            <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
-            <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
-            <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} />} />
-            <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
-            <Route
-              path="/my-contributions"
-              element={
-                <MyContributionsPage
-                  contributorId={CURRENT_CONTRIBUTOR_ID}
-                  viewCampaign={viewCampaign}
-                  viewUserContributions={viewUserContributions}
-                  refundContribution={refundContribution}
-                />
-              }
-            />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
             <Route path="/admin" element={<AdminPage viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/who-we-are" element={<AboutPage />} />
             <Route path="/legal-notice" element={<LegalNoticePage />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
+            <Route element={<AuthGuard />}>
+              <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
+              <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
+              <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
+              <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} />} />
+              <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
+              <Route
+                path="/my-contributions"
+                element={
+                  <MyContributionsPage
+                    contributorId={CURRENT_CONTRIBUTOR_ID}
+                    viewCampaign={viewCampaign}
+                    viewUserContributions={viewUserContributions}
+                    refundContribution={refundContribution}
+                  />
+                }
+              />
+            </Route>
           </Routes>
         </MainLayout>
       </BrowserRouter>

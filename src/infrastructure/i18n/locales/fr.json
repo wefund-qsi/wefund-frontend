@@ -53,7 +53,15 @@
     "endDate": "Date de fin"
   },
   "homePage": {
-    "projectsTitle": "Les projets",
+    "heroEyebrow": "Crowdfunding éditorial et engagé",
+    "heroTitle": "Des projets qui méritent d'être vus, soutenus et portés plus loin.",
+    "heroDescription": "WeFund donne une place claire aux projets et aux campagnes qui les accompagnent. Découvrez ce qui est en cours ou lancez le vôtre.",
+    "heroPrimaryCta": "Découvrir les campagnes",
+    "heroSecondaryCta": "Créer un projet",
+    "campaignsTitle": "Campagnes en cours",
+    "campaignsLink": "Voir toutes les campagnes",
+    "noCampaigns": "Aucune campagne active pour le moment.",
+    "projectsTitle": "Projets à découvrir",
     "noProjects": "Aucun projet pour le moment."
   },
   "projectForm": {

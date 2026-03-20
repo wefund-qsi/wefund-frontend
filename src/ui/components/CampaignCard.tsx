@@ -14,7 +14,7 @@ function CampaignCard({ campaign }: CampaignCardProps) {
       <CardActionArea onClick={() => { void navigate(`/campaigns/${campaign.id}`); }} sx={{ height: "100%" }}>
         <CardContent sx={{ display: "flex", flexDirection: "column", gap: 2, height: "100%" }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-            <Typography variant="h6" component="h2" fontWeight={700}>
+            <Typography variant="h5" component="h3" fontWeight={700}>
               {campaign.title}
             </Typography>
             <Chip
@@ -27,8 +27,10 @@ function CampaignCard({ campaign }: CampaignCardProps) {
             {campaign.description}
           </Typography>
           <Box>
-            <Typography variant="subtitle2">Objectif: {campaign.goal.toLocaleString()} EUR</Typography>
-            <Typography variant="subtitle2">
+            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              Objectif: {campaign.goal.toLocaleString()} EUR
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600 }}>
               Collecte: {getCampaignCollectedAmount(campaign).toLocaleString()} EUR
             </Typography>
             <LinearProgress
