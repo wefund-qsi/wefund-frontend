@@ -1,5 +1,5 @@
-import { Box, Button, Container, Grid, Typography, CircularProgress, IconButton, Stack } from "@mui/material";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Button, CircularProgress, Container, Grid, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
@@ -56,187 +56,302 @@ function ProjectDetails({ viewProject, viewProjectCampaigns, currentUserId }: Pr
   }
 
   const isOwner = currentUserId === project.ownerId;
+  const activeCampaignsCount = campaigns.filter((campaign) => campaign.status === "ACTIVE").length;
+  const successfulCampaignsCount = campaigns.filter((campaign) => campaign.status === "REUSSIE").length;
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box sx={{ display: "flex", alignItems: "center", mb: 4, gap: 2 }}>
-        <IconButton onClick={() => { void navigate("/"); }} aria-label="back" sx={{ color: "primary.dark" }}>
-          <ArrowBackIcon fontSize="large" />
-        </IconButton>
-        <Typography
-          variant="h2"
-          component="h1"
-          sx={{
-            fontWeight: 700,
-            color: "primary.dark",
-            fontSize: { xs: "2rem", md: "3rem" },
-          }}
-        >
-          {project.title}
-        </Typography>
-      </Box>
-
-      <Grid container spacing={4} sx={{ mb: 4, alignItems: "stretch" }}>
-        <Grid size={{ xs: 12, md: 8 }} sx={{ display: "flex" }}>
-          <Box
-            component="img"
-            src={project.photoUrl}
-            alt={project.title}
+    <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
+      <Stack spacing={{ xs: 4, md: 5 }}>
+        <Stack spacing={1.5}>
+          <Typography variant="overline" color="secondary.main">
+            {t("project.detailsEyebrow")}
+          </Typography>
+          <Typography
+            variant="h1"
+            component="h1"
             sx={{
-              width: "100%",
-              height: "auto",
-              maxHeight: { xs: "300px", sm: "400px", md: "500px" },
-              objectFit: "cover",
-              borderRadius: 2,
-              boxShadow: 2,
-              display: "block",
-            }}
-          />
-        </Grid>
-
-        <Grid
-          size={{ xs: 12, md: 4 }}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Box
-            sx={{
-              backgroundColor: "#283618",
-              color: "#FEFAE0",
-              p: 2,
-              borderRadius: 2,
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              alignItems: "center",
-              textAlign: "center",
-              justifyContent: "center",
-              height: "100%",
+              color: "text.primary",
+              fontSize: { xs: "2.3rem", md: "4.2rem" },
+              lineHeight: { xs: 1.04, md: 0.98 },
+              textWrap: "balance",
             }}
           >
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: 600,
-                fontSize: { xs: "1.3rem", md: "1.5rem" },
-                lineHeight: 1.4,
-                mb: 1,
-              }}
-            >
-              {campaigns.length > 0 ? t("campaign.projectSectionTitle") : t("campaign.createCampaign")}
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                mb: 3,
-                fontSize: { xs: "0.9rem", md: "1rem" },
-                lineHeight: 1.6,
-              }}
-            >
-              {campaigns.length > 0 ? t("campaign.projectSummary", { count: campaigns.length }) : t("campaign.noCampaignYet")}
-            </Typography>
-            {isOwner ? (
-              <Stack spacing={2} width="100%">
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#FEFAE0",
-                    color: "#283618",
-                    fontWeight: 600,
-                    px: 3,
-                    py: 1.5,
-                    "&:hover": {
-                      backgroundColor: "#E5E1C9",
-                      color: "#283618",
-                    },
-                  }}
-                  onClick={() => { void navigate(`/projects/${project.id}/campaigns/create`); }}
-                >
-                  {t("campaign.createNew")}
-                </Button>
-                <Button
-                  variant="outlined"
-                  sx={{ color: "#FEFAE0", borderColor: "#FEFAE0" }}
-                  onClick={() => { void navigate(`/projects/${project.id}/edit`); }}
-                >
-                  {t("project.edit")}
-                </Button>
-              </Stack>
-            ) : null}
-          </Box>
-        </Grid>
-      </Grid>
-
-      <Box sx={{ mb: 6 }}>
-        <Typography
-          variant="body1"
-          sx={{
-            color: "text.primary",
-            lineHeight: 1.8,
-            fontSize: "1.1rem",
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          {project.description}
-        </Typography>
-      </Box>
-      <Box sx={{ mt: 4 }}>
-        <Typography
-          variant="h4"
-          component="h2"
-          sx={{ fontWeight: 700, mb: 3, color: "primary.dark" }}
-        >
-          {t("campaign.projectSectionTitle")}
-        </Typography>
-
-        {campaigns.length === 0 ? (
-          <Typography variant="body1" sx={{ color: "text.secondary", fontStyle: "italic", mb: 4 }}>
-            {t("campaign.noCampaignYet")}
+            {project.title}
           </Typography>
-        ) : (
-          <Grid container spacing={3} sx={{ mb: 5 }}>
-            {campaigns.map((campaign) => (
-              <Grid size={{ xs: 12, md: 6 }} key={campaign.id}>
-                <CampaignCard campaign={campaign} />
-              </Grid>
-            ))}
+        </Stack>
+
+        <Grid container spacing={{ xs: 3, md: 4 }} alignItems="stretch">
+          <Grid size={{ xs: 12, md: 7.5 }} sx={{ display: "flex" }}>
+            <Box
+              sx={(theme) => ({
+                width: "100%",
+                overflow: "hidden",
+                borderRadius: 5,
+                border: `1px solid ${theme.palette.divider}`,
+                backgroundColor: theme.palette.background.paper,
+                boxShadow: "0 22px 54px rgba(97, 95, 47, 0.08)",
+              })}
+            >
+              <Box
+                component="img"
+                src={project.photoUrl}
+                alt={project.title}
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  minHeight: { xs: 280, sm: 380, md: 520 },
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            </Box>
           </Grid>
-        )}
 
-        <Typography
-          variant="h4"
-          component="h2"
-          sx={{ fontWeight: 700, mb: 3, color: "primary.dark" }}
-        >
-          {t("project.newsTitle", "Actualités")}
-        </Typography>
+          <Grid size={{ xs: 12, md: 4.5 }} sx={{ display: "flex" }}>
+            <Box
+              sx={(theme) => ({
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
+                width: "100%",
+                borderRadius: 5,
+                border: `1px solid ${theme.palette.divider}`,
+                background: `linear-gradient(180deg, ${alpha(theme.palette.secondary.main, 0.06)} 0%, ${theme.palette.background.paper} 100%)`,
+                boxShadow: "0 18px 44px rgba(97, 95, 47, 0.08)",
+                p: { xs: 2.5, md: 3 },
+              })}
+            >
+              <Box>
+                <Typography variant="h3" component="h2" sx={{ mb: 1.5, fontSize: { xs: "1.8rem", md: "2.2rem" } }}>
+                  {t("project.detailsSummaryTitle")}
+                </Typography>
+                <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.8 }}>
+                  {t("project.detailsSummaryDescription")}
+                </Typography>
+              </Box>
 
-        {newsList.length === 0 ? (
-          <Typography variant="body1" sx={{ color: "text.secondary", fontStyle: "italic" }}>
-            {t("project.noNews", "Aucune actualité pour le moment.")}
-          </Typography>
-        ) : (
-          <Grid container spacing={3}>
-            {newsList.map((news) => (
-              <Grid size={{ xs: 12 }} key={news.id}>
-                <Box sx={{ p: 3, border: "1px solid", borderColor: "divider", borderRadius: 2 }}>
-                  <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-                    {news.title}
+              <Box sx={{ px: 0.5, py: 0.5 }}>
+                <Stack direction="row" spacing={1.2} alignItems="baseline">
+                  <Typography
+                    component="p"
+                    sx={{
+                      color: "text.primary",
+                      fontFamily: "var(--font-family-heading)",
+                      fontSize: { xs: "3.1rem", md: "4.35rem" },
+                      lineHeight: 0.88,
+                    }}
+                  >
+                    {campaigns.length}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: "text.secondary", display: "block", mb: 2 }}>
-                    {new Date(news.publishedAt).toLocaleDateString()}
+                  <Typography variant="h6" component="p" sx={{ color: "text.secondary", fontWeight: 500 }}>
+                    {t("project.totalCampaignsLabel")}
                   </Typography>
-                  <Typography variant="body2">
-                    {news.content}
+                </Stack>
+              </Box>
+
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                divider={
+                  <Box
+                    sx={(theme) => ({
+                      alignSelf: "stretch",
+                      width: { xs: "100%", sm: "1px" },
+                      height: { xs: "1px", sm: "auto" },
+                      backgroundColor: alpha(theme.palette.primary.main, 0.12),
+                    })}
+                  />
+                }
+                spacing={{ xs: 1.8, sm: 0 }}
+                sx={{ pt: 1 }}
+              >
+                <Box sx={{ flex: 1, pr: { sm: 2 } }}>
+                  <Typography
+                    component="p"
+                    sx={{
+                      color: "text.primary",
+                      fontFamily: "var(--font-family-heading)",
+                      fontSize: { xs: "1.7rem", md: "2rem" },
+                      lineHeight: 0.95,
+                      mb: 0.6,
+                    }}
+                  >
+                    {campaigns.filter((campaign) => campaign.status === "BROUILLON" || campaign.status === "EN_ATTENTE").length}
+                  </Typography>
+                  <Typography variant="caption" sx={{ display: "block", color: "text.secondary" }}>
+                    {t("project.draftOrPendingCampaigns")}
                   </Typography>
                 </Box>
-              </Grid>
-            ))}
+                <Box sx={{ flex: 1, px: { sm: 2 } }}>
+                  <Typography
+                    component="p"
+                    sx={{
+                      color: "secondary.main",
+                      fontFamily: "var(--font-family-heading)",
+                      fontSize: { xs: "1.7rem", md: "2rem" },
+                      lineHeight: 0.95,
+                      mb: 0.6,
+                    }}
+                  >
+                    {activeCampaignsCount}
+                  </Typography>
+                  <Typography variant="caption" sx={{ display: "block", color: "text.secondary" }}>
+                    {t("project.activeCampaigns")}
+                  </Typography>
+                </Box>
+                <Box sx={{ flex: 1, pl: { sm: 2 } }}>
+                  <Typography
+                    component="p"
+                    sx={{
+                      color: "success.dark",
+                      fontFamily: "var(--font-family-heading)",
+                      fontSize: { xs: "1.7rem", md: "2rem" },
+                      lineHeight: 0.95,
+                      mb: 0.6,
+                    }}
+                  >
+                    {successfulCampaignsCount}
+                  </Typography>
+                  <Typography variant="caption" sx={{ display: "block", color: "text.secondary" }}>
+                    {t("project.successfulCampaigns")}
+                  </Typography>
+                </Box>
+              </Stack>
+
+              {isOwner ? (
+                <Stack spacing={1.5} sx={{ mt: "auto" }}>
+                  <Button
+                    variant="contained"
+                    onClick={() => { void navigate(`/projects/${project.id}/campaigns/create`); }}
+                    sx={{
+                      py: 1.35,
+                      bgcolor: "secondary.main",
+                      color: "secondary.contrastText",
+                      boxShadow: "0 16px 36px rgba(182, 102, 56, 0.2)",
+                      "&:hover": {
+                        bgcolor: "secondary.dark",
+                      },
+                    }}
+                  >
+                    {t("campaign.createNew")}
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => { void navigate(`/projects/${project.id}/edit`); }}
+                    sx={{
+                      py: 1.25,
+                      borderColor: "rgba(97,95,47,0.28)",
+                      color: "primary.main",
+                    }}
+                  >
+                    {t("project.edit")}
+                  </Button>
+                </Stack>
+              ) : null}
+            </Box>
           </Grid>
-        )}
-      </Box>
+        </Grid>
+
+        <Box
+          sx={(theme) => ({
+            borderRadius: 5,
+            border: `1px solid ${theme.palette.divider}`,
+            background: `linear-gradient(180deg, rgba(255,255,255,0.42) 0%, ${theme.palette.background.paper} 100%)`,
+            px: { xs: 2.5, md: 3.5 },
+            py: { xs: 2.5, md: 3.5 },
+          })}
+        >
+          <Typography variant="h3" component="h2" sx={{ mb: 2.5, fontSize: { xs: "1.75rem", md: "2.2rem" } }}>
+            {t("project.descriptionTitle")}
+          </Typography>
+          <Box
+            sx={{
+              color: "text.primary",
+              lineHeight: 1.85,
+              fontSize: { xs: "1rem", md: "1.06rem" },
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {project.description}
+          </Box>
+        </Box>
+
+        <Box>
+          <Typography variant="h3" component="h2" sx={{ mb: 3, fontSize: { xs: "1.75rem", md: "2.2rem" } }}>
+            {t("campaign.projectSectionTitle")}
+          </Typography>
+
+          {campaigns.length === 0 ? (
+            <Box
+              sx={(theme) => ({
+                borderRadius: 4,
+                border: `1px dashed ${alpha(theme.palette.primary.main, 0.26)}`,
+                backgroundColor: alpha(theme.palette.background.paper, 0.8),
+                px: 2.5,
+                py: 3,
+              })}
+            >
+              <Typography variant="body1" sx={{ color: "text.secondary" }}>
+                {t("campaign.noCampaignYet")}
+              </Typography>
+            </Box>
+          ) : (
+            <Grid container spacing={3}>
+              {campaigns.map((campaign) => (
+                <Grid size={{ xs: 12, md: 6 }} key={campaign.id}>
+                  <CampaignCard campaign={campaign} titleComponent="h3" />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Box>
+
+        <Box>
+          <Typography variant="h3" component="h2" sx={{ mb: 3, fontSize: { xs: "1.75rem", md: "2.2rem" } }}>
+            {t("project.newsTitle", "Actualités")}
+          </Typography>
+
+          {newsList.length === 0 ? (
+            <Box
+              sx={(theme) => ({
+                borderRadius: 4,
+                border: `1px dashed ${alpha(theme.palette.secondary.main, 0.3)}`,
+                background: `linear-gradient(180deg, ${alpha(theme.palette.secondary.main, 0.04)} 0%, ${theme.palette.background.paper} 100%)`,
+                px: 2.5,
+                py: 3,
+              })}
+            >
+              <Typography variant="body1" sx={{ color: "text.secondary" }}>
+                {t("project.noNews", "Aucune actualité pour le moment.")}
+              </Typography>
+            </Box>
+          ) : (
+            <Grid container spacing={3}>
+              {newsList.map((news) => (
+                <Grid size={{ xs: 12 }} key={news.id}>
+                  <Box
+                    sx={(theme) => ({
+                      p: 3,
+                      border: `1px solid ${theme.palette.divider}`,
+                      borderRadius: 4,
+                      backgroundColor: theme.palette.background.paper,
+                    })}
+                  >
+                    <Typography variant="h4" component="h3" sx={{ fontWeight: 600, mb: 1.25, fontSize: "1.45rem" }}>
+                      {news.title}
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: "text.secondary", display: "block", mb: 2 }}>
+                      {new Date(news.publishedAt).toLocaleDateString()}
+                    </Typography>
+                    <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
+                      {news.content}
+                    </Typography>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Box>
+      </Stack>
     </Container>
   );
 }

@@ -129,10 +129,23 @@
     "createNew": "Créer une campagne",
     "projectSectionTitle": "Campagnes du projet",
     "projectSummary": "{{count}} campagne(s) liée(s) à ce projet.",
+    "goal": "Objectif",
+    "collected": "Collecte",
+    "progress": "collecté",
+    "endDate": "Fin :",
+    "viewAction": "Voir la campagne",
     "emptyList": "Aucune campagne disponible pour le moment.",
     "notFound": "Campagne introuvable",
     "edit": "Modifier la campagne",
-    "delete": "Supprimer la campagne"
+    "delete": "Supprimer la campagne",
+    "statuses": {
+      "BROUILLON": "Brouillon",
+      "EN_ATTENTE": "En attente",
+      "ACTIVE": "Active",
+      "REUSSIE": "Réussie",
+      "ECHOUEE": "Échouée",
+      "REFUSEE": "Refusée"
+    }
   },
   "campaignForm": {
     "title": "Créer une campagne",
@@ -225,6 +238,15 @@
     "pageDescription": "Découvrez les projets portés sur WeFund, leurs univers, leurs intentions et les campagnes qui peuvent les accompagner.",
     "emptyList": "Aucun projet disponible pour le moment.",
     "notFound": "Projet introuvable",
+    "detailsEyebrow": "Projet en détail",
+    "detailsSummaryTitle": "Vue d'ensemble",
+    "detailsSummaryDescription": "Retrouvez ici l'état des campagnes liées à ce projet, les informations essentielles et les prochaines actions disponibles.",
+    "totalCampaignsLabel": "campagnes",
+    "draftOrPendingCampaigns": "À préparer",
+    "descriptionTitle": "À propos du projet",
+    "totalCampaigns": "Campagnes",
+    "activeCampaigns": "Actives",
+    "successfulCampaigns": "Réussies",
     "edit": "Modifier le projet",
     "newsTitle": "Actualités",
     "noNews": "Aucune actualité pour le moment."

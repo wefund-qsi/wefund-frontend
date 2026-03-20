@@ -217,7 +217,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
           <Grid container spacing={3}>
             {activeCampaigns.map((campaign) => (
               <Grid key={campaign.id} size={{ xs: 12, md: 4 }}>
-                <CampaignCard campaign={campaign} />
+                <CampaignCard campaign={campaign} titleComponent="h3" />
               </Grid>
             ))}
           </Grid>

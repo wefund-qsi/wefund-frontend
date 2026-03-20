@@ -130,10 +130,23 @@
     "createNew": "Create a Campaign",
     "projectSectionTitle": "Project campaigns",
     "projectSummary": "{{count}} campaign(s) linked to this project.",
+    "goal": "Goal",
+    "collected": "Collected",
+    "progress": "collected",
+    "endDate": "Ends:",
+    "viewAction": "View campaign",
     "emptyList": "No campaigns available yet.",
     "notFound": "Campaign not found",
     "edit": "Edit campaign",
-    "delete": "Delete campaign"
+    "delete": "Delete campaign",
+    "statuses": {
+      "BROUILLON": "Draft",
+      "EN_ATTENTE": "Pending",
+      "ACTIVE": "Active",
+      "REUSSIE": "Successful",
+      "ECHOUEE": "Unsuccessful",
+      "REFUSEE": "Rejected"
+    }
   },
   "campaignForm": {
     "title": "Create a campaign",
@@ -226,6 +239,15 @@
     "pageDescription": "Discover the projects featured on WeFund, their worlds, their intentions, and the campaigns that can support them.",
     "emptyList": "No projects are available yet.",
     "notFound": "Project not found",
+    "detailsEyebrow": "Project details",
+    "detailsSummaryTitle": "Overview",
+    "detailsSummaryDescription": "Find the current state of this project's campaigns, the key information, and the next actions available from here.",
+    "totalCampaignsLabel": "campaigns",
+    "draftOrPendingCampaigns": "To prepare",
+    "descriptionTitle": "About this project",
+    "totalCampaigns": "Campaigns",
+    "activeCampaigns": "Active",
+    "successfulCampaigns": "Successful",
     "edit": "Edit project",
     "newsTitle": "News",
     "noNews": "No news are available yet."

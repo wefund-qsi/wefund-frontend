@@ -28,7 +28,7 @@ function CampaignsPage({ viewAllCampaigns }: CampaignsPageProps) {
         <Grid container spacing={3}>
           {campaigns.map((campaign) => (
             <Grid key={campaign.id} size={{ xs: 12, md: 6 }}>
-              <CampaignCard campaign={campaign} />
+              <CampaignCard campaign={campaign} titleComponent="h2" />
             </Grid>
           ))}
         </Grid>
