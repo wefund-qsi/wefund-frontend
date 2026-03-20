@@ -10,6 +10,21 @@
     "logout": "Se déconnecter"
   },
   "welcome": "Bienvenue sur WeFund",
+  "admin": {
+    "title": "Tableau de bord Admin",
+    "tabs": {
+      "pendingValidation": "En attente de validation",
+      "active": "Active",
+      "succeeded": "Réussie",
+      "failed": "Échouée",
+      "rejected": "Refusée"
+    },
+    "noCampaigns": "Aucune campagne dans ce statut.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "goal": "Objectif",
+    "endDate": "Date de fin"
+  },
   "homePage": {
     "projectsTitle": "Les projets",
     "noProjects": "Aucun projet pour le moment."

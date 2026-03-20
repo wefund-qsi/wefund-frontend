@@ -3,6 +3,19 @@ import type { Brand } from "../../../shared/utils";
 import type { ProjectId } from "../../projects/entities/project";
 import type { UserId } from "../../users/entities/user";
 
+// --- Enum Statut Campagne ---
+
+export const StatutCampagne = {
+  BROUILLON: 'BROUILLON',
+  EN_ATTENTE: 'EN_ATTENTE',
+  ACTIVE: 'ACTIVE',
+  REUSSIE: 'REUSSIE',
+  ECHOUEE: 'ECHOUEE',
+  REFUSEE: 'REFUSEE'
+} as const;
+
+export type StatutCampagneType = typeof StatutCampagne[keyof typeof StatutCampagne];
+
 // --- Branded Type CampaignId ---
 
 export type CampaignId = Brand<string, "CampaignId">;
@@ -11,12 +24,12 @@ export const CampaignId = (value: string): CampaignId => value as CampaignId;
 // --- Discriminated Union pour le statut (cardinalité = 6, pas infini) ---
 
 export type CampaignStatus =
-  | "draft"
-  | "pending_validation"
-  | "active"
-  | "succeeded"
-  | "failed"
-  | "rejected";
+  | 'BROUILLON'
+  | 'EN_ATTENTE'
+  | 'ACTIVE'
+  | 'REUSSIE'
+  | 'ECHOUEE'
+  | 'REFUSEE';
 
 // --- Types métier avec discriminated union par statut ---
 
@@ -32,35 +45,35 @@ interface CampaignBase {
 }
 
 export interface DraftCampaign extends CampaignBase {
-  status: "draft";
+  status: 'BROUILLON';
 }
 
 export interface PendingCampaign extends CampaignBase {
-  status: "pending_validation";
+  status: 'EN_ATTENTE';
 }
 
 export interface ActiveCampaign extends CampaignBase {
-  status: "active";
+  status: 'ACTIVE';
   startedAt: string;
   collectedAmount: number;
 }
 
 export interface SucceededCampaign extends CampaignBase {
-  status: "succeeded";
+  status: 'REUSSIE';
   startedAt: string;
   completedAt: string;
   collectedAmount: number;
 }
 
 export interface FailedCampaign extends CampaignBase {
-  status: "failed";
+  status: 'ECHOUEE';
   startedAt: string;
   completedAt: string;
   collectedAmount: number;
 }
 
 export interface RejectedCampaign extends CampaignBase {
-  status: "rejected";
+  status: 'REFUSEE';
 }
 
 export type Campaign =
@@ -73,9 +86,9 @@ export type Campaign =
 
 export function getCampaignCollectedAmount(campaign: Campaign): number {
   if (
-    campaign.status === "active" ||
-    campaign.status === "succeeded" ||
-    campaign.status === "failed"
+    campaign.status === 'ACTIVE' ||
+    campaign.status === 'REUSSIE' ||
+    campaign.status === 'ECHOUEE'
   ) {
     return campaign.collectedAmount;
   }

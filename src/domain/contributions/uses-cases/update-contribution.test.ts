@@ -27,7 +27,7 @@ describe("UpdateContribution", () => {
         endDate: "2026-09-01",
         ownerId: UserId("owner-1"),
         createdAt: "2026-01-01T10:00:00.000Z",
-        status: "active",
+        status: "ACTIVE",
         startedAt: "2026-02-01T10:00:00.000Z",
         collectedAmount: 300,
       },
@@ -50,8 +50,8 @@ describe("UpdateContribution", () => {
       amount: 150,
     });
 
-    expect(campaign.status).toBe("active");
-    expect(campaign.status === "active" ? campaign.collectedAmount : 0).toBe(350);
+    expect(campaign.status).toBe("ACTIVE");
+    expect(campaign.status === "ACTIVE" ? campaign.collectedAmount : 0).toBe(350);
   });
 
   it("refuse la modification si la campagne n est pas active", async () => {
@@ -65,7 +65,7 @@ describe("UpdateContribution", () => {
         endDate: "2026-09-01",
         ownerId: UserId("owner-1"),
         createdAt: "2026-01-01T10:00:00.000Z",
-        status: "succeeded",
+        status: "REUSSIE",
         startedAt: "2026-02-01T10:00:00.000Z",
         completedAt: "2026-03-01T10:00:00.000Z",
         collectedAmount: 1200,

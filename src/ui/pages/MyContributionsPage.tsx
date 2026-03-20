@@ -97,7 +97,7 @@ function MyContributionsPage({
       ) : (
         <Grid container spacing={3}>
           {items.map(({ contribution, campaign }) => {
-            const canEdit = campaign?.status === "active";
+            const canEdit = campaign?.status === "ACTIVE";
 
             return (
               <Grid key={contribution.id} size={{ xs: 12, md: 6 }}>

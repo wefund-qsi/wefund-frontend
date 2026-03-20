@@ -69,7 +69,7 @@ function CampaignDetailsPage({
           <Typography variant="subtitle1">Projet lié: {campaign.projectId}</Typography>
         </Box>
 
-        {campaign.status === "active" ? (
+        {campaign.status === "ACTIVE" ? (
           <Box sx={{ p: 3, border: "1px solid", borderColor: "divider", borderRadius: 2 }}>
             <Typography variant="h5" fontWeight={700} mb={1}>
               {t("funding.title")}

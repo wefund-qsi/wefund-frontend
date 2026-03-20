@@ -42,6 +42,7 @@ import MyProjectsPage from './ui/pages/MyProjectsPage';
 import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
 import ProjectDetails from './ui/pages/ProjectDetails';
+import AdminPage from './ui/pages/AdminPage';
 import theme from './theme';
 
 const seededProjects = [
@@ -81,7 +82,7 @@ const seededCampaigns = [
     endDate: '2026-10-15',
     ownerId: UserId('seed-owner-1'),
     createdAt: '2026-02-01T10:00:00.000Z',
-    status: 'active' as const,
+    status: 'ACTIVE' as const,
     startedAt: '2026-02-15T10:00:00.000Z',
     collectedAmount: 5400,
   },
@@ -94,7 +95,7 @@ const seededCampaigns = [
     endDate: '2026-12-10',
     ownerId: UserId('seed-owner-1'),
     createdAt: '2026-03-05T10:00:00.000Z',
-    status: 'draft' as const,
+    status: 'BROUILLON' as const,
   },
   {
     id: CampaignId('campaign-animal-3'),
@@ -105,7 +106,7 @@ const seededCampaigns = [
     endDate: '2026-05-30',
     ownerId: UserId('seed-owner-1'),
     createdAt: '2026-01-05T10:00:00.000Z',
-    status: 'succeeded' as const,
+    status: 'REUSSIE' as const,
     startedAt: '2026-01-20T10:00:00.000Z',
     completedAt: '2026-05-28T18:00:00.000Z',
     collectedAmount: 6400,
@@ -119,7 +120,7 @@ const seededCampaigns = [
     endDate: '2026-09-01',
     ownerId: UserId('seed-owner-1'),
     createdAt: '2026-02-10T10:00:00.000Z',
-    status: 'draft' as const,
+    status: 'BROUILLON' as const,
   },
   {
     id: CampaignId('campaign-humanitarian-1'),
@@ -130,7 +131,7 @@ const seededCampaigns = [
     endDate: '2026-11-20',
     ownerId: UserId('seed-owner-1'),
     createdAt: '2026-02-18T10:00:00.000Z',
-    status: 'active' as const,
+    status: 'ACTIVE' as const,
     startedAt: '2026-03-01T10:00:00.000Z',
     collectedAmount: 7200,
   },
@@ -234,6 +235,7 @@ function App() {
             />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
+            <Route path="/admin" element={<AdminPage viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
           </Routes>
         </MainLayout>
