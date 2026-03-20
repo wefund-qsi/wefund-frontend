@@ -137,6 +137,11 @@
   },
   "campaign": {
     "listTitle": "Les campagnes",
+    "pageEyebrow": "Campagnes mises en avant",
+    "pageDescription": "Parcourez les campagnes actuellement visibles sur WeFund, suivez celles qui sont en cours et retrouvez aussi vos brouillons dans un espace séparé.",
+    "publicSectionTitle": "Campagnes visibles",
+    "draftSectionTitle": "Mes campagnes en brouillon",
+    "draftSectionDescription": "Cette section est réservée à vos brouillons. Les autres utilisateurs ne voient pas ces campagnes tant qu'elles ne sont pas publiées.",
     "detailsEyebrow": "Campagne en détail",
     "backToProject": "Retour au projet",
     "createCampaign": "Créer une campagne",
@@ -156,9 +161,16 @@
     "ownerActions": "Gérer la campagne",
     "projectUnavailable": "Le projet lié n'est pas disponible.",
     "emptyList": "Aucune campagne disponible pour le moment.",
+    "emptyActiveList": "Aucune campagne en cours pour le moment.",
+    "emptyFinishedList": "Aucune campagne terminée pour le moment.",
+    "emptyDraftList": "Aucune campagne en brouillon pour le moment.",
     "notFound": "Campagne introuvable",
     "edit": "Modifier la campagne",
     "delete": "Supprimer la campagne",
+    "filters": {
+      "active": "En cours",
+      "finished": "Terminées"
+    },
     "statuses": {
       "BROUILLON": "Brouillon",
       "EN_ATTENTE": "En attente",

@@ -204,7 +204,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/projects" element={<ProjectsPage viewAllProjects={viewAllProjects} />} />
-            <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} />} />
+            <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} currentUserId={CURRENT_USER_ID} />} />
             <Route
               path="/campaigns/:id"
               element={

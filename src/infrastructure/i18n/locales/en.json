@@ -138,6 +138,11 @@
   },
   "campaign": {
     "listTitle": "Campaigns",
+    "pageEyebrow": "Featured campaigns",
+    "pageDescription": "Browse the campaigns currently visible on WeFund, follow the ones still running, and also find your drafts in a separate space.",
+    "publicSectionTitle": "Visible campaigns",
+    "draftSectionTitle": "My draft campaigns",
+    "draftSectionDescription": "This section is reserved for your drafts. Other users cannot see these campaigns until they are published.",
     "detailsEyebrow": "Campaign details",
     "backToProject": "Back to project",
     "createCampaign": "Create a Campaign",
@@ -157,9 +162,16 @@
     "ownerActions": "Manage campaign",
     "projectUnavailable": "The linked project is not available.",
     "emptyList": "No campaigns available yet.",
+    "emptyActiveList": "No active campaigns at the moment.",
+    "emptyFinishedList": "No finished campaigns at the moment.",
+    "emptyDraftList": "No draft campaigns at the moment.",
     "notFound": "Campaign not found",
     "edit": "Edit campaign",
     "delete": "Delete campaign",
+    "filters": {
+      "active": "Active",
+      "finished": "Finished"
+    },
     "statuses": {
       "BROUILLON": "Draft",
       "EN_ATTENTE": "Pending",
