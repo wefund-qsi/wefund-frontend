@@ -36,6 +36,14 @@ export type LoginRequest = {
 
 export type LoginResult = ApiResponse<{ access_token: string }>;
 
+export type JwtPayload = {
+    sub: string;
+    username: string;
+    role: Role;
+    iat?: number;
+    exp?: number;
+};
+
 // --- Schémas Zod ---
 
 export const loginSchema = z.object({

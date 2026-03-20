@@ -11,7 +11,8 @@ import { UpdateCampaign } from './domain/campagns/uses-cases/update-campaign';
 import { ViewAllCampaigns } from './domain/campagns/uses-cases/view-all-campaigns';
 import { ViewCampaign } from './domain/campagns/uses-cases/view-campaign';
 import { ViewProjectCampaigns } from './domain/campagns/uses-cases/view-project-campaigns';
-import { InMemoryAuthRepository } from './domain/auth/adapters/auth-repository.in-memory';
+import { HttpAuthRepository } from './domain/auth/adapters/auth-repository.http';
+import { AuthContextProvider } from './ui/contexts/AuthContext';
 import { Login } from './domain/auth/uses-cases/login';
 import { Signup } from './domain/auth/uses-cases/signup';
 import { InMemoryContributionRepository } from './domain/contributions/adapters/contribution-repository.in-memory';
@@ -172,7 +173,7 @@ const viewAllProjects = new ViewAllProjects(projectRepository);
 const viewAllUserProjects = new ViawAllUserProject(projectRepository);
 const viewProject = new ViewProject(projectRepository);
 
-const authRepository = new InMemoryAuthRepository(new RealIdGenerator(), new RealDateGenerator());
+const authRepository = new HttpAuthRepository('http://localhost:3000');
 const signup = new Signup(authRepository);
 const login = new Login(authRepository);
 
@@ -190,7 +191,8 @@ const viewProjectCampaigns = new ViewProjectCampaigns(campaignRepository);
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <AuthContextProvider>
+      <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
         <MainLayout>
@@ -241,6 +243,7 @@ function App() {
         </MainLayout>
       </BrowserRouter>
     </ThemeProvider>
+    </AuthContextProvider>
   )
 }
 
