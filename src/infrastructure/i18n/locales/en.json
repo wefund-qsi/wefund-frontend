@@ -65,6 +65,13 @@
     "projectsTitle": "Projects to discover",
     "noProjects": "No projects yet."
   },
+  "notFound": {
+    "eyebrow": "Page not found",
+    "title": "This project couldn't find its page.",
+    "description": "The content you are looking for does not exist, is no longer available, or the address is incorrect. Head back home or discover the featured projects.",
+    "primaryCta": "Back to home",
+    "secondaryCta": "View projects"
+  },
   "projectForm": {
     "title": "Create a project",
     "subtitle": "Title, description and photo",

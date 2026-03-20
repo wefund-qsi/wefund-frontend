@@ -64,6 +64,13 @@
     "projectsTitle": "Projets à découvrir",
     "noProjects": "Aucun projet pour le moment."
   },
+  "notFound": {
+    "eyebrow": "Page introuvable",
+    "title": "Ce projet n'a pas trouvé sa page.",
+    "description": "Le contenu que vous cherchez n'existe pas, n'est plus disponible, ou l'adresse est incorrecte. Revenez vers l'accueil ou découvrez les projets mis en avant.",
+    "primaryCta": "Retour à l'accueil",
+    "secondaryCta": "Voir les projets"
+  },
   "projectForm": {
     "title": "Créer un projet",
     "subtitle": "Titre, description et photo",

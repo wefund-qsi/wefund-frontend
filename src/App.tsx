@@ -47,6 +47,7 @@ import ProjectDetails from './ui/pages/ProjectDetails';
 import AdminPage from './ui/pages/AdminPage';
 import AboutPage from './ui/pages/AboutPage';
 import LegalNoticePage from './ui/pages/LegalNoticePage';
+import NotFoundPage from './ui/pages/NotFoundPage';
 import theme from './theme';
 
 const seededProjects = [
@@ -246,6 +247,7 @@ function App() {
                 }
               />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>
