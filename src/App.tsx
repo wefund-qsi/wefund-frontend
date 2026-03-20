@@ -236,7 +236,7 @@ function App() {
               <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
               <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
               <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
-              <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} />} />
+              <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
               <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
               <Route
                 path="/my-contributions"

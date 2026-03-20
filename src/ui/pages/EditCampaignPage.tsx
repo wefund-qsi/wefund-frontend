@@ -37,12 +37,20 @@ function EditCampaignPage({ viewCampaign, updateCampaign }: EditCampaignPageProp
           goal: campaign.goal,
           endDate: campaign.endDate,
         }}
+        showDraftOption={campaign.status === "BROUILLON" || campaign.status === "EN_ATTENTE"}
+        initialIsDraft={campaign.status === "BROUILLON"}
         title="Modifier la campagne"
         subtitle="Mettez a jour vos informations de campagne"
         submitLabel="Enregistrer les modifications"
         successMessage="Campagne mise a jour avec succes !"
-        onSubmit={async (values) => {
-          await updateCampaign.execute({ id: CampaignId(id), values });
+        onSubmit={async (values, { isDraft }) => {
+          await updateCampaign.execute({
+            id: CampaignId(id),
+            values,
+            nextStatus: campaign.status === "BROUILLON" || campaign.status === "EN_ATTENTE"
+              ? (isDraft ? "BROUILLON" : "EN_ATTENTE")
+              : undefined,
+          });
           void navigate(`/campaigns/${id}`);
         }}
       />

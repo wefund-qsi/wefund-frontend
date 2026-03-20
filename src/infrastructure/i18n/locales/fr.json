@@ -182,8 +182,23 @@
     }
   },
   "campaignForm": {
+    "eyebrow": "Nouvelle campagne",
     "title": "Créer une campagne",
     "subtitle": "Titre, description, objectif et date de fin",
+    "pageTitle": "Lancez une nouvelle campagne",
+    "pageDescription": "Définissez un titre clair, un objectif précis et une échéance lisible pour préparer la mise en ligne de votre campagne.",
+    "linkedProject": "Projet lié",
+    "projectContextTitle": "Avant de publier",
+    "projectContextDescription": "Quelques informations utiles pour situer cette nouvelle campagne dans le rythme actuel du projet.",
+    "activeCampaignsCount": "Campagnes en cours",
+    "nextActiveEndDate": "Fin la plus proche",
+    "draftCampaignsCount": "Brouillons existants",
+    "nextDraftEndDate": "Prochain brouillon à finaliser",
+    "none": "Aucune",
+    "draftLabel": "Conserver comme brouillon",
+    "draftHint": "Cette campagne restera privée tant qu'elle est en brouillon.",
+    "publishHint": "Cette campagne sera envoyée pour validation.",
+    "draftTooltip": "Une campagne en brouillon n'est visible que par vous. Une fois décochée, elle passe en attente de validation.",
     "submit": "Enregistrer la campagne",
     "success": "Campagne créée avec succès !",
     "fields": {

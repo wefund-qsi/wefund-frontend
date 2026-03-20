@@ -183,8 +183,23 @@
     }
   },
   "campaignForm": {
+    "eyebrow": "New campaign",
     "title": "Create a campaign",
     "subtitle": "Title, description, target amount and end date",
+    "pageTitle": "Launch a new campaign",
+    "pageDescription": "Set a clear title, a precise goal, and a readable deadline to prepare your campaign before publication.",
+    "linkedProject": "Linked project",
+    "projectContextTitle": "Before publishing",
+    "projectContextDescription": "A few useful pointers to place this new campaign within the current pace of the project.",
+    "activeCampaignsCount": "Active campaigns",
+    "nextActiveEndDate": "Closest end date",
+    "draftCampaignsCount": "Existing drafts",
+    "nextDraftEndDate": "Next draft to complete",
+    "none": "None",
+    "draftLabel": "Keep as draft",
+    "draftHint": "This campaign will remain private while it stays in draft.",
+    "publishHint": "This campaign will be sent for review.",
+    "draftTooltip": "A draft campaign is only visible to you. When unchecked, it moves to pending review.",
     "submit": "Save campaign",
     "success": "Campaign created successfully!",
     "fields": {

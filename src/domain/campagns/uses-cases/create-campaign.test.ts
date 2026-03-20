@@ -38,4 +38,18 @@ describe("CreateCampaign", () => {
         expect(campaign.status).toBe("BROUILLON");
         expect(campaign.goal).toBe(2500);
     });
+
+    it("peut creer une campagne en attente de validation", async () => {
+        const campaign = await createCampaign.execute({
+            projectId: ProjectId("project-1"),
+            ownerId: UserId("user-1"),
+            title: "Campagne soumise",
+            description: "Description",
+            goal: 3000,
+            endDate: "2026-07-10",
+            status: "EN_ATTENTE",
+        });
+
+        expect(campaign.status).toBe("EN_ATTENTE");
+    });
 });

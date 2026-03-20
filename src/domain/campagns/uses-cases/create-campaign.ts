@@ -2,13 +2,14 @@ import type { IDateGenerator } from "../../../core/ports/date-generator.interfac
 import type { IIdGenerator } from "../../../core/ports/id-generator.interface";
 import type { Executable } from "../../../shared/executable";
 import type { ProjectId } from "../../projects/entities/project";
-import { CampaignId, type Campaign, type CampaignFormValues, type DraftCampaign } from "../entites/campaign";
+import { CampaignId, type Campaign, type CampaignFormValues, type DraftCampaign, type PendingCampaign } from "../entites/campaign";
 import type { ICampaignRepository } from "../ports/campaign-repository.interface";
 import type { UserId } from "../../users/entities/user";
 
 type CreateCampaignPayload = CampaignFormValues & {
     ownerId: UserId;
     projectId: ProjectId;
+    status?: "BROUILLON" | "EN_ATTENTE";
 };
 
 export class CreateCampaign implements Executable<CreateCampaignPayload, Campaign> {
@@ -23,7 +24,7 @@ export class CreateCampaign implements Executable<CreateCampaignPayload, Campaig
     }
 
     async execute(data: CreateCampaignPayload): Promise<Campaign> {
-        const campaign: DraftCampaign = {
+        const campaignBase = {
             id: CampaignId(this.idGenerator.generate()),
             projectId: data.projectId,
             title: data.title,
@@ -32,8 +33,11 @@ export class CreateCampaign implements Executable<CreateCampaignPayload, Campaig
             endDate: data.endDate,
             ownerId: data.ownerId,
             createdAt: this.dateGenerator.now().toISOString(),
-            status: "BROUILLON",
         };
+
+        const campaign: DraftCampaign | PendingCampaign = data.status === "EN_ATTENTE"
+            ? { ...campaignBase, status: "EN_ATTENTE" }
+            : { ...campaignBase, status: "BROUILLON" };
 
         return this.campaignRepository.create(campaign);
     }
