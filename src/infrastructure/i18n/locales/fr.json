@@ -38,7 +38,11 @@
   },
   "welcome": "Bienvenue sur WeFund",
   "admin": {
+    "eyebrow": "Pilotage des campagnes",
     "title": "Tableau de bord Admin",
+    "description": "Retrouvez ici les campagnes selon leur état, avec un espace plus lisible pour valider, suivre ou refuser les demandes en attente.",
+    "reviewCount": "campagnes dans cette vue",
+    "cardEyebrow": "Campagne à examiner",
     "tabs": {
       "pendingValidation": "En attente de validation",
       "active": "Active",

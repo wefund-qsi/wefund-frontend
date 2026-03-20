@@ -38,7 +38,11 @@
   },
   "welcome": "Welcome to WeFund",
   "admin": {
+    "eyebrow": "Campaign oversight",
     "title": "Admin Dashboard",
+    "description": "Review campaigns by status in a cleaner space designed to validate, follow, or reject pending submissions.",
+    "reviewCount": "campaigns in this view",
+    "cardEyebrow": "Campaign under review",
     "tabs": {
       "pendingValidation": "Pending Validation",
       "active": "Active",
