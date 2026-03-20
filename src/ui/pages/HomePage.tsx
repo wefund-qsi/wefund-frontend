@@ -194,7 +194,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
           <Grid container spacing={3}>
             {featuredProjects.map((project) => (
               <Grid key={project.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} titleComponent="h3" />
               </Grid>
             ))}
           </Grid>

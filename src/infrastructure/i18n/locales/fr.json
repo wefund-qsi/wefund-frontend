@@ -220,6 +220,10 @@
     }
   },
   "project": {
+    "pageEyebrow": "Projets mis en lumière",
+    "listTitle": "Les projets",
+    "pageDescription": "Découvrez les projets portés sur WeFund, leurs univers, leurs intentions et les campagnes qui peuvent les accompagner.",
+    "emptyList": "Aucun projet disponible pour le moment.",
     "notFound": "Projet introuvable",
     "edit": "Modifier le projet",
     "newsTitle": "Actualités",

@@ -37,6 +37,7 @@ import CampaignsPage from './ui/pages/CampaignsPage';
 import CreateCampaignPage from './ui/pages/CreateCampaignPage';
 import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
+import ProjectsPage from './ui/pages/ProjectsPage';
 import EditCampaignPage from './ui/pages/EditCampaignPage';
 import EditProjectPage from './ui/pages/EditProjectPage';
 import MyContributionsPage from './ui/pages/MyContributionsPage';
@@ -202,6 +203,7 @@ function App() {
         <MainLayout>
           <Routes>
             <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} viewAllCampaigns={viewAllCampaigns} />} />
+            <Route path="/projects" element={<ProjectsPage viewAllProjects={viewAllProjects} />} />
             <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} />} />
             <Route
               path="/campaigns/:id"

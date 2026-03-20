@@ -221,6 +221,10 @@
     }
   },
   "project": {
+    "pageEyebrow": "Projects in the spotlight",
+    "listTitle": "Projects",
+    "pageDescription": "Discover the projects featured on WeFund, their worlds, their intentions, and the campaigns that can support them.",
+    "emptyList": "No projects are available yet.",
     "notFound": "Project not found",
     "edit": "Edit project",
     "newsTitle": "News",
