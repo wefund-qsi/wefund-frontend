@@ -211,6 +211,7 @@ function App() {
                 <CampaignDetailsPage
                   currentUserId={CURRENT_USER_ID}
                   viewCampaign={viewCampaign}
+                  viewProject={viewProject}
                   deleteCampaign={deleteCampaign}
                 />
               }
