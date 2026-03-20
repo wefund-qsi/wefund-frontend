@@ -95,7 +95,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
           container
           spacing={{ xs: 3, md: 4 }}
           alignItems="stretch"
-          sx={{ flex: 1, position: "relative", zIndex: 1, px: { xs: 2, sm: 3, md: 5 }, py: { xs: 4, md: 5 } }}
+          sx={{ flex: 1, position: "relative", zIndex: 1, px: { xs: 2, sm: 3, md: 5 }, py: { xs: 5, md: 7 } }}
         >
           <Grid size={{ xs: 12, md: 6.5 }}>
             <Box
@@ -104,7 +104,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                py: { xs: 3, md: 5 },
+                py: { xs: 4, md: 7 },
                 pr: { md: 4 },
               }}
             >
@@ -113,7 +113,10 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
                 sx={{
                   mb: 2,
                   color: "secondary.main",
-                  letterSpacing: "0.12em",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  fontWeight: 700,
+                  fontSize: { xs: "0.75rem", md: "0.875rem" },
                 }}
               >
                 {t("homePage.heroEyebrow")}
@@ -123,7 +126,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
                 component="h1"
                 sx={{
                   maxWidth: 700,
-                  mb: 2,
+                  mb: { xs: 3, md: 4.5 },
                   color: "text.primary",
                   fontSize: { xs: "2.6rem", md: "5rem" },
                   lineHeight: { xs: 1.02, md: 0.96 },
@@ -136,7 +139,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
                 variant="body1"
                 sx={{
                   maxWidth: 560,
-                  mb: 3,
+                  mb: { xs: 4, md: 5.5 },
                   color: "text.secondary",
                   lineHeight: 1.9,
                   fontSize: { xs: "1rem", md: "1.06rem" },
@@ -144,7 +147,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
               >
                 {t("homePage.heroDescription")}
               </Typography>
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2.5}>
                 <Button
                   variant="contained"
                   onClick={() => void navigate("/campaigns")}

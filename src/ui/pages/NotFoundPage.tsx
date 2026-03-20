@@ -79,13 +79,14 @@ function NotFoundPage() {
 
         <Box sx={{ position: "relative", zIndex: 1, px: { xs: 3, md: 6 }, py: { xs: 6, md: 8 } }}>
           <Typography
-            variant="body2"
+            variant="overline"
             sx={{
-              mb: 3,
+              mb: 2,
               color: "secondary.main",
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               fontWeight: 700,
+              fontSize: { xs: "0.75rem", md: "0.875rem" },
             }}
           >
             {t("notFound.eyebrow")}
