@@ -6,9 +6,11 @@ import noPicture from "../public/no_picture.jpg";
 interface ProjectCardProps {
   project: Project;
   titleComponent?: "h2" | "h3";
+  disableNavigation?: boolean;
+  hideCta?: boolean;
 }
 
-function ProjectCard({ project, titleComponent = "h3" }: ProjectCardProps) {
+function ProjectCard({ project, titleComponent = "h3", disableNavigation = false, hideCta = false }: ProjectCardProps) {
   const navigate = useNavigate();
 
   return (
@@ -30,9 +32,11 @@ function ProjectCard({ project, titleComponent = "h3" }: ProjectCardProps) {
         },
       })}
     >
-      <CardActionArea 
-        onClick={() => { void navigate(`/projects/${project.id}`); }}
-        sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", height: "100%" }}
+      <CardActionArea
+        onClick={disableNavigation ? undefined : () => { void navigate(`/projects/${project.id}`); }}
+        sx={{ display: "flex", flexDirection: "column", alignItems: "stretch", height: "100%", cursor: disableNavigation ? "default" : "pointer" }}
+        disableRipple={disableNavigation}
+        disableTouchRipple={disableNavigation}
       >
         <CardMedia
           component="img"
@@ -59,11 +63,13 @@ function ProjectCard({ project, titleComponent = "h3" }: ProjectCardProps) {
           >
             {project.description}
           </Typography>
-          <Box sx={{ mt: "auto", pt: 1 }}>
-            <Typography variant="body2" sx={{ color: "primary.main", fontWeight: 600 }}>
-              Voir le projet
-            </Typography>
-          </Box>
+          {!hideCta ? (
+            <Box sx={{ mt: "auto", pt: 1 }}>
+              <Typography variant="body2" sx={{ color: "primary.main", fontWeight: 600 }}>
+                Voir le projet
+              </Typography>
+            </Box>
+          ) : null}
         </CardContent>
       </CardActionArea>
     </Card>

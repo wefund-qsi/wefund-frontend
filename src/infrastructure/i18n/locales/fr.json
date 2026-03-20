@@ -73,8 +73,21 @@
     "secondaryCta": "Voir les projets"
   },
   "projectForm": {
+    "createEyebrow": "Nouveau projet",
+    "createPageTitle": "Présentez votre projet",
+    "createPageDescription": "Travaillez votre titre, votre texte et votre image tout en gardant un aperçu immédiat de la carte qui sera affichée.",
+    "editEyebrow": "Modifier un projet",
+    "editPageTitle": "Ajustez votre projet",
+    "editPageDescription": "Mettez à jour le titre, le texte et l'image tout en gardant un aperçu immédiat du rendu final.",
     "title": "Créer un projet",
     "subtitle": "Titre, description et photo",
+    "editTitle": "Modifier le projet",
+    "editSubtitle": "Mettez à jour le titre, la description et la photo",
+    "editSubmit": "Enregistrer les modifications",
+    "editSuccess": "Projet mis à jour avec succès !",
+    "previewTitle": "Prévisualisation",
+    "previewFallbackTitle": "Titre de votre projet",
+    "previewFallbackDescription": "La description du projet apparaîtra ici au fur et à mesure de votre saisie.",
     "fields": {
       "title": "Titre",
       "description": "Description",

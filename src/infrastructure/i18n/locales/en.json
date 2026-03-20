@@ -74,8 +74,21 @@
     "secondaryCta": "View projects"
   },
   "projectForm": {
+    "createEyebrow": "New project",
+    "createPageTitle": "Present your project",
+    "createPageDescription": "Shape your title, text, and image while keeping an immediate preview of the card that will be displayed.",
+    "editEyebrow": "Edit project",
+    "editPageTitle": "Refine your project",
+    "editPageDescription": "Update the title, text, and image while keeping an immediate preview of the final rendering.",
     "title": "Create a project",
     "subtitle": "Title, description and photo",
+    "editTitle": "Edit project",
+    "editSubtitle": "Update the title, description, and image",
+    "editSubmit": "Save changes",
+    "editSuccess": "Project updated successfully!",
+    "previewTitle": "Preview",
+    "previewFallbackTitle": "Your project title",
+    "previewFallbackDescription": "The project description will appear here as you type.",
     "fields": {
       "title": "Title",
       "description": "Description",
