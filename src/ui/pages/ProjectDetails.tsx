@@ -58,6 +58,8 @@ function ProjectDetails({ viewProject, viewProjectCampaigns, currentUserId }: Pr
   const isOwner = currentUserId === project.ownerId;
   const activeCampaignsCount = campaigns.filter((campaign) => campaign.status === "ACTIVE").length;
   const successfulCampaignsCount = campaigns.filter((campaign) => campaign.status === "REUSSIE").length;
+  const visibleCampaigns = campaigns.filter((campaign) => campaign.status !== "BROUILLON");
+  const draftCampaigns = campaigns.filter((campaign) => campaign.status === "BROUILLON");
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
@@ -280,7 +282,7 @@ function ProjectDetails({ viewProject, viewProjectCampaigns, currentUserId }: Pr
             {t("campaign.projectSectionTitle")}
           </Typography>
 
-          {campaigns.length === 0 ? (
+          {visibleCampaigns.length === 0 ? (
             <Box
               sx={(theme) => ({
                 borderRadius: 4,
@@ -296,7 +298,7 @@ function ProjectDetails({ viewProject, viewProjectCampaigns, currentUserId }: Pr
             </Box>
           ) : (
             <Grid container spacing={3}>
-              {campaigns.map((campaign) => (
+              {visibleCampaigns.map((campaign) => (
                 <Grid size={{ xs: 12, md: 6 }} key={campaign.id}>
                   <CampaignCard campaign={campaign} titleComponent="h3" />
                 </Grid>
@@ -304,6 +306,36 @@ function ProjectDetails({ viewProject, viewProjectCampaigns, currentUserId }: Pr
             </Grid>
           )}
         </Box>
+
+        {isOwner && draftCampaigns.length > 0 ? (
+          <Box>
+            <Box
+              sx={(theme) => ({
+                borderRadius: 5,
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}`,
+                background: `linear-gradient(180deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${theme.palette.background.paper} 100%)`,
+                px: { xs: 2.5, md: 3 },
+                py: { xs: 2.5, md: 3 },
+                mb: 3,
+              })}
+            >
+              <Typography variant="h3" component="h2" sx={{ mb: 1.2, fontSize: { xs: "1.75rem", md: "2.2rem" } }}>
+                {t("project.draftCampaignsTitle")}
+              </Typography>
+              <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.8, maxWidth: 760 }}>
+                {t("project.draftCampaignsDescription")}
+              </Typography>
+            </Box>
+
+            <Grid container spacing={3}>
+              {draftCampaigns.map((campaign) => (
+                <Grid size={{ xs: 12, md: 6 }} key={campaign.id}>
+                  <CampaignCard campaign={campaign} titleComponent="h3" />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        ) : null}
 
         <Box>
           <Typography variant="h3" component="h2" sx={{ mb: 3, fontSize: { xs: "1.75rem", md: "2.2rem" } }}>

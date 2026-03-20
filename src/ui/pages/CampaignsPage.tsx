@@ -117,27 +117,25 @@ function CampaignsPage({ viewAllCampaigns, currentUserId }: CampaignsPageProps) 
         )}
       </Stack>
 
-      <Stack spacing={3}>
-        <Box
-          sx={(theme) => ({
-            borderRadius: 5,
-            border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}`,
-            background: `linear-gradient(180deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${theme.palette.background.paper} 100%)`,
-            px: { xs: 2.5, md: 3 },
-            py: { xs: 2.5, md: 3 },
-          })}
-        >
-          <Typography variant="h3" component="h2" sx={{ mb: 1.2 }}>
-            {t("campaign.draftSectionTitle")}
-          </Typography>
-          <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.8, maxWidth: 760 }}>
-            {t("campaign.draftSectionDescription")}
-          </Typography>
-        </Box>
+      {draftCampaigns.length > 0 ? (
+        <Stack spacing={3}>
+          <Box
+            sx={(theme) => ({
+              borderRadius: 5,
+              border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}`,
+              background: `linear-gradient(180deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${theme.palette.background.paper} 100%)`,
+              px: { xs: 2.5, md: 3 },
+              py: { xs: 2.5, md: 3 },
+            })}
+          >
+            <Typography variant="h3" component="h2" sx={{ mb: 1.2 }}>
+              {t("campaign.draftSectionTitle")}
+            </Typography>
+            <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.8, maxWidth: 760 }}>
+              {t("campaign.draftSectionDescription")}
+            </Typography>
+          </Box>
 
-        {draftCampaigns.length === 0 ? (
-          <Typography color="text.secondary">{t("campaign.emptyDraftList")}</Typography>
-        ) : (
           <Grid container spacing={3}>
             {draftCampaigns.map((campaign) => (
               <Grid key={campaign.id} size={{ xs: 12, md: 6 }}>
@@ -145,8 +143,8 @@ function CampaignsPage({ viewAllCampaigns, currentUserId }: CampaignsPageProps) 
               </Grid>
             ))}
           </Grid>
-        )}
-      </Stack>
+        </Stack>
+      ) : null}
     </Box>
   );
 }
