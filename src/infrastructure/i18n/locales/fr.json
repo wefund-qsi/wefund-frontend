@@ -294,6 +294,21 @@
       "reasonRequired": "Le motif de la demande est obligatoire"
     }
   },
+  "myProjects": {
+    "eyebrow": "Espace créateur",
+    "title": "Mes projets",
+    "description": "Retrouvez les projets que vous portez, ajustez leur présentation et préparez les campagnes qui leur donneront de l'élan.",
+    "create": "Nouveau projet",
+    "empty": "Vous n'avez encore créé aucun projet.",
+    "view": "Voir",
+    "edit": "Modifier",
+    "addCampaign": "Ajouter une campagne",
+    "delete": "Supprimer",
+    "deleteDialogTitle": "Supprimer ce projet ?",
+    "deleteDialogBody": "Le projet « {{title}} » va être supprimé. Cette action est à confirmer.",
+    "cancel": "Annuler",
+    "confirmDelete": "Confirmer la suppression"
+  },
   "project": {
     "pageEyebrow": "Projets mis en lumière",
     "listTitle": "Les projets",

@@ -295,6 +295,21 @@
       "reasonRequired": "Request reason is required"
     }
   },
+  "myProjects": {
+    "eyebrow": "Creator space",
+    "title": "My projects",
+    "description": "Find the projects you lead, refine their presentation, and prepare the campaigns that will help them move forward.",
+    "create": "New project",
+    "empty": "You have not created any project yet.",
+    "view": "View",
+    "edit": "Edit",
+    "addCampaign": "Add campaign",
+    "delete": "Delete",
+    "deleteDialogTitle": "Delete this project?",
+    "deleteDialogBody": "The project \"{{title}}\" will be deleted. Please confirm this action.",
+    "cancel": "Cancel",
+    "confirmDelete": "Confirm deletion"
+  },
   "project": {
     "pageEyebrow": "Projects in the spotlight",
     "listTitle": "Projects",
