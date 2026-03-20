@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Grid, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProjectId, type Project, type ProjectFormValues } from "../../domain/projects/entities/project";
@@ -19,11 +19,10 @@ function EditProjectPage({ viewProject, updateProject }: EditProjectPageProps) {
   const navigate = useNavigate();
   const [project, setProject] = useState<Project | null>(null);
   const [previewValues, setPreviewValues] = useState<ProjectFormValues | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(id));
 
   useEffect(() => {
     if (!id) {
-      setLoading(false);
       return;
     }
 
@@ -33,17 +32,17 @@ function EditProjectPage({ viewProject, updateProject }: EditProjectPageProps) {
       .finally(() => { setLoading(false); });
   }, [id, viewProject]);
 
-  useEffect(() => {
+  const displayedPreview = useMemo(() => {
     if (!project) {
-      return;
+      return null;
     }
 
-    setPreviewValues({
-      title: project.title,
-      description: project.description,
-      photoUrl: project.photoUrl,
-    });
-  }, [project]);
+    return {
+      title: previewValues?.title || project.title,
+      description: previewValues?.description || project.description,
+      photoUrl: previewValues?.photoUrl || project.photoUrl,
+    };
+  }, [previewValues, project]);
 
   if (loading) {
     return (
@@ -103,7 +102,7 @@ function EditProjectPage({ viewProject, updateProject }: EditProjectPageProps) {
           </Grid>
 
           <Grid size={{ xs: 12, md: 4.75 }}>
-            {previewValues ? (
+            {displayedPreview ? (
               <Stack spacing={2}>
                 <Typography variant="h5" component="h2" sx={{ fontSize: "1.45rem", color: "text.primary" }}>
                   {t("projectForm.previewTitle")}
@@ -111,9 +110,9 @@ function EditProjectPage({ viewProject, updateProject }: EditProjectPageProps) {
                 <ProjectCard
                   project={{
                     ...project,
-                    title: previewValues.title || project.title,
-                    description: previewValues.description || project.description,
-                    photoUrl: previewValues.photoUrl || project.photoUrl,
+                    title: displayedPreview.title,
+                    description: displayedPreview.description,
+                    photoUrl: displayedPreview.photoUrl,
                   }}
                   titleComponent="h2"
                   disableNavigation

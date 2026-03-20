@@ -24,11 +24,10 @@ function CreateCampaignPage({ createCampaign, currentUserId, viewProject, viewPr
   const { projectId } = useParams<{ projectId: string }>();
   const [project, setProject] = useState<Project | null>(null);
   const [projectCampaigns, setProjectCampaigns] = useState<Campaign[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(projectId));
 
   useEffect(() => {
     if (!projectId) {
-      setLoading(false);
       return;
     }
 

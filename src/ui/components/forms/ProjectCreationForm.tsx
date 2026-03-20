@@ -9,7 +9,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { projectSchema, type ProjectFormValues } from "../../../domain/projects/entities/project";
@@ -37,10 +37,10 @@ function ProjectCreationForm({
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
+    control,
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
@@ -53,7 +53,9 @@ function ProjectCreationForm({
     reset(initialValues ? data : undefined);
   };
 
-  const watchedValues = watch();
+  const watchedValues = useWatch({
+    control,
+  });
 
   useEffect(() => {
     if (!onValuesChange) {
