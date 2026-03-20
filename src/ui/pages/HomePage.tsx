@@ -184,9 +184,14 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
       </Box>
 
       <Box>
-        <Typography variant="h3" component="h2" sx={{ mb: 3 }}>
-          {t("homePage.projectsTitle")}
-        </Typography>
+        <Stack direction={{ xs: "column", md: "row" }} justifyContent="space-between" spacing={2} sx={{ mb: 3 }}>
+          <Typography variant="h3" component="h2">
+            {t("homePage.projectsTitle")}
+          </Typography>
+          <Button color="inherit" onClick={() => void navigate("/projects")} sx={{ alignSelf: { xs: "flex-start", md: "center" } }}>
+            {t("homePage.projectsLink")}
+          </Button>
+        </Stack>
 
         {featuredProjects.length === 0 ? (
           <Typography color="text.secondary">{t("homePage.noProjects")}</Typography>
