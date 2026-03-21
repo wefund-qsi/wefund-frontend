@@ -30,7 +30,7 @@ export class HttpProjectRepository implements IProjectRepository {
   async findAll(): Promise<Project[]> {
     const res = await fetch(`${this.baseUrl}/projets`);
     if (!res.ok) throw new Error('Impossible de récupérer les projets');
-    const data: BackendProjectDto[] = await res.json();
+    const data = (await res.json()) as unknown as BackendProjectDto[];
     return data.map(mapToProject);
   }
 
@@ -38,7 +38,7 @@ export class HttpProjectRepository implements IProjectRepository {
     const res = await fetch(`${this.baseUrl}/projets/${id}`);
     if (res.status === 404) return null;
     if (!res.ok) throw new Error('Impossible de récupérer le projet');
-    const data: BackendProjectDto = await res.json();
+    const data = (await res.json()) as unknown as BackendProjectDto;
     return mapToProject(data);
   }
 
@@ -54,12 +54,12 @@ export class HttpProjectRepository implements IProjectRepository {
     });
     if (res.status === 401) throw new Error('Non authentifié');
     if (!res.ok) throw new Error('Échec de la création du projet');
-    const data: BackendProjectDto = await res.json();
+    const data = (await res.json()) as unknown as BackendProjectDto;
     return mapToProject(data);
   }
 
-  async update(_project: Project): Promise<Project> {
-    throw new Error('Modification de projet non encore implémentée');
+  update(): Promise<Project> {
+    return Promise.reject(new Error('Modification de projet non encore implémentée'));
   }
 
   async delete(id: ProjectId): Promise<boolean> {

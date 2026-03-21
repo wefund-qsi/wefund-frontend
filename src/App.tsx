@@ -118,7 +118,6 @@ const seededCampaigns = [
   },
 ];
 
-const CURRENT_USER_ID = UserId('seed-owner-1');
 const CURRENT_CONTRIBUTOR_ID = UserId('seed-contributor-1');
 
 const seededContributions = [
