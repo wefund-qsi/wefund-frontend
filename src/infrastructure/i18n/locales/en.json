@@ -108,7 +108,8 @@
       "titleRequired": "Title is required",
       "descriptionRequired": "Description is required",
       "photoUrlRequired": "Photo URL is required",
-      "photoUrlInvalid": "Photo URL is not valid"
+      "photoUrlInvalid": "Photo URL is not valid",
+      "descriptionTooShort": "Description must be at least 10 characters"
     }
   },
   "authForm": {

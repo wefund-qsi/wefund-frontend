@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography, Alert } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -21,16 +21,21 @@ function CreateProjectPage({ createProject, currentUserId }: CreateProjectPagePr
     description: "",
     photoUrl: "",
   });
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const handleSubmit = async (payload: ProjectFormValues) => {
-    await createProject.execute({
-      ...payload,
-      ownerId: currentUserId,
-    });
-
-    setTimeout(() => {
-      void navigate("/my-projects");
-    }, 1500);
+    setServerError(null);
+    try {
+      await createProject.execute({
+        ...payload,
+        ownerId: currentUserId,
+      });
+      setTimeout(() => {
+        void navigate("/my-projects");
+      }, 1500);
+    } catch (err) {
+      setServerError(err instanceof Error ? err.message : "Erreur lors de la création du projet");
+    }
   };
 
   return (
@@ -58,6 +63,9 @@ function CreateProjectPage({ createProject, currentUserId }: CreateProjectPagePr
 
         <Grid container spacing={{ xs: 3, md: 4 }} alignItems="start">
           <Grid size={{ xs: 12, md: 7.25 }}>
+            {serverError && (
+              <Alert severity="error" sx={{ mb: 2 }}>{serverError}</Alert>
+            )}
             <ProjectCreationForm
               onValuesChange={setPreviewValues}
               onSubmit={(payload) => void handleSubmit(payload)}
