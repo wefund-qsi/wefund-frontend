@@ -10,7 +10,7 @@ import { navigationLinkButtonSx } from "./navigation-link.styles";
 function Header() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -143,6 +143,20 @@ function Header() {
                 <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/my-projects")}>{t("header.myProjects")}</Button>
                 <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/my-contributions")}>{t("header.myContributions")}</Button>
                 <Button color="inherit" sx={navigationLinkButtonSx} onClick={() => void navigate("/projects/create")}>{t("header.createProject")}</Button>
+                <Button
+                  variant="outlined"
+                  sx={(theme) => ({
+                    color: theme.palette.primary.main,
+                    borderColor: theme.palette.secondary.light,
+                    "&:hover": {
+                      borderColor: theme.palette.secondary.main,
+                      bgcolor: "rgba(182, 102, 56, 0.06)",
+                    },
+                  })}
+                  onClick={() => { logout(); void navigate("/"); }}
+                >
+                  {t("header.logout")}
+                </Button>
               </>
             ) : null}
             {!currentUser ? (

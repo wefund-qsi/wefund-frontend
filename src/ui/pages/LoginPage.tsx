@@ -29,6 +29,7 @@ function LoginPage({ login }: LoginPageProps) {
   const handleSubmit = useCallback(
     async (payload: LoginFormValues) => {
       const result = await login.execute(payload);
+      sessionStorage.setItem('wefund_token', result.data.access_token);
       const user = decodeJwt(result.data.access_token);
       setCurrentUser(user);
 

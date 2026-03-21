@@ -20,7 +20,7 @@ import { ContributionId } from './domain/contributions/entities/contribution';
 import { FundCampaign } from './domain/contributions/uses-cases/fund-campaign';
 import { RefundContribution } from './domain/contributions/uses-cases/refund-contribution';
 import { ViewUserContributions } from './domain/contributions/uses-cases/view-user-contributions';
-import { InMemoryProjectRepository } from './domain/projects/adapters/project-repository.in-memory';
+import { HttpProjectRepository } from './domain/projects/adapters/project-repository.http';
 import { ProjectId } from './domain/projects/entities/project';
 import { CreateProject } from './domain/projects/uses-cases/create-project';
 import { DeleteProject } from './domain/projects/uses-cases/delete-project';
@@ -49,34 +49,9 @@ import AdminPage from './ui/pages/AdminPage';
 import AboutPage from './ui/pages/AboutPage';
 import LegalNoticePage from './ui/pages/LegalNoticePage';
 import NotFoundPage from './ui/pages/NotFoundPage';
+import { useAuth } from './ui/contexts/use-auth';
 import theme from './theme';
 
-const seededProjects = [
-  {
-    id: ProjectId('project-animal'),
-    title: 'Refuge Seconde Chance',
-    description: 'Un refuge pour accueillir, soigner et réhabiliter des animaux victimes de maltraitance et d’abandon.',
-    photoUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80',
-    ownerId: UserId('seed-owner-1'),
-    createdAt: new Date('2026-01-10T10:00:00.000Z'),
-  },
-  {
-    id: ProjectId('project-art'),
-    title: 'Sortie du court métrage Éclats de Nuit',
-    description: 'Un projet de diffusion pour finaliser et sortir un court métrage indépendant en festival, en salle associative et en ligne.',
-    photoUrl: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80',
-    ownerId: UserId('seed-owner-1'),
-    createdAt: new Date('2026-01-12T10:00:00.000Z'),
-  },
-  {
-    id: ProjectId('project-humanitarian'),
-    title: 'Passerelle Humanitaire',
-    description: 'Une initiative de soutien d’urgence pour fournir des kits essentiels, des repas et un accompagnement aux familles déplacées.',
-    photoUrl: 'https://images.unsplash.com/photo-1526976668912-1a811878dd37?auto=format&fit=crop&w=1200&q=80',
-    ownerId: UserId('seed-owner-1'),
-    createdAt: new Date('2026-01-15T10:00:00.000Z'),
-  },
-];
 
 const seededCampaigns = [
   {
@@ -143,7 +118,6 @@ const seededCampaigns = [
   },
 ];
 
-const CURRENT_USER_ID = UserId('seed-owner-1');
 const CURRENT_CONTRIBUTOR_ID = UserId('seed-contributor-1');
 
 const seededContributions = [
@@ -170,7 +144,7 @@ const seededContributions = [
   },
 ];
 
-const projectRepository = new InMemoryProjectRepository(seededProjects);
+const projectRepository = new HttpProjectRepository('http://localhost:3001/api');
 const createProject = new CreateProject(projectRepository, new RealIdGenerator(), new RealDateGenerator());
 const updateProject = new UpdateProject(projectRepository);
 const deleteProject = new DeleteProject(projectRepository);
@@ -194,22 +168,21 @@ const viewAllCampaigns = new ViewAllCampaigns(campaignRepository);
 const viewCampaign = new ViewCampaign(campaignRepository);
 const viewProjectCampaigns = new ViewProjectCampaigns(campaignRepository);
 
-function App() {
+function AppRoutes() {
+  const { currentUser } = useAuth();
+  const currentUserId = UserId(currentUser?.sub ?? 'anonymous');
+  const currentContributorId = currentUserId;
+
   return (
-    <AuthContextProvider>
-      <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <MainLayout>
-          <Routes>
+    <Routes>
             <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/projects" element={<ProjectsPage viewAllProjects={viewAllProjects} />} />
-            <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} currentUserId={CURRENT_USER_ID} />} />
+            <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} currentUserId={currentUserId} />} />
             <Route
               path="/campaigns/:id"
               element={
                 <CampaignDetailsPage
-                  currentUserId={CURRENT_USER_ID}
+                  currentUserId={currentUserId}
                   viewCampaign={viewCampaign}
                   viewProject={viewProject}
                   deleteCampaign={deleteCampaign}
@@ -220,7 +193,7 @@ function App() {
               path="/campaigns/:id/fund"
               element={
                 <CampaignPaymentPage
-                  contributorId={CURRENT_CONTRIBUTOR_ID}
+                  contributorId={currentContributorId}
                   viewCampaign={viewCampaign}
                   fundCampaign={fundCampaign}
                 />
@@ -231,18 +204,18 @@ function App() {
             <Route path="/admin" element={<AdminPage viewAllCampaigns={viewAllCampaigns} />} />
             <Route path="/who-we-are" element={<AboutPage />} />
             <Route path="/legal-notice" element={<LegalNoticePage />} />
-            <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
+            <Route path="/projects/:id" element={<ProjectDetails currentUserId={currentUserId} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
             <Route element={<AuthGuard />}>
               <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
-              <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
+              <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={currentUserId} />} />
               <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
-              <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
-              <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
+              <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={currentUserId} createCampaign={createCampaign} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
+              <Route path="/my-projects" element={<MyProjectsPage currentUserId={currentUserId} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
               <Route
                 path="/my-contributions"
                 element={
                   <MyContributionsPage
-                    contributorId={CURRENT_CONTRIBUTOR_ID}
+                    contributorId={currentContributorId}
                     viewCampaign={viewCampaign}
                     viewUserContributions={viewUserContributions}
                     refundContribution={refundContribution}
@@ -252,6 +225,17 @@ function App() {
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+  );
+}
+
+function App() {
+  return (
+    <AuthContextProvider>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <MainLayout>
+          <AppRoutes />
         </MainLayout>
       </BrowserRouter>
     </ThemeProvider>

@@ -31,7 +31,10 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
         }
     };
 
-    const logout = () => { setCurrentUser(null); };
+    const logout = () => {
+        sessionStorage.removeItem('wefund_token');
+        setCurrentUser(null);
+    };
 
     return (
         <AuthContext.Provider value={{ currentUser, setCurrentUser, logout }}>
