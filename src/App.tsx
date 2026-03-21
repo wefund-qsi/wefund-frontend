@@ -30,12 +30,14 @@ import { ViawAllUserProject } from './domain/projects/uses-cases/view-all-user-p
 import { ViewProject } from './domain/projects/uses-cases/view-project';
 import { UserId } from './domain/users/entities/user';
 import MainLayout from './ui/components/layouts/MainLayout';
+import AuthGuard from './ui/components/routes/AuthGuard';
 import CampaignDetailsPage from './ui/pages/CampaignDetailsPage';
 import CampaignPaymentPage from './ui/pages/CampaignPaymentPage';
 import CampaignsPage from './ui/pages/CampaignsPage';
 import CreateCampaignPage from './ui/pages/CreateCampaignPage';
 import HomePage from './ui/pages/HomePage';
 import CreateProjectPage from './ui/pages/CreateProjectPage';
+import ProjectsPage from './ui/pages/ProjectsPage';
 import EditCampaignPage from './ui/pages/EditCampaignPage';
 import EditProjectPage from './ui/pages/EditProjectPage';
 import MyContributionsPage from './ui/pages/MyContributionsPage';
@@ -44,21 +46,24 @@ import SignupPage from './ui/pages/SignupPage';
 import LoginPage from './ui/pages/LoginPage';
 import ProjectDetails from './ui/pages/ProjectDetails';
 import AdminPage from './ui/pages/AdminPage';
+import AboutPage from './ui/pages/AboutPage';
+import LegalNoticePage from './ui/pages/LegalNoticePage';
+import NotFoundPage from './ui/pages/NotFoundPage';
 import theme from './theme';
 
 const seededProjects = [
   {
     id: ProjectId('project-animal'),
     title: 'Refuge Seconde Chance',
-    description: 'Un refuge pour accueillir, soigner et rehabiliter des animaux victimes de maltraitance et d abandon.',
+    description: 'Un refuge pour accueillir, soigner et réhabiliter des animaux victimes de maltraitance et d’abandon.',
     photoUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80',
     ownerId: UserId('seed-owner-1'),
     createdAt: new Date('2026-01-10T10:00:00.000Z'),
   },
   {
     id: ProjectId('project-art'),
-    title: 'Sortie du court metrage Eclats de Nuit',
-    description: 'Un projet de diffusion pour finaliser et sortir un court metrage independant en festival, en salle associative et en ligne.',
+    title: 'Sortie du court métrage Éclats de Nuit',
+    description: 'Un projet de diffusion pour finaliser et sortir un court métrage indépendant en festival, en salle associative et en ligne.',
     photoUrl: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80',
     ownerId: UserId('seed-owner-1'),
     createdAt: new Date('2026-01-12T10:00:00.000Z'),
@@ -66,7 +71,7 @@ const seededProjects = [
   {
     id: ProjectId('project-humanitarian'),
     title: 'Passerelle Humanitaire',
-    description: 'Une initiative de soutien d urgence pour fournir des kits essentiels, des repas et un accompagnement aux familles deplacees.',
+    description: 'Une initiative de soutien d’urgence pour fournir des kits essentiels, des repas et un accompagnement aux familles déplacées.',
     photoUrl: 'https://images.unsplash.com/photo-1526976668912-1a811878dd37?auto=format&fit=crop&w=1200&q=80',
     ownerId: UserId('seed-owner-1'),
     createdAt: new Date('2026-01-15T10:00:00.000Z'),
@@ -77,8 +82,8 @@ const seededCampaigns = [
   {
     id: CampaignId('campaign-animal-1'),
     projectId: ProjectId('project-animal'),
-    title: 'Amenager le refuge et financer les soins veterinaire',
-    description: 'Financer les box de quarantaine, les soins d urgence, la nourriture et la remise en etat du refuge.',
+    title: 'Aménager le refuge et financer les soins vétérinaires',
+    description: 'Financer les box de quarantaine, les soins d’urgence, la nourriture et la remise en état du refuge.',
     goal: 12000,
     endDate: '2026-10-15',
     ownerId: UserId('seed-owner-1'),
@@ -90,8 +95,8 @@ const seededCampaigns = [
   {
     id: CampaignId('campaign-animal-2'),
     projectId: ProjectId('project-animal'),
-    title: 'Lancer une cellule de sauvetage pour animaux maltraites',
-    description: 'Cette campagne finance les transports d urgence, le materiel de premiers soins et l accueil temporaire des animaux retires de situations de violence.',
+    title: 'Lancer une cellule de sauvetage pour animaux maltraités',
+    description: 'Cette campagne finance les transports d’urgence, le matériel de premiers soins et l’accueil temporaire des animaux retirés de situations de violence.',
     goal: 8500,
     endDate: '2026-12-10',
     ownerId: UserId('seed-owner-1'),
@@ -101,8 +106,8 @@ const seededCampaigns = [
   {
     id: CampaignId('campaign-animal-3'),
     projectId: ProjectId('project-animal'),
-    title: 'Renover l espace de convalescence',
-    description: 'Campagne terminee ayant permis de financer des cages adaptees, un espace de repos chauffe et du materiel de suivi post-operatoire.',
+    title: 'Rénover l’espace de convalescence',
+    description: 'Campagne terminée ayant permis de financer des cages adaptées, un espace de repos chauffé et du matériel de suivi post-opératoire.',
     goal: 6000,
     endDate: '2026-05-30',
     ownerId: UserId('seed-owner-1'),
@@ -116,7 +121,7 @@ const seededCampaigns = [
     id: CampaignId('campaign-art-1'),
     projectId: ProjectId('project-art'),
     title: 'Finaliser la post-production et organiser la sortie',
-    description: 'Cette campagne finance l etalonnage, le mixage son, les sous-titres, l affiche et les inscriptions en festival du court metrage.',
+    description: 'Cette campagne finance l’étalonnage, le mixage son, les sous-titres, l’affiche et les inscriptions en festival du court métrage.',
     goal: 7000,
     endDate: '2026-09-01',
     ownerId: UserId('seed-owner-1'),
@@ -126,8 +131,8 @@ const seededCampaigns = [
   {
     id: CampaignId('campaign-humanitarian-1'),
     projectId: ProjectId('project-humanitarian'),
-    title: 'Distribuer 500 kits de premiere necessite',
-    description: 'Objectif de financement pour acheter et distribuer des kits d hygiene, couvertures et repas a des familles vulnerables.',
+    title: 'Distribuer 500 kits de première nécessité',
+    description: 'Objectif de financement pour acheter et distribuer des kits d’hygiène, couvertures et repas à des familles vulnérables.',
     goal: 20000,
     endDate: '2026-11-20',
     ownerId: UserId('seed-owner-1'),
@@ -197,14 +202,16 @@ function App() {
       <BrowserRouter>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} />} />
-            <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} />} />
+            <Route path="/" element={<HomePage viewAllProjects={viewAllProjects} viewAllCampaigns={viewAllCampaigns} />} />
+            <Route path="/projects" element={<ProjectsPage viewAllProjects={viewAllProjects} />} />
+            <Route path="/campaigns" element={<CampaignsPage viewAllCampaigns={viewAllCampaigns} currentUserId={CURRENT_USER_ID} />} />
             <Route
               path="/campaigns/:id"
               element={
                 <CampaignDetailsPage
                   currentUserId={CURRENT_USER_ID}
                   viewCampaign={viewCampaign}
+                  viewProject={viewProject}
                   deleteCampaign={deleteCampaign}
                 />
               }
@@ -219,26 +226,31 @@ function App() {
                 />
               }
             />
-            <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
-            <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
-            <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
-            <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} />} />
-            <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
-            <Route
-              path="/my-contributions"
-              element={
-                <MyContributionsPage
-                  contributorId={CURRENT_CONTRIBUTOR_ID}
-                  viewCampaign={viewCampaign}
-                  viewUserContributions={viewUserContributions}
-                  refundContribution={refundContribution}
-                />
-              }
-            />
             <Route path="/signup" element={<SignupPage signup={signup} />} />
             <Route path="/login" element={<LoginPage login={login} />} />
             <Route path="/admin" element={<AdminPage viewAllCampaigns={viewAllCampaigns} />} />
+            <Route path="/who-we-are" element={<AboutPage />} />
+            <Route path="/legal-notice" element={<LegalNoticePage />} />
             <Route path="/projects/:id" element={<ProjectDetails currentUserId={CURRENT_USER_ID} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
+            <Route element={<AuthGuard />}>
+              <Route path="/campaigns/:id/edit" element={<EditCampaignPage viewCampaign={viewCampaign} updateCampaign={updateCampaign} />} />
+              <Route path="/projects/create" element={<CreateProjectPage createProject={createProject} currentUserId={CURRENT_USER_ID} />} />
+              <Route path="/projects/:id/edit" element={<EditProjectPage viewProject={viewProject} updateProject={updateProject} />} />
+              <Route path="/projects/:projectId/campaigns/create" element={<CreateCampaignPage currentUserId={CURRENT_USER_ID} createCampaign={createCampaign} viewProject={viewProject} viewProjectCampaigns={viewProjectCampaigns} />} />
+              <Route path="/my-projects" element={<MyProjectsPage currentUserId={CURRENT_USER_ID} deleteProject={deleteProject} viewAllUserProjects={viewAllUserProjects} />} />
+              <Route
+                path="/my-contributions"
+                element={
+                  <MyContributionsPage
+                    contributorId={CURRENT_CONTRIBUTOR_ID}
+                    viewCampaign={viewCampaign}
+                    viewUserContributions={viewUserContributions}
+                    refundContribution={refundContribution}
+                  />
+                }
+              />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>

@@ -1,8 +1,9 @@
-import { Alert, Box, Button, Card, CardContent, CardHeader, CircularProgress, Container, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Card, CardContent, CircularProgress, Container, Grid, LinearProgress, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { CampaignId, getCampaignCollectedAmount, type Campaign } from "../../domain/campagns/entites/campaign";
+import { CampaignId, getCampaignCollectedAmount, getCampaignProgress, getCampaignProgressForBar, type Campaign } from "../../domain/campagns/entites/campaign";
 import type { ViewCampaign } from "../../domain/campagns/uses-cases/view-campaign";
 import type { BankPaymentFormValues } from "../components/forms/BankPaymentForm";
 import BankPaymentForm from "../components/forms/BankPaymentForm";
@@ -72,53 +73,139 @@ function CampaignPaymentPage({ contributorId, viewCampaign, fundCampaign }: Camp
   };
 
   return (
-    <Container maxWidth="sm" sx={{ py: 4 }}>
-      <Stack spacing={3}>
-        <Button variant="text" onClick={() => { void navigate(`/campaigns/${campaign.id}`); }} sx={{ alignSelf: "flex-start" }}>
-          {t("payment.back")}
-        </Button>
+    <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
+      <Stack spacing={{ xs: 4, md: 5 }}>
+        <Stack spacing={1.5} sx={{ maxWidth: 760 }}>
+          <Typography variant="overline" color="secondary.main">
+            {t("payment.eyebrow")}
+          </Typography>
+          <Typography variant="h1" component="h1" sx={{ fontSize: { xs: "2.35rem", md: "4rem" }, lineHeight: { xs: 1.03, md: 0.98 } }}>
+            {t("payment.title")}
+          </Typography>
+          <Typography variant="body1" sx={{ color: "text.secondary", lineHeight: 1.85 }}>
+            {t("payment.subtitle")}
+          </Typography>
+        </Stack>
 
-        <Card>
-          <CardHeader
-            title={t("payment.title")}
-            subheader={t("payment.subtitle")}
-          />
-          <CardContent>
-            <Stack spacing={3}>
-              <Box>
-                <Typography variant="h6" fontWeight={700}>{campaign.title}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                  {campaign.description}
-                </Typography>
-                <Typography variant="body2" sx={{ mt: 2 }}>
-                  {t("payment.currentFunding")}: {getCampaignCollectedAmount(campaign).toLocaleString()} EUR
-                </Typography>
-                <Typography variant="body2">
-                  {t("payment.goal")}: {campaign.goal.toLocaleString()} EUR
-                </Typography>
-              </Box>
+        <Grid container spacing={{ xs: 3, md: 4 }} alignItems="start">
+          <Grid size={{ xs: 12, md: 7.25 }}>
+            <Card
+              sx={(theme) => ({
+                borderRadius: 5,
+                border: `1px solid ${theme.palette.divider}`,
+                background: "linear-gradient(180deg, rgba(255,255,255,0.62) 0%, rgba(251,247,240,0.98) 100%)",
+                boxShadow: "0 20px 46px rgba(97, 95, 47, 0.08)",
+              })}
+            >
+              <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
+                <Stack spacing={3}>
+                  <Box>
+                    <Typography variant="h3" component="h2" sx={{ fontSize: { xs: "1.9rem", md: "2.3rem" }, mb: 0.8 }}>
+                      {t("payment.formTitle")}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: "text.secondary", lineHeight: 1.8 }}>
+                      {t("payment.formDescription")}
+                    </Typography>
+                  </Box>
 
-              {paymentSuccess ? <Alert severity="success">{t("payment.success")}</Alert> : null}
+                  {paymentSuccess ? <Alert severity="success">{t("payment.success")}</Alert> : null}
 
-              {isProcessing ? (
-                <Stack spacing={2} alignItems="center" sx={{ py: 3 }}>
-                  <CircularProgress />
-                  <Typography variant="body1">{t("payment.processing")}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {t("payment.processingHint")}
-                  </Typography>
+                  {isProcessing ? (
+                    <Stack spacing={2} alignItems="center" sx={{ py: 4 }}>
+                      <CircularProgress />
+                      <Typography variant="body1">{t("payment.processing")}</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {t("payment.processingHint")}
+                      </Typography>
+                    </Stack>
+                  ) : (
+                    <BankPaymentForm
+                      defaultAmount={undefined}
+                      isSubmitting={isProcessing}
+                      onSubmit={handlePayment}
+                      errorMessage={errorMessage}
+                    />
+                  )}
                 </Stack>
-              ) : (
-                <BankPaymentForm
-                  defaultAmount={undefined}
-                  isSubmitting={isProcessing}
-                  onSubmit={handlePayment}
-                  errorMessage={errorMessage}
-                />
-              )}
-            </Stack>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 4.75 }}>
+            <Card
+              sx={(theme) => ({
+                borderRadius: 5,
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.14)}`,
+                background: `linear-gradient(180deg, ${alpha(theme.palette.primary.main, 0.05)} 0%, ${theme.palette.background.paper} 100%)`,
+                boxShadow: "0 18px 40px rgba(97, 95, 47, 0.08)",
+              })}
+            >
+              <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
+                <Stack spacing={2.5}>
+                  <Button variant="text" onClick={() => { void navigate(`/campaigns/${campaign.id}`); }} sx={{ alignSelf: "flex-start", px: 0, color: "primary.main", fontWeight: 600 }}>
+                    {t("payment.back")}
+                  </Button>
+                  <Box>
+                    <Typography variant="h4" component="h2" sx={{ fontSize: "1.8rem", mb: 1 }}>
+                      {campaign.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                      {campaign.description}
+                    </Typography>
+                  </Box>
+
+                  <Box>
+                    <Stack direction="row" spacing={1.2} alignItems="baseline" sx={{ mb: 1.2 }}>
+                      <Typography
+                        component="p"
+                        sx={{
+                          color: "text.primary",
+                          fontFamily: "var(--font-family-heading)",
+                          fontSize: { xs: "2.8rem", md: "3.6rem" },
+                          lineHeight: 0.9,
+                        }}
+                      >
+                        {getCampaignProgress(campaign)}%
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                        {t("payment.progressReached")}
+                      </Typography>
+                    </Stack>
+                    <LinearProgress
+                      variant="determinate"
+                      value={getCampaignProgressForBar(campaign)}
+                      sx={{
+                        mb: 2.2,
+                        height: 10,
+                        borderRadius: 999,
+                        bgcolor: alpha("#615f2f", 0.14),
+                        "& .MuiLinearProgress-bar": { bgcolor: "#615f2f" },
+                      }}
+                    />
+                    <Stack spacing={1.4}>
+                      <Box>
+                        <Typography variant="caption" sx={{ display: "block", color: "text.secondary", mb: 0.35 }}>
+                          {t("payment.currentFunding")}
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: "text.primary", fontWeight: 700 }}>
+                          {getCampaignCollectedAmount(campaign).toLocaleString()} EUR
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography variant="caption" sx={{ display: "block", color: "text.secondary", mb: 0.35 }}>
+                          {t("payment.goal")}
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: "text.primary", fontWeight: 700 }}>
+                          {campaign.goal.toLocaleString()} EUR
+                        </Typography>
+                      </Box>
+                    </Stack>
+                  </Box>
+                </Stack>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </Stack>
     </Container>
   );

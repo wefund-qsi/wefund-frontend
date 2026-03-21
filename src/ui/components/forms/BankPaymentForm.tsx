@@ -63,19 +63,35 @@ function BankPaymentForm({ defaultAmount, isSubmitting, onSubmit, errorMessage }
       <TextField
         label={t("payment.fields.amount")}
         type="number"
+        id="payment-amount"
+        variant="filled"
         slotProps={{ htmlInput: { min: 1, step: 1 } }}
         {...register("amount", { valueAsNumber: true })}
         error={Boolean(errors.amount)}
         helperText={errors.amount ? t(errors.amount.message!) : t("payment.amountHelper")}
         disabled={isSubmitting}
+        sx={{
+          "& .MuiFilledInput-root": {
+            borderRadius: 3,
+            bgcolor: "rgba(255,255,255,0.72)",
+          },
+        }}
       />
 
       <TextField
         label={t("payment.fields.cardholderName")}
+        id="payment-cardholder-name"
         {...register("cardholderName")}
+        variant="filled"
         error={Boolean(errors.cardholderName)}
         helperText={errors.cardholderName ? t(errors.cardholderName.message!) : undefined}
         disabled={isSubmitting}
+        sx={{
+          "& .MuiFilledInput-root": {
+            borderRadius: 3,
+            bgcolor: "rgba(255,255,255,0.72)",
+          },
+        }}
       />
 
       <Controller
@@ -84,11 +100,19 @@ function BankPaymentForm({ defaultAmount, isSubmitting, onSubmit, errorMessage }
         render={({ field }) => (
           <TextField
             label={t("payment.fields.cardNumber")}
+            id="payment-card-number"
             value={field.value ?? ""}
             onChange={(event) => field.onChange(formatCardNumber(event.target.value))}
+            variant="filled"
             error={Boolean(errors.cardNumber)}
             helperText={errors.cardNumber ? t(errors.cardNumber.message!) : t("payment.cardNumberHelper")}
             disabled={isSubmitting}
+            sx={{
+              "& .MuiFilledInput-root": {
+                borderRadius: 3,
+                bgcolor: "rgba(255,255,255,0.72)",
+              },
+            }}
           />
         )}
       />
@@ -100,12 +124,20 @@ function BankPaymentForm({ defaultAmount, isSubmitting, onSubmit, errorMessage }
           render={({ field }) => (
             <TextField
               label={t("payment.fields.expiryDate")}
+              id="payment-expiry-date"
               value={field.value ?? ""}
               onChange={(event) => field.onChange(formatExpiryDate(event.target.value))}
+              variant="filled"
               error={Boolean(errors.expiryDate)}
               helperText={errors.expiryDate ? t(errors.expiryDate.message!) : t("payment.expiryHelper")}
               disabled={isSubmitting}
               fullWidth
+              sx={{
+                "& .MuiFilledInput-root": {
+                  borderRadius: 3,
+                  bgcolor: "rgba(255,255,255,0.72)",
+                },
+              }}
             />
           )}
         />
@@ -115,18 +147,26 @@ function BankPaymentForm({ defaultAmount, isSubmitting, onSubmit, errorMessage }
           render={({ field }) => (
             <TextField
               label={t("payment.fields.cvc")}
+              id="payment-cvc"
               value={field.value ?? ""}
               onChange={(event) => field.onChange(formatCvc(event.target.value))}
+              variant="filled"
               error={Boolean(errors.cvc)}
               helperText={errors.cvc ? t(errors.cvc.message!) : undefined}
               disabled={isSubmitting}
               fullWidth
+              sx={{
+                "& .MuiFilledInput-root": {
+                  borderRadius: 3,
+                  bgcolor: "rgba(255,255,255,0.72)",
+                },
+              }}
             />
           )}
         />
       </Stack>
 
-      <Button type="submit" variant="contained" disabled={isSubmitting}>
+      <Button type="submit" variant="contained" disabled={isSubmitting} sx={{ alignSelf: { xs: "stretch", sm: "flex-start" }, px: 2.8, py: 1.2 }}>
         {t("payment.submit")}
       </Button>
     </Stack>
