@@ -16,7 +16,11 @@ function mapToProject(bp: BackendProjectDto): Project {
 }
 
 export class HttpProjectRepository implements IProjectRepository {
-  constructor(private readonly baseUrl: string) {}
+  private readonly baseUrl: string;
+
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
+  }
 
   private getHeaders(auth = false): Record<string, string> {
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
