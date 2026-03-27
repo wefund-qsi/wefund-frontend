@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
 import "../../../infrastructure/i18n";
@@ -6,9 +6,14 @@ import "../../../infrastructure/i18n";
 describe("LoginForm", () => {
   const setup = () => {
     const onSubmit = vi.fn();
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     render(<LoginForm onSubmit={onSubmit} />);
     return { onSubmit, user };
+  };
+
+  const fill = (username: string, password: string) => {
+    fireEvent.change(screen.getByLabelText(/nom d'utilisateur/i), { target: { value: username } });
+    fireEvent.change(screen.getByLabelText(/mot de passe/i), { target: { value: password } });
   };
 
   it("affiche les champs du formulaire", () => {
@@ -33,8 +38,7 @@ describe("LoginForm", () => {
   it("appelle onSubmit avec les données valides", async () => {
     const { onSubmit, user } = setup();
 
-    await user.type(screen.getByLabelText(/nom d'utilisateur/i), "alice");
-    await user.type(screen.getByLabelText(/mot de passe/i), "secret");
+    fill("alice", "secret");
     await user.click(screen.getByRole("button", { name: /se connecter/i }));
 
     await waitFor(() => {
@@ -48,8 +52,7 @@ describe("LoginForm", () => {
   it("affiche une erreur si le nom d'utilisateur est trop court", async () => {
     const { user } = setup();
 
-    await user.type(screen.getByLabelText(/nom d'utilisateur/i), "ab");
-    await user.type(screen.getByLabelText(/mot de passe/i), "secret");
+    fill("ab", "secret");
     await user.click(screen.getByRole("button", { name: /se connecter/i }));
 
     await waitFor(() => {
@@ -60,8 +63,7 @@ describe("LoginForm", () => {
   it("affiche une erreur si le mot de passe est trop court", async () => {
     const { user } = setup();
 
-    await user.type(screen.getByLabelText(/nom d'utilisateur/i), "alice");
-    await user.type(screen.getByLabelText(/mot de passe/i), "abc");
+    fill("alice", "abc");
     await user.click(screen.getByRole("button", { name: /se connecter/i }));
 
     await waitFor(() => {
@@ -72,8 +74,7 @@ describe("LoginForm", () => {
   it("affiche un message de succès après soumission", async () => {
     const { user } = setup();
 
-    await user.type(screen.getByLabelText(/nom d'utilisateur/i), "alice");
-    await user.type(screen.getByLabelText(/mot de passe/i), "secret");
+    fill("alice", "secret");
     await user.click(screen.getByRole("button", { name: /se connecter/i }));
 
     await waitFor(() => {

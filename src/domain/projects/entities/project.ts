@@ -18,11 +18,21 @@ export type Project = {
   createdAt: Date;
 }
 
+// DTO correspondant à la réponse du backend 
+export type BackendProjectDto = {
+  id: string;
+  titre: string;
+  description: string;
+  photo: string;
+  porteurId: string;
+  createdAt: string;
+};
+
 // --- Schéma Zod ---
 
 export const projectSchema = z.object({
   title: z.string().min(1, "projectForm.errors.titleRequired"),
-  description: z.string().min(1, "projectForm.errors.descriptionRequired"),
+  description: z.string().min(1, "projectForm.errors.descriptionRequired").min(10, "projectForm.errors.descriptionTooShort"),
   photoUrl: z.string().min(1, "projectForm.errors.photoUrlRequired").url("projectForm.errors.photoUrlInvalid"),
 });
 

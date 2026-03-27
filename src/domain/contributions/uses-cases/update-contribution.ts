@@ -32,16 +32,18 @@ export class UpdateContribution {
       throw new ContributionActionForbiddenException();
     }
 
-    const nextCollectedAmount = campaign.collectedAmount - contribution.amount + amount;
-
+    // Mettre à jour la contribution via l'API
     await this.contributionRepository.update({
       ...contribution,
       amount,
     });
 
-    return this.campaignRepository.update({
-      ...campaign,
-      collectedAmount: nextCollectedAmount,
-    });
+    const updatedCampaign = await this.campaignRepository.findById(campaign.id);
+
+    if (!updatedCampaign) {
+      throw new Error('Campagne non trouvée après mise à jour de contribution');
+    }
+
+    return updatedCampaign;
   }
 }
