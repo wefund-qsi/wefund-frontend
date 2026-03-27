@@ -29,9 +29,12 @@ export class RefundContribution {
 
     await this.contributionRepository.delete(contribution.id);
 
-    return this.campaignRepository.update({
-      ...campaign,
-      collectedAmount: Math.max(0, campaign.collectedAmount - contribution.amount),
-    });
+    const updatedCampaign = await this.campaignRepository.findById(campaign.id);
+
+    if (!updatedCampaign) {
+      throw new Error('Campagne non trouvée après remboursement de contribution');
+    }
+
+    return updatedCampaign;
   }
 }

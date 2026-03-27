@@ -15,7 +15,7 @@ import { HttpAuthRepository } from './domain/auth/adapters/auth-repository.http'
 import { AuthContextProvider } from './ui/contexts/AuthContext';
 import { Login } from './domain/auth/uses-cases/login';
 import { Signup } from './domain/auth/uses-cases/signup';
-import { InMemoryContributionRepository } from './domain/contributions/adapters/contribution-repository.in-memory';
+import { HttpContributionRepository } from './domain/contributions/adapters/contribution-repository.http';
 import { ContributionId } from './domain/contributions/entities/contribution';
 import { FundCampaign } from './domain/contributions/uses-cases/fund-campaign';
 import { RefundContribution } from './domain/contributions/uses-cases/refund-contribution';
@@ -156,8 +156,8 @@ const authRepository = new HttpAuthRepository('http://localhost:3000');
 const signup = new Signup(authRepository);
 const login = new Login(authRepository);
 
-const campaignRepository = new InMemoryCampaignRepository(seededCampaigns);
-const contributionRepository = new InMemoryContributionRepository(seededContributions);
+const campaignRepository = new HttpCampaignRepository('http://localhost:3001/api');
+const contributionRepository = new HttpContributionRepository('http://localhost:3000/api');
 const createCampaign = new CreateCampaign(campaignRepository, new RealIdGenerator(), new RealDateGenerator());
 const updateCampaign = new UpdateCampaign(campaignRepository);
 const deleteCampaign = new DeleteCampaign(campaignRepository);

@@ -38,8 +38,7 @@ export class FundCampaign {
       throw new CampaignNotActiveException();
     }
 
-    const nextCollectedAmount = campaign.collectedAmount + amount;
-
+    // Créer la contribution via l'API
     await this.contributionRepository.create({
       id: ContributionId(this.idGenerator.generate()),
       campaignId,
@@ -48,9 +47,12 @@ export class FundCampaign {
       createdAt: this.dateGenerator.now().toISOString(),
     });
 
-    return this.campaignRepository.update({
-      ...campaign,
-      collectedAmount: nextCollectedAmount,
-    });
+    const updatedCampaign = await this.campaignRepository.findById(campaignId);
+
+    if (!updatedCampaign) {
+      throw new Error('Campagne non trouvée après contribution');
+    }
+
+    return updatedCampaign;
   }
 }
