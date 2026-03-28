@@ -37,8 +37,47 @@ jobs:
       - run: npm ci
       - run: npm run type-check
 
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run test
+
+  test-int:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run test:int
+
+  test-e2e:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run test:e2e
+
   build:
-    needs: [lint, type-check]
+    needs: [lint, type-check, test, test-int, test-e2e]
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
