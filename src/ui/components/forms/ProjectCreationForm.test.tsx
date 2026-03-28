@@ -6,7 +6,7 @@ import "../../../infrastructure/i18n";
 describe("ProjectCreationForm", () => {
   const setup = () => {
     const onSubmit = vi.fn();
-    const user = userEvent.setup();
+    const user = userEvent.setup({ delay: null });
     render(<ProjectCreationForm onSubmit={onSubmit} />);
     return { onSubmit, user };
   };
