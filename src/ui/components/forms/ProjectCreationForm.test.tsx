@@ -35,9 +35,12 @@ describe("ProjectCreationForm", () => {
   it("affiche une erreur si l'URL est invalide", async () => {
     const { user } = setup();
 
-    await user.type(screen.getByLabelText(/titre/i), "Mon projet");
-    await user.type(screen.getByLabelText(/description/i), "Une belle description");
-    await user.type(screen.getByLabelText(/url de la photo/i), "pas-une-url");
+    await user.click(screen.getByLabelText(/titre/i));
+    await user.paste("Mon projet");
+    await user.click(screen.getByLabelText(/description/i));
+    await user.paste("Une belle description");
+    await user.click(screen.getByLabelText(/url de la photo/i));
+    await user.paste("pas-une-url");
     await user.click(screen.getByRole("button", { name: /enregistrer/i }));
 
     await waitFor(() => {
@@ -48,9 +51,12 @@ describe("ProjectCreationForm", () => {
   it("appelle onSubmit avec les données valides", async () => {
     const { onSubmit, user } = setup();
 
-    await user.type(screen.getByLabelText(/titre/i), "Mon projet");
-    await user.type(screen.getByLabelText(/description/i), "Une belle description");
-    await user.type(screen.getByLabelText(/url de la photo/i), "https://example.com/photo.jpg");
+    await user.click(screen.getByLabelText(/titre/i));
+    await user.paste("Mon projet");
+    await user.click(screen.getByLabelText(/description/i));
+    await user.paste("Une belle description");
+    await user.click(screen.getByLabelText(/url de la photo/i));
+    await user.paste("https://example.com/photo.jpg");
     await user.click(screen.getByRole("button", { name: /enregistrer/i }));
 
     await waitFor(() => {
@@ -65,9 +71,12 @@ describe("ProjectCreationForm", () => {
   it("affiche un message de succès après soumission", async () => {
     const { user } = setup();
 
-    await user.type(screen.getByLabelText(/titre/i), "Mon projet");
-    await user.type(screen.getByLabelText(/description/i), "Une belle description");
-    await user.type(screen.getByLabelText(/url de la photo/i), "https://example.com/photo.jpg");
+    await user.click(screen.getByLabelText(/titre/i));
+    await user.paste("Mon projet");
+    await user.click(screen.getByLabelText(/description/i));
+    await user.paste("Une belle description");
+    await user.click(screen.getByLabelText(/url de la photo/i));
+    await user.paste("https://example.com/photo.jpg");
     await user.click(screen.getByRole("button", { name: /enregistrer/i }));
 
     await waitFor(() => {

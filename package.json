@@ -10,6 +10,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:int": "vitest run --config vitest.config.int.ts",
+    "test:int:watch": "vitest --config vitest.config.int.ts",
+    "test:e2e": "vitest run --config vitest.config.e2e.ts",
+    "test:e2e:watch": "vitest --config vitest.config.e2e.ts",
     "preview": "vite preview"
   },
   "dependencies": {

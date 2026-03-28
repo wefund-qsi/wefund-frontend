@@ -1,5 +1,11 @@
 # WeFund FrontEnd
 
+WeFund est une plateforme de financement participatif (crowdfunding).
+Cette plateforme permet :
+● à des porteurs de projet de proposer des campagnes de financement
+● à des contributeurs de soutenir financièrement ces projets
+● à la plateforme d’assurer la confiance, la transparence et la gestion des paiements
+
 ## Prérequis
 
 - [Node.js](https://nodejs.org/) (v24)
@@ -35,6 +41,17 @@ npm run preview
 
 ```bash
 npm run test
+```
+
+### Lancer les tests d'intégration
+
+```bash
+npm run test:int
+```
+### Lancer les tests e2e
+
+```bash
+npm run test:e2e
 ```
 
 ### Lancer les tests en mode watch
