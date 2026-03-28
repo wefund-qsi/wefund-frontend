@@ -30,9 +30,16 @@ describe('CreateProjectPage (e2e)', () => {
     const user = userEvent.setup();
     renderPage();
 
-    await user.type(screen.getByLabelText(/titre/i), 'Mon nouveau projet');
-    await user.type(screen.getByLabelText(/description/i), 'Une description complète');
-    await user.type(screen.getByLabelText(/url de la photo/i), 'https://example.com/photo.jpg');
+    const titleInput = screen.getByLabelText(/titre/i);
+    const descriptionInput = screen.getByLabelText(/description/i);
+    const photoUrlInput = screen.getByLabelText(/url de la photo/i);
+
+    await user.click(titleInput);
+    await user.paste('Mon nouveau projet');
+    await user.click(descriptionInput);
+    await user.paste('Une description complète');
+    await user.click(photoUrlInput);
+    await user.paste('https://example.com/photo.jpg');
     await user.click(screen.getByRole('button', { name: /enregistrer/i }));
 
     await waitFor(() => {

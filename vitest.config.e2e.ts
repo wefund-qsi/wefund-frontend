@@ -7,7 +7,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test-setup.ts'],
-    testMatch: ['**/*.e2e.test.tsx'],
+    include: ['**/*.e2e.test.tsx'],
     testTimeout: 10000,
   },
 })
