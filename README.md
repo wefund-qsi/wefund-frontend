@@ -43,6 +43,17 @@ npm run preview
 npm run test
 ```
 
+### Lancer les tests d'intégration
+
+```bash
+npm run test:int
+```
+### Lancer les tests e2e
+
+```bash
+npm run test:e2e
+```
+
 ### Lancer les tests en mode watch
 
 ```bash
