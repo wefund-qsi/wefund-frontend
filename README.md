@@ -65,3 +65,23 @@ npm run test:watch
 ```bash
 npm run lint
 ```
+
+## Docker
+
+### Prérequis
+
+- [Docker](https://www.docker.com/)
+
+### Build de l'image
+
+```bash
+docker build -t wefund-frontend .
+```
+
+### Lancer le conteneur
+
+```bash
+docker run -p 80:80 wefund-frontend
+```
+
+L'application est ensuite accessible sur [http://localhost](http://localhost).
