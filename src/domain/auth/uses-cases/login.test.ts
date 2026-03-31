@@ -6,6 +6,12 @@ import { InvalidCredentialsException } from "../exceptions/invalid-credentials";
 import type { IIdGenerator } from "../../../core/ports/id-generator.interface";
 import type { IDateGenerator } from "../../../core/ports/date-generator.interface";
 
+/**
+ * Tests unitaires pour le use-case Login
+ *
+ * Vérifie que l'authentification fonctionne correctement avec des identifiants valides
+ * et lève les exceptions appropriées en cas d'erreur (password incorrect, utilisateur inexistant).
+ */
 describe("Login", () => {
     let repository: InMemoryAuthRepository;
     let login: Login;
