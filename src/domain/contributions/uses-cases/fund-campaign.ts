@@ -7,6 +7,13 @@ import type { ICampaignRepository } from "../../campagns/ports/campaign-reposito
 import type { IContributionRepository } from "../ports/contribution-repository.interface";
 import type { UserId } from "../../users/entities/user";
 
+/**
+    * Use-case pour financer une campagne de crowdfunding.
+    *
+    * Ce use-case vérifie que la campagne est active avant d'accepter une contribution.
+    * Si la campagne est active, il crée une nouvelle contribution et met à jour le montant collecté de la campagne.
+    * Si la campagne n'est pas active, il lance une exception.
+    */
 type FundCampaignPayload = {
   campaignId: CampaignId;
   contributorId: UserId;
