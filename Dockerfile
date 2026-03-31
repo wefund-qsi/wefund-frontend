@@ -19,6 +19,20 @@ RUN printf 'server {\n\
     listen 80;\n\
     root /usr/share/nginx/html;\n\
     index index.html;\n\
+\n\
+    # index.html must never be cached so browsers always fetch the latest entry point\n\
+    location = /index.html {\n\
+        add_header Cache-Control "no-cache, no-store, must-revalidate";\n\
+        add_header Pragma "no-cache";\n\
+        expires 0;\n\
+    }\n\
+\n\
+    # Hashed static assets can be cached indefinitely\n\
+    location ~* \\.(?:js|css|woff2?|png|svg|ico|jpg|webp)$ {\n\
+        expires 1y;\n\
+        add_header Cache-Control "public, immutable";\n\
+    }\n\
+\n\
     location / {\n\
         try_files $uri $uri/ /index.html;\n\
     }\n\
