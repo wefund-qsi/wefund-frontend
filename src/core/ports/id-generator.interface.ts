@@ -15,7 +15,7 @@
  * Cette interface définit une méthode unique pour générer des identifiants uniques.
  * Les implémentations concrètes peuvent fournir des identifiants réels (UUID v4) ou
  * mockés (utile pour les tests).
- * 
+ *
  * Utilité :
  * - En production : Génère des UUID v4 cryptographiquement sécurisés via {@link RealIdGenerator}
  * - En tests : Permet de générer des identifiants prévisibles et contrôlés pour tester
