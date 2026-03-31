@@ -5,10 +5,24 @@ import { ContributionNotFoundException } from "../exceptions/contribution-not-fo
 import type { ContributionId } from "../entities/contribution";
 import type { IContributionRepository } from "../ports/contribution-repository.interface";
 
+/**
+    * Use-case pour rembourser une contribution à une campagne de crowdfunding.
+    *
+    * Ce use-case vérifie que la contribution existe et que la campagne associée est active avant de procéder au remboursement.
+    * Si la contribution n'existe pas, il lance une exception.
+    * Si la campagne n'est pas active, il lance une exception.
+    * Si les vérifications sont passées, il supprime la contribution et met à jour le montant collecté de la campagne.
+        */
 export class RefundContribution {
   private readonly contributionRepository: IContributionRepository;
   private readonly campaignRepository: ICampaignRepository;
 
+/**
+    * @param contributionRepository - Le repository pour accéder aux contributions
+    * @param campaignRepository - Le repository pour accéder aux campagnes
+    *
+    * Ce constructeur initialise les repositories nécessaires pour exécuter le use-case de remboursement de contribution.
+    */
   constructor(contributionRepository: IContributionRepository, campaignRepository: ICampaignRepository) {
     this.contributionRepository = contributionRepository;
     this.campaignRepository = campaignRepository;
