@@ -6,6 +6,12 @@ import { UserId } from "../../users/entities/user";
 import { InMemoryCampaignRepository } from "../adapters/campaign-repository.in-memory";
 import { CreateCampaign } from "./create-campaign";
 
+/**
+ * Tests unitaires pour le use-case CreateCampaign
+ *
+ * Vérifie que les campagnes peuvent être créées en brouillon ou en attente de validation,
+ * et que les données sont correctement enregistrées.
+ */
 describe("CreateCampaign", () => {
     let repository: InMemoryCampaignRepository;
     let createCampaign: CreateCampaign;
