@@ -7,6 +7,12 @@ import { UserId } from '../../users/entities/user';
 import { CampaignNotActiveException } from '../exceptions/campaign-not-active';
 import { ContributionActionForbiddenException } from '../exceptions/contribution-action-forbidden';
 
+/**
+ * Tests d'intégration pour le cycle de vie complet des contributions
+ *
+ * Vérifie le financement des campagnes, les remboursements, les listes de contributions
+ * et la gestion des erreurs lors de contributions sur des campagnes inactives.
+ */
 describe('Contribution lifecycle (integration)', () => {
   let fixture: AppTestFixture;
 
