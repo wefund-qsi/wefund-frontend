@@ -8,6 +8,12 @@ import { ContributionActionForbiddenException } from "../exceptions/contribution
 import { ContributionId } from "../entities/contribution";
 import { UpdateContribution } from "./update-contribution";
 
+/**
+    * Tests unitaires pour le use-case UpdateContribution
+    *
+    * Vérifie que la mise à jour d'une contribution modifie correctement le montant collecté de la campagne associée,
+    * et que la modification est refusée si la campagne n'est pas active.
+        */
 describe("UpdateContribution", () => {
   let campaignRepository: InMemoryCampaignRepository;
   let contributionRepository: InMemoryContributionRepository;
