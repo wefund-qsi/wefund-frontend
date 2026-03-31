@@ -68,6 +68,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
         />
         <Box
           sx={{
+            display: { xs: "none", md: "block" },
             position: "absolute",
             inset: { xs: "auto -8% 2% auto", md: "8% 3% 2% auto" },
             width: { xs: "86%", md: "42%" },
@@ -81,7 +82,7 @@ function HomePage({ viewAllProjects, viewAllCampaigns }: HomePageProps) {
             sx={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: "contain",
               objectPosition: "center center",
               display: "block",
             }}
