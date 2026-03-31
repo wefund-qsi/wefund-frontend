@@ -5,6 +5,12 @@ import { ProjectId } from '../../projects/entities/project';
 import { UserId } from '../../users/entities/user';
 import { CampaignNotFoundException } from '../exceptions/campaign-not-found';
 
+/**
+ * Tests d'intégration pour le cycle de vie complet des campagnes
+ *
+ * Vérifie la création, la mise à jour, la suppression et la récupération des campagnes,
+ * ainsi que le filtrage par projet et propriétaire.
+ */
 describe('Campaign lifecycle (integration)', () => {
   let fixture: AppTestFixture;
 
