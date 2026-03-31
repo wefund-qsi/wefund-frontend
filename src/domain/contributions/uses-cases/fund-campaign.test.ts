@@ -9,6 +9,12 @@ import { InMemoryContributionRepository } from "../adapters/contribution-reposit
 import { CampaignNotActiveException } from "../exceptions/campaign-not-active";
 import { FundCampaign } from "./fund-campaign";
 
+/**
+ * Tests unitaires pour le use-case FundCampaign
+ *
+ * Vérifie que les contributions augmentent correctement le montant collecté des campagnes actives,
+ * et que le financement est refusé pour les campagnes non actives.
+ */
 describe("FundCampaign", () => {
   let campaignRepository: InMemoryCampaignRepository;
   let contributionRepository: InMemoryContributionRepository;
