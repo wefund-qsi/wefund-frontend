@@ -5,11 +5,25 @@ import { ContributionNotFoundException } from "../exceptions/contribution-not-fo
 import type { ContributionId } from "../entities/contribution";
 import type { IContributionRepository } from "../ports/contribution-repository.interface";
 
+/**
+    * Use-case pour mettre à jour une contribution à une campagne de crowdfunding.
+    *
+    * Ce use-case vérifie que la contribution existe et que la campagne associée est active avant de procéder à la mise à jour.
+    * Si la contribution n'existe pas, il lance une exception.
+    * Si la campagne n'est pas active, il lance une exception.
+    * Si les vérifications sont passées, il met à jour la contribution et le montant collecté de la campagne.
+        */
 type UpdateContributionPayload = {
   contributionId: ContributionId;
   amount: number;
 };
 
+/**
+    * @param contributionRepository - Le repository pour accéder aux contributions
+    * @param campaignRepository - Le repository pour accéder aux campagnes
+    *
+    * Ce constructeur initialise les repositories nécessaires pour exécuter le use-case de mise à jour de contribution.
+    */
 export class UpdateContribution {
   private readonly contributionRepository: IContributionRepository;
   private readonly campaignRepository: ICampaignRepository;
