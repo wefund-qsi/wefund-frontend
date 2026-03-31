@@ -8,6 +8,12 @@ import { ContributionActionForbiddenException } from "../exceptions/contribution
 import { ContributionId } from "../entities/contribution";
 import { RefundContribution } from "./refund-contribution";
 
+/**
+    * Tests unitaires pour le use-case RefundContribution
+    *
+    * Vérifie que les contributions sont correctement remboursées et que le montant collecté des campagnes est mis à jour,
+    * et que le remboursement est refusé pour les campagnes non actives.
+    */
 describe("RefundContribution", () => {
   let campaignRepository: InMemoryCampaignRepository;
   let contributionRepository: InMemoryContributionRepository;
