@@ -3,6 +3,12 @@ import type { CampaignId } from "../entites/campaign";
 import { CampaignNotFoundException } from "../exceptions/campaign-not-found";
 import type { ICampaignRepository } from "../ports/campaign-repository.interface";
 
+/**
+ * Use-case pour supprimer une campagne
+ *
+ * Supprime une campagne existante par son ID.
+ * Lève une CampaignNotFoundException si la campagne n'existe pas.
+ */
 export class DeleteCampaign implements Executable<CampaignId, void> {
     private readonly campaignRepository: ICampaignRepository;
 
