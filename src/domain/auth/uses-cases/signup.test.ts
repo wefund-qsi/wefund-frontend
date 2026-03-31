@@ -4,6 +4,12 @@ import { Signup } from "./signup";
 import type { IIdGenerator } from "../../../core/ports/id-generator.interface";
 import type { IDateGenerator } from "../../../core/ports/date-generator.interface";
 
+/**
+ * Tests unitaires pour le use-case Signup
+ *
+ * Vérifie que l'enregistrement d'un nouvel utilisateur fonctionne correctement,
+ * que les données sont validées et qu'une exception est levée si le username existe déjà.
+ */
 describe("Signup", () => {
     let repository: InMemoryAuthRepository;
     let signup: Signup;
