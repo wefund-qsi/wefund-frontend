@@ -6,6 +6,10 @@ Cette plateforme permet :
 ● à des contributeurs de soutenir financièrement ces projets
 ● à la plateforme d’assurer la confiance, la transparence et la gestion des paiements
 
+## Lien vers les maquettes qui nous ont servi pour l'enchainement des écrans et la répartition du développement 
+
+https://www.figma.com/design/ax5rRoWy1V8Aed2Zg4DZgf/maquettes-Wefund?node-id=0-1&p=f
+
 ## Prérequis
 
 - [Node.js](https://nodejs.org/) (v24)
