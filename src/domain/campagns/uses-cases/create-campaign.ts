@@ -6,12 +6,26 @@ import { CampaignId, type Campaign, type CampaignFormValues, type DraftCampaign,
 import type { ICampaignRepository } from "../ports/campaign-repository.interface";
 import type { UserId } from "../../users/entities/user";
 
+/**
+ * Données requises pour créer une nouvelle campagne
+ *
+ * @typedef {Object} CreateCampaignPayload
+ * @property {UserId} ownerId - ID du propriétaire de la campagne
+ * @property {ProjectId} projectId - ID du projet associé
+ * @property {string} [status="BROUILLON"] - Statut initial (BROUILLON ou EN_ATTENTE)
+ */
 type CreateCampaignPayload = CampaignFormValues & {
     ownerId: UserId;
     projectId: ProjectId;
     status?: "BROUILLON" | "EN_ATTENTE";
 };
 
+/**
+ * Use-case pour créer une nouvelle campagne
+ *
+ * Crée une campagne en brouillon ou en attente d'approbation.
+ * Génère automatiquement un ID unique et un timestamp de création.
+ */
 export class CreateCampaign implements Executable<CreateCampaignPayload, Campaign> {
     private readonly campaignRepository: ICampaignRepository;
     private readonly idGenerator: IIdGenerator;
