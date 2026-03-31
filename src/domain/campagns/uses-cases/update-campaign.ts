@@ -5,7 +5,7 @@ import type { ICampaignRepository } from "../ports/campaign-repository.interface
 
 /**
  * Use-case pour mettre à jour une campagne existante
- * 
+ *
  * Met à jour les données d'une campagne et peut optionnellement changer son statut.
  * Lève une CampaignNotFoundException si la campagne n'existe pas.
  */
